@@ -1,12 +1,40 @@
 {
-  "pages":[
-    "pages/index/index",
-    "pages/logs/logs"
+  "pages": [
+    "pages/home/home/home",
+    "pages/person/collect/collect",
+    "pages/person/person/person"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
-  }
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffd102",
+    "navigationBarTitleText": "潮品萃",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#ffd102",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home/home",
+        "text": "首页",
+        "iconPath": "./image/home.png",
+        "selectedIconPath": "./image/home-select.png"
+      },
+      {
+        "pagePath": "pages/person/collect/collect",
+        "text": "我的收藏",
+        "iconPath": "./image/collect.png",
+        "selectedIconPath": "./image/collect-select.png"
+      },
+      {
+        "pagePath": "pages/person/person/person",
+        "text": "个人中心",
+        "iconPath": "./image/person.png",
+        "selectedIconPath": "./image/person-select.png"
+      }
+    ]
+  },
+  "debug": true
 }
