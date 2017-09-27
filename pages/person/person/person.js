@@ -24,7 +24,7 @@ Page({
       { name: '明信片', typeId: 5 }
     ],
     userInfo:{},
-    bindLogin: '已登录'
+    bindLogin: ''
   },
 
   /**
@@ -40,6 +40,11 @@ Page({
       success: function(){
         wx.getUserInfo({
           success: function(res){
+            if (res.userInfo.avatarUrl != null && res.userInfo.nickName != null) {
+              that.setData({
+                bindLogin: '退出登录'
+              })
+            }
             that.setData({
               userInfo: res.userInfo
             })

@@ -38,10 +38,21 @@ Page({
       })
     }
     wx.request({
-      url: 'http://api/home/company',
-      success: function(res){
+      url: 'http://cpc.find360.cn/api/home/comment',
+      success: function(res) {
         console.log(res)
       }
+      // header:{
+      //   'Content-Type': 'application/x-www-form-urlencoded'
+      // },
+      // method: 'POST',
+      // data: ({
+      //   user: this.data.loginName,
+      //   password: this.data.
+      // })
+      // success: function(res){
+      //   console.log(res)
+      // }
     })
   }
 })

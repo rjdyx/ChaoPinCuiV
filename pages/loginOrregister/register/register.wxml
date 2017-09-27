@@ -1,9 +1,8 @@
 <view class="register">
   <form bindsubmit="formSubmit">
     <view class='inputWrap'>
-      <input placeholder='手机号' class='phone' bindblur="validatePhone" name="phone"></input>  
-      <input placeholder='邮箱' class='email' bindblur="validateEmail" name="email"></input>  
-      <input placeholder='用户名' class='passward' name="name"></input>  
+      <input placeholder='用户名' class='passward' name="name"></input> 
+      <input placeholder='手机号' class='phone' bindblur="validatePhone" name="phone"></input>   
       <input type="password" placeholder='密码' class='passward' name="password"></input>  
       <input type="password" placeholder='确认密码' class='passward' name="checkPassword"></input>  
     </view>

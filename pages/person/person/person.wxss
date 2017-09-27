@@ -2,7 +2,7 @@
 @import '../../../iconfont/stylesheet.wxss';
 .person{
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
   background: #F2f2f2;
   margin: 0;
   padding: 0;
@@ -128,6 +128,12 @@
 .ideasIcon:after{
   content: '\e66d';
 }
+.bind{
+  width: 100%;
+  background: #fff;
+  padding-bottom: 20rpx;
+}
 .bindLogin{
   width: 90%;
+  background: #fed555;
 }

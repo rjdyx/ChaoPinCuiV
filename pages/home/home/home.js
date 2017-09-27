@@ -44,7 +44,7 @@ Page({
    */
   onReady: function () {
     wx.request({
-      url: 'http://cpc.find360.cn/api/home/index/categorys', 
+      url: 'https://cpc.find360.cn/api/home/index/categorys', 
       header: {
         'content-type': 'application/json' // 默认值
       },
