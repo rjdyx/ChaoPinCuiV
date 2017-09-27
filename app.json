@@ -4,13 +4,16 @@
     "pages/loginOrregister/loginOrigister/loginOrigister",
     "pages/loginOrregister/register/register",
     "pages/loginOrregister/login/login",
+    "pages/home/category/category",
+    "pages/home/products_list/products_list",
+    "pages/common/pages/comment/comment",
+    "pages/home/details/details",
     "pages/person/person/person",
     "pages/personComponent/feedback/feedback",
     "pages/personComponent/collect/collect",
     "pages/personComponent/evaluate/evaluate",
     "pages/personComponent/footprint/footprint",
-    "pages/personComponent/aboutUs/aboutUs",
-    "pages/index/index"
+    "pages/personComponent/aboutUs/aboutUs"
   ],
   "window": {
     "backgroundTextStyle": "light",

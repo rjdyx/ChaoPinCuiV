@@ -1,6 +1,3 @@
 {
-  "backgroundTextStyle": "light",
-  "navigationBarBackgroundColor": "#ffd102",
-  "navigationBarTitleText": "个人信息",
-  "navigationBarTextStyle": "black"
+  "navigationBarTitleText": "个人中心"
 }

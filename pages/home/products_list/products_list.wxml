@@ -1,0 +1,15 @@
+<!--pages/common/pages/products_list/products_list.wxml-->
+<view class="pro_list">
+<block wx:for="{{proList}}" wx:key="">
+	<view class="a_pro" catch:tap="jumpFn">
+		<image src="{{item.src}}"></image>
+		<view>
+			<text class="pro_name tv_el dis_ib">{{item.proName}}</text>
+			<view class="pro_place">
+				<text class="tv_el">{{item.proCity}}</text>
+				<text class="tv_el">{{item.proArea}}</text>
+			</view>
+		</view>
+	</view>
+</block>
+</view>

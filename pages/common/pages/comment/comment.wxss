@@ -1,0 +1,103 @@
+/* pages/home/comment/comment.wxss */
+@import "../../wxss/comWxss.wxss"
+.width700{
+	width: 700rpx;
+}
+.bg_gray_line{
+	height: 20rpx;
+	background: #f4f4f6;
+}
+.t{
+	font-size: 32rpx;
+	color:#414141;
+}
+.com_form{
+	padding: 20rpx 0rpx;
+	text-align: center;
+	border:1px solid #eae9ea;
+}
+.com_textArea{
+	height: 245rpx;
+	padding:10rpx;
+	box-sizing: border-box;
+	border:1px solid #eae9ea;
+	text-align: left;
+	display: black;
+	margin:0 auto;
+}
+.putOutImg{
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 auto;
+	padding: 20rpx 0rpx 20rpx;
+}
+.putOutImg .a_camera, .putOutImg .a_putOutImg{
+  width: 222rpx;
+  height: 165rpx;
+  box-sizing: border-box;
+  border:1rpx solid #eae9ea;
+  text-align: center;
+  margin:0rpx 15rpx 15rpx 0rpx;
+}
+.putOutImg>view:nth-of-type(3n){
+	margin-right: 0rpx;
+}
+.putOutImg .a_camera image{
+  width: 78rpx;
+  height: 68rpx;
+  margin-top: 40rpx;
+}
+.putOutImg .a_putOutImg image{
+  width: 100%;
+  height: 100%;
+}
+.grade{
+	margin:0 auto;
+	padding-top: 40rpx;
+	height: 460rpx;
+}
+.grade .star-image {
+  width: 50rpx;
+  height:50rpx;
+  src: "../../../image/全星.png";
+  position: relative;
+  margin-right: 25rpx;
+  vertical-align: middle;
+}
+.grade .item {
+  position: absolute;
+  top: 0rpx;
+  left: 0rpx;
+  width:25rpx;
+  height: 50rpx;
+}
+.grade .item:last-child{
+  left:25rpx;
+}
+.grade .star-image:first-of-type{
+	margin-left: 30rpx;
+}
+.footer{
+	width: 100%;
+	position: fixed;
+	bottom:0;
+	left:0;
+	border-top:1px solid #e4e4e6;
+	height: 110rpx;
+}
+.footer_l{
+	line-height: 110rpx;
+}
+.footer .footer_l icon{
+	margin-left: 30rpx;
+	vertical-align: text-middle;
+}
+.footer button.footer_r{
+	width: 250rpx;
+	height: 110rpx;
+	line-height: 110rpx;
+	background: #fccf52;
+	color: #fff;
+	border-radius: 0;
+	border:none;
+}

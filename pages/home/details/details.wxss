@@ -1,0 +1,2 @@
+/* pages/home/details/details.wxss */
+@import "../../common/pages/details/details.wxss";
