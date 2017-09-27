@@ -1,0 +1,106 @@
+@import '../../../iconfont/stylesheet.wxss';
+.login{
+  width: 100%;
+  height: 100%;
+  background-color: #F2f2f2;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.loginWrap{
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+.inputWrap{
+  width: 81%; 
+  height: 234rpx;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 20rpx;
+  margin-top: 50rpx;
+  margin-bottom: 50rpx;
+}
+.inputWrap input{
+  display: flex;
+  width: 100%;
+  padding: 30rpx;
+  background-color: #fff;
+}
+.inputWrap input:first-child{
+  margin-bottom: 3rpx;
+}
+.name{
+  border-radius: 25rpx 25rpx 0 0 ;
+}
+.passward{
+  border-radius: 0 0 25rpx 25rpx;
+}
+.loginBtn{
+  background-color: #ffd102;
+  width: 88%;
+  padding: 10rpx 0;
+  border: none;
+}
+.forget{
+  width: 88%;
+  margin: 80rpx auto;
+  font-size: 34rpx;
+  overflow: hidden;
+}
+.forget text{
+  float: right;
+}
+.forget text:last-child{
+  padding-right: 95rpx;
+}
+.recommand{
+  width:91%;
+  
+  /* margin-top: 270rpx; */
+  position: fixed;
+  bottom: 9%;
+  left: 5%;
+}
+.recommandText{
+  color: #9d9d9d;
+  text-align: center;
+  padding-top: 5rpx;
+}
+.type{
+  width: 100%;
+  height: 200rpx;
+
+}
+.type .block{
+  width: 38%;
+  height: 132rpx;
+  display:block;
+  background-color:#69dd62;
+  border-radius: 14rpx;
+  margin-right: 10rpx;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 132rpx;
+  margin: 0 auto;
+  color: #fff;
+}
+.block .icon{
+}
+.wechatText{
+  padding-bottom: 32rpx;
+  font-size: 35rpx;
+  padding-left: 20rpx;
+  display: inline-block;
+  vertical-align: middle;
+}
+.block .icon:after{
+  font-family: 'iconfont';
+  font-weight: 500;
+  font-style: normal;
+  content: '\e673';
+  font-size:74rpx;
+  padding-right: 10rpx;
+}

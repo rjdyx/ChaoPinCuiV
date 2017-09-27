@@ -1,0 +1,28 @@
+<view class="register">
+  <form bindsubmit="formSubmit">
+    <view class='inputWrap'>
+      <input placeholder='手机号' class='phone' bindblur="validatePhone" name="phone"></input>  
+      <input placeholder='邮箱' class='email' bindblur="validateEmail" name="email"></input>  
+      <input placeholder='用户名' class='passward' name="name"></input>  
+      <input type="password" placeholder='密码' class='passward' name="password"></input>  
+      <input type="password" placeholder='确认密码' class='passward' name="checkPassword"></input>  
+    </view>
+
+  <!-- <view class='check'>
+    <input placeholder='验证码'></input>
+    <text bindtap="getCode" class="{{sendmsg}}">{{codeText}}</text>
+  </view> -->
+
+  <button class="registerBtn {{isChecked?'is_checked':'normal'}}" formType="submit">确定</button>
+
+  <view class='items'>
+    <checkbox-group bindchange="checkboxChange">
+      <label>
+        <checkbox value='我已阅读并接受 版权声明和隐私保护条款' checked="{{checkbox}}" bindtap="check"></checkbox>
+      我已阅读并接受 版权声明和隐私保护条款
+      </label>
+    </checkbox-group>
+  </view>
+  </form>
+
+</view>

@@ -1,0 +1,131 @@
+.container{
+  width: 100%;
+  height: 100vh;
+  background: #F2f2f2;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.prints{
+  width:819rpx;
+}
+.print-item{
+  flex-grow: 1;
+  height:466rpx;
+  background: #fff;
+  display: block;
+  margin-bottom: 20rpx;
+}
+.print-title{
+  display: flex;
+  width: 819rpx;
+  height:112rpx;
+  border-bottom: 1px solid #f1f1f1;
+  line-height: 112rpx;
+  font-size: 35rpx;
+  color: #898989;
+  position: relative;
+}
+.print-title text{
+  padding-left: 65rpx;
+}
+.print-title image{
+  width: 71rpx;
+  height: 57rpx;
+  position: absolute;
+  right: 41rpx;
+  top: 29rpx;
+}
+.print-content{
+  width: 819rpx;
+  display: flex;
+  padding-top: 50rpx;
+}
+.content{
+   display: flex;
+  width: 819rpx;
+  margin-right:0;
+ -webkit-transition: all 0.4s;
+ transition: all 0.4s;
+ -webkit-transform: translateX(127px);
+ transform: translateX(127px);
+ margin-left: -127px;
+}
+.print-spot{
+  flex: 2;
+  margin-left: 37rpx;
+}
+.print-desc{
+  flex: 3;
+  padding-right: 37rpx;  
+}
+.print-spot image{
+  width: 250rpx;
+  height: 250rpx;
+  margin: 0 auto;
+  display: block;
+}
+.grade{
+  font-size: 29rpx;
+}
+.grade .point{
+  color: red;
+  float: right;
+  padding-right: 10rpx;
+}
+.fiveStars{
+  width: 208rpx;
+  height: 40rpx;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+.star-image {
+  position: absolute;
+  width: 37rpx;
+  height:43rpx;
+  src: "../../../image/星_1.png";
+}
+
+.item {
+  position: absolute;
+  top: 1rpx;
+  width:15rpx;
+  height: 36rpx;
+}
+.item:first-child{
+  left: 3rpx;
+}
+.item:last-child{
+  left:20rpx;
+}
+.spotDesc{
+  color: #ababab;
+  font-size: 29rpx;
+}
+
+.del{
+background-color: orangered;
+height: 354rpx;
+ width: 110px;
+ display: flex;
+ margin-top: -49rpx;
+  flex-direction: column; 
+ align-items: center; 
+ justify-content: center;  
+ color: #fff;
+ -webkit-transform: translateX(127px);
+ transform: translateX(127px);
+ -webkit-transition: all 0.4s;
+ transition: all 0.4s;
+
+}
+
+.touch-move-active .content,
+.touch-move-active .del {
+ -webkit-transform: translateX(0);
+ transform: translateX(0);
+}

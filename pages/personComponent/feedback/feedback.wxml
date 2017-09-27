@@ -1,0 +1,14 @@
+<view class="feedBack">
+<!-- 意见反馈 -->
+  <view class="images-wrapper">
+    <view class="images-list">
+      <block wx:for-items="{{imageList}}" wx:for-item="image">
+        <image src="{{image}}" class="images-image" data-src="{{image}}" bindtap="previewImage"></image>
+      </block>
+      <text class="images-image images-image-plus" bindtap="chooseImage"></text>
+    </view>
+  </view>
+
+    <textarea class='feedText' placeholder='说些什么...'></textarea>
+
+</view>

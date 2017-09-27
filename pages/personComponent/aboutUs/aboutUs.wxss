@@ -1,0 +1,23 @@
+.contact{
+  width: 100%;
+  height: 100vh;
+  background: #fff;
+}
+.phone{
+  width: 91%;
+  padding: 36rpx;
+  color: #b7b7b7;
+  border-bottom: 1px solid #f2f2f2;
+}
+.dial{
+  float: right;
+  border: 1px solid #ff733e;
+  text-align: center;
+  width: 131rpx;
+  height: 58rpx;
+  line-height: 58rpx;
+  margin-top: -4rpx;
+  color:  #ff733e;
+  font-size: 29rpx;
+  font-weight: bold;
+}

@@ -1,0 +1,47 @@
+<scroll-view scroll-y="true" class="container" bindscrolltoupper="upper" upper-threshold="10" lower-threshold="5" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+
+<view class='prints'>
+ <block wx:for="{{prints}}"  wx:key="title">
+<!-- 头部 -->
+  <view class='print-item' bindtap='itemTo'>
+    <view class='print-title'>
+      <text>{{item.title}}</text>
+      <image src='../../../image/arrow_down.png'></image>
+    </view>
+<!-- 中间内容 -->
+    <view class="print-content {{item.isTouchMove ? 'touch-move-active' : ''}}"  data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove='touchmove'>
+      <view class='content'>
+      <!-- 图片 -->
+        <view class='print-spot flex-item'>
+        <image src='{{item.spot}}'></image>
+      </view>
+      <!-- 右侧评分和描述 -->
+      <view class='print-desc flex-item'>
+        <view class='grade'>
+          <text class=''>景点评分：</text>
+
+          <!-- 评分 -->
+          <view class='fiveStars'>
+            <block wx:for="{{stars}}">
+            <image class="star-image" style="left: {{item*40}}rpx" src="{{key > item ?(key-item == 0.5?halfSrc:selectedSrc) : normalSrc}}">
+              <view class="item" data-key="{{item+0.5}}" bindtap="selectLeft"></view>
+              <view class="item" data-key="{{item+1}}" bindtap="selectRight"></view>
+            </image>
+          </block>
+          </view>
+
+          <text class='point'>{{key}}分</text>
+        </view>
+        <text class='spotDesc'>{{item.spotDesc}}</text>
+      </view>
+      </view>
+
+      <!-- 删除 -->
+      <view class='del' catchtap='del' data-index='{{index}}'>删除</view>
+    </view>
+    
+  </view>
+</block>
+</view>
+
+</scroll-view>
