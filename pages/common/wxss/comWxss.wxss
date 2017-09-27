@@ -1,0 +1,19 @@
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+.clear:after{
+	display: block;
+	content: '';
+	clear:both;
+}
+.tv_el{
+	overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+.dis_ib{
+	display: inline-block;
+}

@@ -1,0 +1,12 @@
+<template name="looked">
+	<view class="footer">
+		<text class="title">看来此目的地的人还看了</text>
+		<view class="looked_class">
+			<block wx:for="{{scenicCategory}}" wx:key="">
+				<view class="looked_box">
+					{{item}}
+				</view>
+			</block>
+		</view>
+	</view>
+</template>

@@ -1,0 +1,3 @@
+<!--pages/home/details/details.wxml-->
+<import src="../../common/pages/details/details.wxml" />
+<template is="details" data="{{...item}}"></template>

@@ -1,0 +1,2 @@
+/* pages/home/category/category.wxss */
+@import "../../common/pages/category/category.wxss";

@@ -19,7 +19,15 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    wx.request({
+      url: 'http://cpc.find360.cn/api/home/index/categorys', 
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res)
+      }
+    })
   },
 
   /**

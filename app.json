@@ -1,5 +1,9 @@
 {
   "pages": [
+    "pages/home/category/category",
+    "pages/home/products_list/products_list",
+    "pages/common/pages/comment/comment",
+    "pages/home/details/details",
     "pages/home/home/home",
     "pages/person/collect/collect",
     "pages/person/person/person"

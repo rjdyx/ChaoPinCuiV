@@ -1,0 +1,3 @@
+<!--pages/home/category/category.wxml-->
+<import src="../../common/pages/category/category.wxml" />
+<template is="category" data="{{...item}}"></template>

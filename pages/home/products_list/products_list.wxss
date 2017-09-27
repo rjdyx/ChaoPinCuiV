@@ -1,0 +1,36 @@
+/* pages/common/pages/products_list/products_list.wxss */
+/*更多按钮时的样式*/
+.pro_list {
+	width: 700rpx;
+	margin: 0 auto;
+	padding: 30rpx 0rpx 70rpx ;
+}
+.pro_list .a_pro{
+	padding-bottom:15rpx;
+	border-bottom:1px solid #f4f4f6;
+	margin-bottom: 40rpx;
+}
+.pro_list .a_pro:last-child{
+	border-bottom:none;
+}
+.pro_list .a_pro>image{
+	width: 100%;
+	height: 450rpx;
+}
+.pro_list .a_pro .pro_name{
+	width: 100%;
+	font-size: 32rpx;
+	color: #2370af;
+	line-height: 60rpx;
+}
+
+.pro_list .a_pro .pro_place text{
+	max-width: 50%;
+	display: inline-block;
+	box-sizing: border-box; 
+	color: #acacac;
+	font-size: 30rpx;
+}
+.pro_list .a_pro .pro_place text:first-child{
+	padding-right: 30rpx;
+}

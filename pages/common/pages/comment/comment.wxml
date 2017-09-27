@@ -1,0 +1,41 @@
+<!--pages/home/comment/comment.wxml-->
+<view class="comment">
+  <view class="com_form">
+    <!-- <form class="dis_ib" bindsubmit="bindFormSubmit"> -->
+        <textarea class="com_textArea width700" placeholder="广济桥景色美" name="textarea"/>
+        <!-- <button form-type="submit"> 提交 </button> -->
+    <!-- </form> -->
+  </view>
+  <view class='putOutImg width700'>
+    <view class='a_putOutImg'>
+      <image src='../../../../image/潮州旅游_03.png'></image>
+    </view>
+        <view class='a_putOutImg'>
+      <image src='../../../../image/潮州旅游_03.png'></image>
+    </view>    
+    <view class='a_putOutImg'>
+      <image src='../../../../image/潮州旅游_03.png'></image>
+    </view>    
+    <view class='a_putOutImg'>
+      <image src='../../../../image/潮州旅游_03.png'></image>
+    </view>
+    <view class='a_camera'>
+      <image src='../../../../image/camera.png'></image>
+    </view>
+  </view>
+  <view class="bg_gray_line"></view>
+  <view class="grade width700">
+	   <text class="t">景点评分</text>
+	    <block wx:for="{{stars}}" wx:key="">
+	        <image class="star-image" src="{{key > item ?(key-item == 0.5?halfSrc:selectedSrc) : normalSrc}}">
+	          <view class="item" data-key="{{item+0.5}}" bindtap="selectLeft"></view>
+	          <view class="item" data-key="{{item+1}}" bindtap="selectRight"></view>
+	        </image>
+	     </block>
+  </view>
+  <view class="footer clear">
+  	<view class="footer_l t fl"><icon type="success" size="20" color="{{userNameCol}}" bind:tap="changeUserNameColFn"/>
+    匿名评价</view>
+    <button class='footer_r fr'>发表评论</button>
+  </view>
+</view>

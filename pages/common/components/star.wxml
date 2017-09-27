@@ -1,0 +1,20 @@
+<!-- 星星列表模板 -->
+<template name="star">
+	<view class="star_score_box">
+		<view class="clear star_item">
+			<block wx:for="{{[1,2,3,4,5]}}"  wx:for-index="idx" wx:for-item="item" wx:key="">
+				<view class="fl">
+					<image src="../../../image/star2.png"></image>
+				</view>
+			</block>
+		</view>
+		<view class="star_score clear star_item">
+			<block wx:for="{{[1,2,3,4,5]}}"  wx:for-index="idx" wx:for-item="item" wx:key="">
+				<view class="fl">
+					<image wx:if="{{item<=star}}" src="../../../image/star1.png"></image>
+					<image wx:elif="{{item === star + 0.5}}"  src="../../../image/star3.png"></image>
+				</view>
+			</block>
+		</view>
+	</view>
+</template>

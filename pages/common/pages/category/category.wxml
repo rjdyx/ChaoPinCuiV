@@ -1,0 +1,64 @@
+<import src="../../components/looked.wxml"></import>
+<template name="category">
+	<view class="category">
+		<view class="header">
+			<view class="header_top">
+				<image class="header_bg_img" src="{{src}}"></image>
+				<view class="search clear">
+					<view class="search_icon fl">
+						<image src="../../../image/search.png"></image>
+					</view>
+		            <input placeholder="{{placeholder}}" type="text" class="fl" />
+		        </view>
+		        <view class="bgName">
+		        	<text class="tv_el dis_ib">{{bgName}}</text>
+		        	<image src="../../../image/downward.png" data-url="details" catch:tap="jumpFn"></image>
+		        </view>
+			</view>
+			<view class="header_bottom">
+				<view class="hb_class">
+					<block wx:for="{{scenicCategory}}" wx:key="">
+						<view class="class_box" data-url="products_list" catch:tap="jumpFn">
+							{{item}}
+						</view>
+					</block>
+				</view>
+				<view class="hb_class_more" wx:if="{{moreCategory.length}}">
+					<text catch:tap="moreClassFn">{{isShowMC ? '查看更多' : '收起'}}</text>
+				</view>
+			</view>
+	    </view>
+	    <view class="main">
+	    	<view class="main_inner">
+	    		<view class="main_con">
+	    			<view class="main_title clear">
+						<text>{{main_title}}</text>
+						<text class="fr" data-url="products_list" catch:tap="jumpFn">更多></text>
+			    	</view>
+			    	<view class="recommend_products">
+			    		<block wx:for="{{recommend_products_arr}}" wx:key="">
+			    			<view class="a_product" data-url="details" catch:tap="jumpFn">
+								<image src="{{item.src}}"></image>
+								<view>
+									<text class="pro_name tv_el">{{item.proName}}</text>
+									<view class="pro_place"><text class="tv_el">{{item.proCity}}</text><text class="tv_el">{{item.proArea}}</text></view>
+								</view>
+							</view>
+			    		</block>
+			    	</view>
+	    		</view>
+	    	</view>
+	    </view>
+<!-- 		<view class="footer">
+			<text class="title">看来此目的地的人还看了</text>
+			<view class="looked_class">
+				<block wx:for="{{scenicCategory}}" wx:key="">
+					<view class="looked_box">
+						{{item}}
+					</view>
+				</block>
+			</view>
+    	</view> -->
+    	<template is="looked" data="{{scenicCategory}}"/>
+	</view>
+</template>
