@@ -1,2 +1,57 @@
 <!--pages/person/person/person.wxml-->
-<text>pages/person/person/person.wxml</text>
+<view class='person'>
+
+<!-- 头部个人信息 -->
+  <view class='userMsg'>
+    <view class='user-avatar'>
+      <image background-size="cover" src='{{userInfo.avatarUrl}}'></image>
+    </view>
+    <view class='user-msg'>
+      <text>个人信息</text>
+      <text>名字：{{userInfo.nickName}}</text>
+    </view>
+  </view>
+
+  <!-- 分类导航 -->
+  <view class="navs">
+      <block wx:for="{{navs}}" wx:key="name"> 
+        <view class="nav-item" catchtap='catchTapCategory' data-type="{{item.name}}" data-typeid="{{item.typeId}}"> 
+          <navigator url="../../personComponent/{{item.url}}/{{item.url}}">
+            <text class='nav-image {{item.navIcon}}'></text>
+            <text>{{item.name}}</text>
+          </navigator>
+        </view>
+      </block>
+  </view>
+
+  <!-- 我想了解 -->
+  <view class="knowWrap">
+    <text class="title">我想了解</text>
+  </view>
+
+  <!-- 分类 -->
+  <view class="navs">
+    <block wx:for="{{knows}}" wx:key="name"> 
+      <view class="nav-item" catchtap='catchTapCategory' data-type="{{item.name}}" data-typeid="{{item.typeId}}">  
+        <navigator url="../../personComponent/{{item.url}}/{{item.url}}">
+          <text class='nav-image {{item.knowicon}}'></text>
+          <text>{{item.name}}</text>
+        </navigator>
+      </view>
+    </block>
+  </view>
+
+  <!-- 感兴趣 -->
+  <view class="interest">
+    <text class="interestTitle">你感兴趣的东西</text>
+    <view class="interestTab">
+      <block wx:for="{{interset}}">
+        <view class="interest-item" data-type="{{item.name}}" data-typeid="{{item.typeId}}">
+          <text>{{item.name}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <button class="bindLogin">{{bindLogin}}</button>
+</view>

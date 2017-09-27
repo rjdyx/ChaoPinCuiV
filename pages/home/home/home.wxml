@@ -1,2 +1,40 @@
-<!--pages/home/home/home.wxml-->
-<text>pages/home/home/home.wxml</text>
+
+<view class='container'>
+<!-- 轮播图 -->
+  <view class="swiper-container">
+        <swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+            <block wx:for="{{banners}}">
+                <swiper-item>
+                    <image bindtap="catchTapCategory" src="{{item}}" class="slide-image" height="150"/>
+                </swiper-item>
+            </block>
+        </swiper>
+   </view>
+
+<!-- 分类导航 -->
+   <view class="navs">
+    <block wx:for="{{navs}}" wx:key="name">
+      <view class="nav-item" data-type="{{item.name}}" data-typeid="{{item.typeId}}">  
+        <navigator url="">
+          <image src='{{item.icon}}' class='nav-image'></image>
+          <text>{{item.name}}</text>
+        </navigator>
+      </view>
+    </block>
+  </view>
+
+<!-- 经典推荐 -->
+  <view class='recommand'>
+      <view class='recommandTitle'>
+          <view class="recommandText">经典推荐</view>
+      </view>
+  </view> 
+  <view class='relist'>
+     <block wx:for="{{list}}" wx:key="name"> 
+      <view class="list-item" catchtap='catchTapCategory' data-type="{{item.name}}" data-typeid="{{item.typeId}}">  
+        <image src='{{item.icon}}' class='list-image'></image>
+         <text>{{item.name}}</text> 
+      </view>
+    </block>
+  </view>
+</view>

@@ -1,1 +1,133 @@
 /* pages/person/person/person.wxss */
+@import '../../../iconfont/stylesheet.wxss';
+.person{
+  width: 100%;
+  height: 100vh;
+  background: #F2f2f2;
+  margin: 0;
+  padding: 0;
+}
+.userMsg{
+  width: 100%;
+  height: 222rpx;
+  background-color: #fed555;
+  display: flex;
+  flex-direction: row;
+}
+.user-avatar{
+  width: 34%; 
+  height: 100%;
+}
+.user-avatar image{
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50px;
+  border: 5px solid #fff;
+  display: block;
+  margin-top: 20rpx;
+  margin-left: 52rpx;
+}
+.user-msg{
+    width: 60%;  
+    padding: 50rpx 0;
+    font-size: 30rpx;
+}
+.user-msg text{
+    display: block; 
+    padding: 8rpx;
+}
+.navs{
+  width: 100%;
+  height: 210rpx;
+  display: flex;
+  background: #fff;
+}
+.nav-item{
+  width: 25%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 37rpx;
+}
+.nav-item .nav-image{
+  width: 100rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  display: block;
+  font-family: 'iconfont';
+  font-weight: 500;
+  font-style: normal;
+  text-align: center;
+  font-size: 70rpx;
+  color: #f7db92;
+  border: #000;
+}
+.nav-item text{
+  padding-top: 10rpx;
+  font-size: 29rpx;
+}
+
+.knowWrap{
+  width: 100%;
+  margin-top: 20rpx;
+}
+.knowWrap text{
+  display: block;
+  width: 100%;
+  padding: 32rpx;
+  background: #fff;
+  margin-bottom: 5rpx;
+}
+.interest{
+  width: 100%;
+  background: #fff;
+  margin-top: 5rpx;
+}
+.interestTitle{
+  display: block;
+  padding: 32rpx;
+}
+.interestTab{
+  width: 100%;
+  /* height: 250rpx; */
+}
+.interest-item{
+  display: inline-block;
+  width: 31%;
+  margin-bottom: 34rpx;
+}
+.interest-item text{
+  display: block;
+  width: 85%;
+  background: #f3f4f6;
+  margin: 0 auto;
+  text-align: center;
+  padding: 10rpx 0;
+  font-size: 29rpx;
+}
+.interest-item:first-child,.interest-item:nth-child(4){
+  margin-left: 20rpx;
+}
+.aboutIcon:after{
+  content: '\e604';
+  color: #1f1f1f;
+}
+.bindIcon:after{
+  content: '\e507';
+  color: #1f1f1f;
+}
+.likeIcon:after{
+  content: '\e656';
+}
+.footIcon:after{
+  content: '\e635';
+}
+.evaluate:after{
+  content: '\e615';
+}
+.ideasIcon:after{
+  content: '\e66d';
+}
+.bindLogin{
+  width: 90%;
+}

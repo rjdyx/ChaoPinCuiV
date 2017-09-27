@@ -1,8 +1,16 @@
 {
   "pages": [
     "pages/home/home/home",
-    "pages/person/collect/collect",
-    "pages/person/person/person"
+    "pages/loginOrregister/loginOrigister/loginOrigister",
+    "pages/loginOrregister/register/register",
+    "pages/loginOrregister/login/login",
+    "pages/person/person/person",
+    "pages/personComponent/feedback/feedback",
+    "pages/personComponent/collect/collect",
+    "pages/personComponent/evaluate/evaluate",
+    "pages/personComponent/footprint/footprint",
+    "pages/personComponent/aboutUs/aboutUs",
+    "pages/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -23,7 +31,7 @@
         "selectedIconPath": "./image/home-select.png"
       },
       {
-        "pagePath": "pages/person/collect/collect",
+        "pagePath": "pages/personComponent/collect/collect",
         "text": "我的收藏",
         "iconPath": "./image/collect.png",
         "selectedIconPath": "./image/collect-select.png"

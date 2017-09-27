@@ -1,1 +1,93 @@
 /* pages/home/home/home.wxss */
+.container {
+  width: 100%;
+  display: flex;
+  height: 100%;
+  background-color: #F2f2f2;
+  padding: 0;
+  margin: 0;
+}
+.swiper-container{
+  width: 100%;
+}
+.swiper-container image{
+  width: 100%;
+}
+.navs{
+  width: 100%;
+  height: 200rpx;
+  display: flex;
+  background: #fff;
+}
+.nav-item{
+  width: 25%;
+  padding: 20rpx;
+}
+.nav-item navigator{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.nav-item .nav-image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+.nav-item text{
+  padding-top: 10rpx;
+  font-size: 29rpx;
+}
+.recommand{
+  width:100%;
+  margin-top: 20rpx;
+  background: #fff;
+  height: 100rpx;
+  margin-bottom: 6rpx;
+}
+.recommandTitle{
+  width: 65%;
+  border-top: 1px solid #95e1eb;
+  margin: 1.3rem auto;
+  line-height: 1.6em;
+  text-align: center;
+}
+.recommandText{
+  position: relative;
+  top: -1em;
+  padding: 0 .55em;
+  vertical-align: middle;
+  display: inline-block;
+  background: #fff;
+  color: #95e1eb;
+}
+.relist{
+  width: 100%;
+  height: 200rpx;
+  background: #fff;
+}
+.list-item{
+  width: 43%;
+  height: 200rpx;
+  display: inline-block; 
+  margin: 30rpx;
+  margin-top: 35rpx;
+  margin-right: 0rpx;
+  margin-bottom: 0rpx;
+  position: relative;
+}
+.list-item .list-image{
+  width:100%;
+  height: 200rpx;
+  border-radius: 20rpx;
+}
+.list-item text{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid;
+  top: 0;
+  left: 0;
+  color: #fff;
+  line-height: 200rpx;
+  text-align: center;
+}
