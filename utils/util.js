@@ -15,5 +15,12 @@ const formatNumber = n => {
 }
 
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  json2Form (json) {
+  var str = []
+  for (var p in json) {
+    str.push(encodeURIComponent(p) + '=' + encodeURIComponent(json[p]))
+  }
+  return str.join('&')
+}
 }

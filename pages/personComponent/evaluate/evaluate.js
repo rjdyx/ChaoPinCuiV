@@ -46,7 +46,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    wx.request({
+      url: 'https://cpc.find360.cn/api/home/comment',
+      success: function(res){
+        console.log(res)
+      }
+    })
   },
 
   /**

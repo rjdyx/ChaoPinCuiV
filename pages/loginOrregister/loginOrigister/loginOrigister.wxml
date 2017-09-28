@@ -1,5 +1,5 @@
 <view class="loginOrigister">
-  <image src='../../../image/bg.png' class='bg'></image>
+  <image src='../../../image/bg.jpg' class='bg'></image>
   <view class='mask'>
     <image src='../../../image/replace.png' class='logo'></image>
       <button class='register' bindtap="toRegister">注册账号</button>

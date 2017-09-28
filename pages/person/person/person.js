@@ -1,4 +1,5 @@
 // pages/person/person/person.js
+var app = getApp()
 Page({
 
   /**
@@ -24,29 +25,16 @@ Page({
       { name: '明信片', typeId: 5 }
     ],
     userInfo:{},
-    bindLogin: '已登录'
+    bindLogin: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    this.getUserInfo()
-  },
-  // 获取个人信息
-  getUserInfo: function(cb){
-    var that = this
-    wx.login({
-      success: function(){
-        wx.getUserInfo({
-          success: function(res){
-            that.setData({
-              userInfo: res.userInfo
-            })
-          }
-        })
-      }
-    })
+    // 获取当前页面的路径
+    var url = getCurrentPages()[getCurrentPages().length - 1].__route__;
+    console.log(url)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

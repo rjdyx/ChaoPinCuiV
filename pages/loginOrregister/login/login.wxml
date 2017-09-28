@@ -3,11 +3,11 @@
 
     <form bindsubmit="formSubmit">
       <view class='inputWrap'>
-      <input placeholder='手机号/电子邮箱' class='name' bindinput="inputClick" id="loginName"></input>  
-      <input placeholder='密码' class='passward' bindinput="inputClick" id="password" type="password"></input>
-    </view>
+        <input placeholder='手机号/电子邮箱' class='name' bindinput="inputClick" id="loginName" name="user"></input>  
+        <input placeholder='密码' class='passward' bindinput="inputClick" id="password" type="password" name="password"></input>
+      </view>
 
-    <button class='loginBtn' catchtap="loginClick" formType="submit">登录</button>
+    <button class='loginBtn' formType="submit">登录</button>
     
     <view class='forget'>
       <text>随意游览</text>

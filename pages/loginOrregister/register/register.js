@@ -5,7 +5,6 @@ Page({
     phone: '',
     name: '',
     password:'',
-    codeText: '获取验证码',
     sendmsg: 'nosend'
   },
   onload: function(){
@@ -21,33 +20,6 @@ Page({
         isChecked: false
       })
     }
-  },
-  getCode: function(e){
-    if (timer == 1){
-      var timer = 0
-      var that = this
-      var time = 60
-      this.setData({
-        sendmsg: 'hassend'
-      })
-      var inter = setInterval(function(){
-        that.setData({
-          codeText: 'time' + 's后重新发送',
-        })
-        time--
-        if (time < 0) {
-          clearInterval(inter)
-          this.setData({
-            codeText: '获取验证码'
-          })
-        }
-      },1000)
-    }
-    wx.showToast({
-      title: '验证码已发送',
-      icon: 'success',
-      duration: 2000
-    })
   },
   // 验证手机号
   validatePhone: function(event){
@@ -90,6 +62,7 @@ Page({
     }
   },
   formSubmit: function(e) {
+    console.log(e)
     var phone = e.detail.value.phone,
         name = e.detail.value.name,
         email = e.detail.value.email,
@@ -107,6 +80,38 @@ Page({
         icon: 'success',
         duration: 1500
       })
+    } else if (phone != null && name != null && email != null && password != null && checkPassword != null && this.data.isChecked == false) {
+      wx.showToast({
+        title: '请勾选协议',
+        icon: 'success',
+        duration: 1500
+      })
     }
+    var formData = e.detail.value
+    console.log(formData)
+    var openid = wx.getStorageSync('user')
+    var token = wx.getStorageSync('token')
+    wx.request({
+      url: 'https://cpc.find360.cn/api/home/wx/register',
+      data: {
+        name: name,
+        email: email,
+        phone: phone,
+        password: password,
+        repassword: checkPassword,
+        openid: openid,
+        _token: token
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        '_token': token,
+        'X-CSRF-TOKEN': token,
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      method: 'POST',
+      success: function(res) {
+        console.log(res)
+      }
+    })
   }
 })

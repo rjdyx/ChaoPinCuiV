@@ -53,5 +53,7 @@
     </view>
   </view>
 
-  <button class="bindLogin">{{bindLogin}}</button>
+  <view class='bind'>
+    <button class="bindLogin">{{bindLogin}}</button>
+  </view>
 </view>

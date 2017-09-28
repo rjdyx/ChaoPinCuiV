@@ -43,3 +43,7 @@
   color: #b5b5b7;
   font-size: 70rpx;
 }
+.send{
+  width: 92%;
+  background: #fed555;
+}
