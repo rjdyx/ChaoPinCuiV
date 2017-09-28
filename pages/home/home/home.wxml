@@ -15,7 +15,7 @@
    <view class="navs">
     <block wx:for="{{navs}}" wx:key="name">
       <view class="nav-item" data-type="{{item.name}}" data-typeid="{{item.typeId}}">  
-        <navigator url="">
+        <navigator>
           <image src='{{item.icon}}' class='nav-image'></image>
           <text>{{item.name}}</text>
         </navigator>
@@ -31,8 +31,8 @@
   </view> 
   <view class='relist'>
      <block wx:for="{{list}}" wx:key="name"> 
-      <view class="list-item" catchtap='catchTapCategory' data-type="{{item.name}}" data-typeid="{{item.typeId}}">  
-        <image src='{{item.icon}}' class='list-image'></image>
+      <view class="list-item" catchtap='catchTapCategory' data-type="{{item.name}}" data-typeid="{{item.id}}">  
+         <!-- <image src='{{item.icon}}' class='list-image'></image>  -->
          <text>{{item.name}}</text> 
       </view>
     </block>

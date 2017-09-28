@@ -1,7 +1,5 @@
 //index.js
 //获取应用实例
-c
-
 Page({
   data: {
     motto: 'Hello World',

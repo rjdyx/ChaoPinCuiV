@@ -111,9 +111,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var state = wx.getStorageSync('loginState')
+    console.log(state)
+    if (!state) {
+      wx.redirectTo({
+        url: '../../loginOrregister/loginOrigister/loginOrigister',
+      })
+    }
+    // 获取当前页面的路径
+    var url = getCurrentPages()[getCurrentPages().length - 1].__route__;
+    wx.setStorageSync('currentUrl',url)
+    console.log(url)
+    wx.request({
+      url: 'https://cpc.find360.cn/api/home/collect',
+      success: function(res){
+        console.lo
+      }
+    })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

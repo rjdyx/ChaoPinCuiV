@@ -1,4 +1,5 @@
 // pages/home/home/home.js
+var app = getApp()
 Page({
 
   /**
@@ -26,9 +27,6 @@ Page({
   ],
   },
   catchTapCategory: function () {
-     wx.navigateTo({
-       url:'../../loginOrregister/loginOrigister/loginOrigister'
-     })
   },
  
 
@@ -43,13 +41,17 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    var that = this
     wx.request({
-      url: 'https://cpc.find360.cn/api/home/index/categorys', 
+      url: 'https://cpc.find360.cn/api/home/index/recommend', 
       header: {
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        console.log(res)
+        console.log(res.data.data)
+        that.setData({
+          list: res.data.data
+        })
       }
     })
   },

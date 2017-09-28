@@ -1,4 +1,5 @@
 // pages/person/person/person.js
+var app = getApp()
 Page({
 
   /**
@@ -31,27 +32,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    this.getUserInfo()
-  },
-  // 获取个人信息
-  getUserInfo: function(cb){
-    var that = this
-    wx.login({
-      success: function(){
-        wx.getUserInfo({
-          success: function(res){
-            if (res.userInfo.avatarUrl != null && res.userInfo.nickName != null) {
-              that.setData({
-                bindLogin: '退出登录'
-              })
-            }
-            that.setData({
-              userInfo: res.userInfo
-            })
-          }
-        })
-      }
-    })
+    // 获取当前页面的路径
+    var url = getCurrentPages()[getCurrentPages().length - 1].__route__;
+    console.log(url)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

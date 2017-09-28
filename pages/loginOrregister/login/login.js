@@ -19,40 +19,45 @@ Page({
     paraObj[objId] = event.detail.value
     this.setData(paraObj)
   },
-  loginClick: function(){
-    var loginName = this.data.loginName
-    var password = this.data.password
-    if (loginName != null && password != null) {
-      var backUrl = this.data.backUrl
-      app.globalData.userInfo = {
-        loginName: loginName,
-        password: password
-      }
-      wx.redirectTo({
-        url: backUrl
-      })
-    } else {
-      this.setData({
-        loginName: null,
-        password: null
-      })
-    }
+  // loginClick: function(){
+  //   var loginName = this.data.loginName
+  //   var password = this.data.password
+  //   if (loginName != null && password != null) {
+  //     var backUrl = this.data.backUrl
+  //     app.globalData.userInfo = {
+  //       loginName: loginName,
+  //       password: password
+  //     }
+  //     wx.redirectTo({
+  //       url: backUrl
+  //     })
+  //   } else {
+  //     this.setData({
+  //       loginName: null,
+  //       password: null
+  //     })
+  //   }
+  // },
+  formSubmit: function(e) {
+    wx.navigateTo({
+          url: '../../personComponent/collect/collect'
+        })
+    var openid = wx.getStorageSync('user')
+    var url = wx.getStorageSync('currentUrl')
     wx.request({
-      url: 'http://cpc.find360.cn/api/home/comment',
+      url: 'https://cpc.find360.cn/api/home/wx/login',
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
+      data:{
+        user: e.detail.value.user,
+        password: e.detail.value.password,
+        openid: openid
+      },
+      method: "POST", 
       success: function(res) {
         console.log(res)
       }
-      // header:{
-      //   'Content-Type': 'application/x-www-form-urlencoded'
-      // },
-      // method: 'POST',
-      // data: ({
-      //   user: this.data.loginName,
-      //   password: this.data.
-      // })
-      // success: function(res){
-      //   console.log(res)
-      // }
     })
   }
 })

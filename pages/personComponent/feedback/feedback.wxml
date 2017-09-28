@@ -2,7 +2,7 @@
 <!-- 意见反馈 -->
   <view class="images-wrapper">
     <view class="images-list">
-      <block wx:for-items="{{imageList}}" wx:for-item="image">
+      <block wx:for-items="{{pics}}" wx:for-item="image">
         <image src="{{image}}" class="images-image" data-src="{{image}}" bindtap="previewImage"></image>
       </block>
       <text class="images-image images-image-plus" bindtap="chooseImage"></text>
@@ -10,5 +10,5 @@
   </view>
 
     <textarea class='feedText' placeholder='说些什么...'></textarea>
-
+    <button class='send' bindtap="uploadimg">发送</button>
 </view>
