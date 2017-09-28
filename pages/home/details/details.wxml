@@ -1,3 +1,217 @@
-<!--pages/home/details/details.wxml-->
-<import src="../../common/pages/details/details.wxml" />
-<template is="details" data="{{...item}}"></template>
+<import src="../../common/components/star.wxml"></import>
+<import src="../../common/components/looked.wxml"></import>
+<!-- 详情页 -->
+<view class="details">
+	<view class="header">
+		<view class="header_top">
+			<image 
+			class="header_bg_img" 
+			src="{{proInfo.img ? https + proInfo.img : ''}}">
+			</image>
+		</view>
+		<view class="header_bottom">
+			<text class="pro_name t dis_ib">{{proInfo.name}}</text>
+			<view class="pro_place">目的地：{{proInfo.address}}
+			</view>
+		</view>
+    </view>
+    <view class="bg_gray_line"></view>
+    <view class="main">
+    	<view class="main_inner">
+    		<view class="main_con">
+    		    <!-- tab切换 -->
+    			<view class="tab width700">
+    				<block 
+    				wx:for="{{tabArr}}" 
+    				wx:key="" 
+    				wx:for-index="idx">
+    					<view 
+    					class="{{idx === tabIndex ? 'tab_active' : ''}}" 
+    					catchtap="changeTabIndexFn" 
+    					data-id="{{idx}}">{{item}}
+	    				</view>
+	    			</block>
+    			</view>
+    			<!-- tab_con1 产品详细 -->
+    			<view class="tab_con1" wx:if="{{tabIndex === 0}}">
+    				<!-- 历史来源 -->
+    				<view class="source width700">
+    					<view class="header_h3 clear">
+    						<view class="header_h3_l fl">
+								<image src="../../../image/dian.png"></image>
+								<text class="t">{{proInfo.name}}历史来源</text>
+							</view>
+							<view class="header_h3_r fr">
+								星级：{{star}}
+							</view>
+    					</view>
+						<view class="source_text line-height40 font_size30">
+							<view>{{proInfo.desc}}</view>
+							<view 
+							class="look_more dis_ib" 
+							catchtap="lookSourceFn">
+								查看完整历史
+								<image src="../../../image/r_icon.png"></image>
+							</view>
+						</view>	
+    				</view>
+    				<!-- 详细地址 -->
+    				<view class="address width700">
+    					<view class="header_h3 clear">
+    						<view class="header_h3_l fl">
+								<image src="../../../image/dian.png"></image>
+								<text class="t">详细地址</text>
+							</view>
+    					</view>
+						<view class="address_text line-height40 clear">
+							<image class="address_icon fl" src="../../../image/address_icon.png"></image>
+							<view 
+							class="details_address fl font_size30" 
+							catchtap="lookMapFn">
+								{{proInfo.address}}
+								<view class="look_more dis_ib">
+									<image src="../../../image/r_icon.png"></image>
+								</view>
+							</view>
+						</view>	
+    				</view>
+    				<view class="bg_gray_line"></view>
+    				<!-- 实用贴士 -->
+    				<view class="tip width700">
+    					<view class="header_h3 clear">
+    						<view class="header_h3_l fl">
+								<image src="../../../image/dian.png"></image>
+								<text class="t">实用贴士</text>
+							</view>
+    					</view>
+						<view class="tip_text line-height40">
+							<view class="details_tip">
+								<block wx:for="{{proRecommend}}" wx:key="">
+									<view class="padding_top30">
+										<text class='t'>{{item.name}}：</text>
+										<text class="font_size30">{{item.content}}</text>
+									</view>
+								</block>
+							</view>
+						</view>	
+    				</view>
+    				<view class="bg_gray_line"></view>
+    				<!-- 游客评论 -->
+    				<view class="comment width700">
+    					<view class="header_h3 clear">
+    						<view class="header_h3_l fl">
+								<image src="../../../image/dian.png"></image>
+								<text class="t">游客评论</text>
+							</view>
+							<button class="comment_btn fr" data-url="comment" catch:tap="jumpFn">发表评论</button>
+    					</view>
+    					<view class="score">
+							<view>{{proInfo.comment}}分</view>
+							<view>{{proComment.length}}条评论</view>
+							<view class="padding_top30">
+								<template is="star" data="{{...score}}"/>
+							</view>
+							<view class="user_comment">
+								<block wx:for="{{proComment}}" wx:key="">
+									<view class="user_comment_item" >
+										<view class="user_comment_item_t clear">
+											<image class="user_header fl" src="{{item.user_img ? https + item.user_img : ''}}"></image>
+											<view class="user_comment_item_t_r fl">
+												<text class="t">{{item.user_name}}</text>
+												<template is="star" data="{{...item}}"/>
+											</view>
+										</view>
+										<view class="user_comment_item_b">
+											<text>{{item.content}}</text>
+											<view class="user_comment_item_img">
+											    <scroll-view scroll-x="true" class="imgScroll">
+											        <block wx:for="{{item.img}}" wx:key="">
+											           <image src="{{item ?  https + item : ''}}"></image>
+											        </block>
+											    </scroll-view>
+											</view>
+										</view>
+									</view>
+								</block>
+							</view>
+    					</view>
+    				</view>
+    			</view>
+    			<!-- tab_con2 产品图片 -->
+    			<view class="tab_con2" wx:elif="{{tabIndex === 1}}">
+    				<view class="width700">
+    					<view class="header_h3 clear">
+    						<view class="header_h3_l fl">
+								<image src="../../../image/dian.png"></image>
+								<text class="t">{{proName}}摄影</text>
+							</view>
+    					</view>
+    					<view class="tab_con2_inner" >
+    						<view wx:if="{{proImgs.length}}">
+	    					 	<block wx:for="{{proImgs}}" wx:key="">	
+	    					 		<view>  	
+	    					 			<view wx:if="{{item.desc}}">{{item.desc}}</view>
+	    					 			<view class="imgText">
+	    					 				<image src="{{item.img ? https + item.img : ''}}"></image>
+	    					 				<text class="tv_el" wx:if="{{item.desc}}">{{item.name}}</text>
+	    					 			</view>
+	    					 		</view>
+	    					 	</block>
+    					 	</view>
+    					 	<view class="no_data" wx:else>暂无数据，尽情期待以后内容</view>
+    					</view>
+    				</view>
+    			</view>
+    			<!-- tab_con3 附近产品-->
+    			<view class="tab_con3" wx:elif="{{tabIndex === 2}}">
+    				<view class="width700">
+    					<view class="header_h3 clear">
+    						<view class="header_h3_l fl">
+								<image src="../../../image/dian.png"></image>
+								<text class="t">{{proName}}附近景点</text>
+							</view>
+							<view class="header_h3_r fr" data-url="products_list" catch:tap="jumpFn">
+								更多<image src="../../../image/r_icon.png"></image>
+							</view>
+    					</view>
+    					<view class="tab_con3_inner">
+    					 	<view class="nearby_products"  wx:if="{{nearbysProList.length}}">
+					    		<block wx:for="{{nearbysProList}}" wx:key="">
+					    			<view 
+					    			class="a_product" 
+					    			data-url="details"
+					    			data-id="{{item.id}}"
+					    			catch:tap="jumpFn">
+										<image src="{{item.img ? https + item.img : ''}}"></image>
+										<view>
+											<text class="pro_name tv_el">{{item.name}}</text>
+											<view class="pro_distance">
+												<text class="tv_el">距离</text>
+												<text class="tv_el">{{item.dis}}</text>
+											</view>
+										</view>
+									</view>
+					    		</block>
+					    	</view>
+					    	<view class="no_data" wx:else>暂无数据，尽情期待以后内容</view>
+    					</view>
+    				</view>
+    			</view>
+    			<view>
+    				<template wx:if="{{tabIndex === 1 || tabIndex === 2}}" is="looked" data="{{other,categoryUrl}}"/>
+    			</view>
+    		</view>
+    	</view>
+    </view>
+    <!-- 弹出框 -->
+    <view class="pop_up_wrap" wx:if="{{isShowPop.bol}}">
+		<view class="pop_up_inner">
+			<image class="close_icon" catchtap="closeFn" src="../../../image/x.png"></image>
+			<view class="pop_up_title">{{proInfo.name}}历史来源</view>
+			<scroll-view wx:if="{{isShowPop.name === 'source'}}" scroll-y="true" class="pop_up_text">
+				{{proInfo.desc}}
+			 </scroll-view>
+			<map wx:if="{{isShowPop.name === 'map'}}" class="map" longitude="113.324520" latitude="23.099994" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location ></map>
+		</view>
+    </view>
+</view>

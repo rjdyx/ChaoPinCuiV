@@ -115,5 +115,19 @@ App({
         }
       }
     })
+  },
+  requestData:function(url,params,callback,) {
+    wx.request({
+      url: url,
+      data: params,
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      header: {'Content-Type':'application/json'}, // 设置请求的 header
+      success: function(res){
+        callback(null,res.data);
+      },
+      fail: function(e) {
+        callback(e)
+      }
+    })
   }
 })

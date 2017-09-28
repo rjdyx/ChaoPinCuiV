@@ -1,15 +1,23 @@
 <!--pages/common/pages/products_list/products_list.wxml-->
 <view class="pro_list">
-<block wx:for="{{proList}}" wx:key="">
-	<view class="a_pro" catch:tap="jumpFn">
-		<image src="{{item.src}}"></image>
-		<view>
-			<text class="pro_name tv_el dis_ib">{{item.proName}}</text>
-			<view class="pro_place">
-				<text class="tv_el">{{item.proCity}}</text>
-				<text class="tv_el">{{item.proArea}}</text>
+	<view wx:if='{{proList.length}}'>
+		<block wx:for="{{proList}}" wx:key="">
+			<view class="a_pro" 
+			data-id="{{item.id}}"
+			data-url="products_list"
+			catch:tap="jumpFn">
+				<image src="{{item.img ? https + item.img : ''}}"></image>
+				<view>
+					<view class="pro_name">
+						<text class="tv_el dis_ib fl">{{item.name}}</text>
+						<text class="tv_el dis_ib fr">距离：{{item.dis}}</text>
+					</view>
+					<view class="pro_place">
+						{{item.address}}
+					</view>
+				</view>
 			</view>
-		</view>
+		</block>
 	</view>
-</block>
+	<view class="no_data" wx:else>暂无数据，尽情期待以后内容</view>
 </view>
