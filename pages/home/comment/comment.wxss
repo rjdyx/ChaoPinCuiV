@@ -1,5 +1,5 @@
 /* pages/home/comment/comment.wxss */
-@import "../../wxss/comWxss.wxss"
+@import "../../common/wxss/comWxss.wxss"
 .width700{
 	width: 700rpx;
 }

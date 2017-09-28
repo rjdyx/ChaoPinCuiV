@@ -1,83 +1,144 @@
 // pages/home/category/category.js
+import API from '../../../utils/api.js';
+const APP = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    item: {
-      src: '../../../image/潮州旅游_03.png',
-      placeholder: '请输入你想了解的景点',
-      scenicCategory: ['潮州文乐', '古城景点', '特色景点', '景点住宿', '特色茶馆', '潮州手信', '古城景点1', '特色景点2', '景点住宿2'],
-      moreCategory: [],
-      isShowMC: false,
-      bgName: '广济桥',
-      main_title: '景点推荐',
-      recommend_products_arr: [
-        {
-          src: '../../../image/潮州旅游_03.png',
-          proName: '牌坊街牌坊街牌坊街牌坊街牌坊街',
-          proCity: '潮州市',
-          proArea: '湘桥区'
-        },
-        {
-          src: '../../../image/潮州旅游_03.png',
-          proName: '牌坊街',
-          proCity: '潮州市',
-          proArea: '湘桥区'
-        },
-        {
-          src: '../../../image/潮州旅游_03.png',
-          proName: '牌坊街',
-          proCity: '潮州市',
-          proArea: '湘桥区'
-        },
-        {
-          src: '../../../image/潮州旅游_03.png',
-          proName: '牌坊街',
-          proCity: '潮州市',
-          proArea: '湘桥区'
-        },
-        {
-          src: '../../../image/潮州旅游_03.png',
-          proName: '牌坊街',
-          proCity: '潮州市',
-          proArea: '湘桥区'
-        },
-        {
-          src: '../../../image/潮州旅游_03.png',
-          proName: '牌坊街',
-          proCity: '潮州市',
-          proArea: '湘桥区'
-        }
-      ]
-    }
+    https: 'https://cpc.find360.cn/',
+    detailsUrl: '../details/details',
+    proListUrl: '../products_list/products_list',
+    categoryUrl: './category',
+    placeholder: '请输入你想了解的景点',
+    isShowMC: false,
+    main_title: '景点推荐',
+    scenicCategory: [],
+    category: [], // 推荐分类
+    moreCategory: [], //更多分类
+    product: {}, // 推荐产品对象
+    recommend_products_arr: [], //推荐产品列表
+    other: [], // 其他人还看了,
+    options:{}
   },
-
+  // 跳页面
+  jumpFn: function(e){
+    console.log(e)
+    var url = ''
+    switch (e.currentTarget.dataset.url) {
+      case 'details':  
+        url = this.data.detailsUrl + '?id=' + e.currentTarget.dataset.id
+        break
+      case 'products_list':
+        url = this.data.proListUrl + '?id=' + this.data.options.id + '&type=recommend'
+        break
+    }
+    wx.navigateTo({
+      url: url
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var self = this
+    console.log('cetagory.js------------')
+    console.log('options---')
+    console.log(options)
+        // 获取当前的地理位置
+    wx.getLocation({
+      type: 'wgs84',
+      success: function(res) {
+        var latitude = res.latitude //纬度
+        var longitude = res.longitude //经度
+        var speed = res.speed
+        var accuracy = res.accuracy
+        console.log('getLocation--')
+        console.log(res)
+      }
+    })
+    if (options) {
+      self.setData({
+        "options": options
+      })
+    }
+    // 当前分类代表性产品数据
+    APP.requestData(API.product + '?category_id=' + options.id, {}, (err, data) =>{
+      console.log('product---')
+      console.log(data)
+      if (data) {
+        self.setData({
+          "product": data
+        })
+      }
+    })
+    // 当前分类下的二级分类
+    APP.requestData(API.categoryChild + '?pid=' + options.id, {}, (err, data) =>{
+      console.log('category---')
+      console.log(data)
+      if (data) {
+        self.setData({
+          "category": data
+        })
+        this.slice6()
+      }
+    })
+    // 榜单推荐（默认6个）
+    APP.requestData(API.categoryRecommend + '?category_id=' + options.id + '?num=' + 6, {}, (err, data) =>{
+      console.log('recommend_products_arr---')
+      console.log(data)
+      if (data.data) {
+        self.setData({
+          "recommend_products_arr": data.data
+        })
+      }
+    })
+    // 其他人还看了
+    APP.requestData(API.other + '?category_id=' + options.id, {}, (err, data) =>{
+      console.log('other---')
+      console.log(data)
+      if (data.data) {
+        self.setData({
+          "other": data.data
+        })
+      }
+    })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+  },
+  slice6: function() {
     var arr = []
     var arr2 = []
-    if (this.data.item.scenicCategory.length > 6) {
-      arr = this.data.item.scenicCategory.slice(0, 6)
-      arr2 = this.data.item.scenicCategory.slice(6)
+    if (this.data.category.length > 6) {
+      arr = this.data.category.slice(0, 6)
+      arr2 = this.data.category.slice(6)
       this.setData({
-        "item.scenicCategory": arr,
-        "item.moreCategory": arr2,
-        "item.isShowMC": true
+        "category": arr,
+        "moreCategory": arr2,
+        "isShowMC": true
       })
     }
   },
-
+  // 点击查看更多，或收起
+  moreCategoryFn:function(){
+    if (this.data.moreCategory.length) {
+      if (this.data.isShowMC) {
+        this.setData({
+          "category": this.data.category.concat(this.data.moreCategory),
+          "isShowMC": !this.data.isShowMC
+        })
+      } else{
+        this.setData({
+          "category": this.data.category.slice(0, 6),
+          "isShowMC": !this.data.isShowMC
+        })
+      }
+    }
+  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -118,37 +179,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  },
-  // 点击查看更多，或收起
-  moreClassFn:function(){
-    if (this.data.item.moreCategory.length) {
-      if (this.data.item.isShowMC) {
-        this.setData({
-          "item.scenicCategory": this.data.item.scenicCategory.concat(this.data.item.moreCategory),
-          "item.isShowMC": !this.data.item.isShowMC
-        })
-      } else{
-        this.setData({
-          "item.scenicCategory": this.data.item.scenicCategory.slice(0, 6),
-          "item.isShowMC": !this.data.item.isShowMC
-        })
-      }
-    }
-  },
-  // 跳页面
-  jumpFn: function(e){
-    console.log(e)
-    var url = ''
-    switch (e.currentTarget.dataset.url) {
-      case 'details':
-        url = '../details/details'
-        break
-      case 'products_list':
-        url = '../products_list/products_list'
-        break
-    }
-    wx.navigateTo({
-      url: url
-    })
   }
 })

@@ -1,4 +1,5 @@
 /* pages/common/pages/products_list/products_list.wxss */
+@import "../../common/wxss/comWxss.wxss";
 /*更多按钮时的样式*/
 .pro_list {
 	width: 700rpx;
@@ -18,19 +19,25 @@
 	height: 450rpx;
 }
 .pro_list .a_pro .pro_name{
-	width: 100%;
 	font-size: 32rpx;
 	color: #2370af;
 	line-height: 60rpx;
 }
-
-.pro_list .a_pro .pro_place text{
-	max-width: 50%;
-	display: inline-block;
-	box-sizing: border-box; 
+.pro_list .a_pro .pro_name>text{
+	width: 50%;
+}
+.pro_list .a_pro .pro_name>text:last-child{
+	text-align: right;
+	color: #cc5b5f;
+	font-size: 26rpx;
+}
+.pro_list .a_pro .pro_place{
 	color: #acacac;
 	font-size: 30rpx;
 }
-.pro_list .a_pro .pro_place text:first-child{
-	padding-right: 30rpx;
+.no_data{
+	text-align: center;
+	font-size: 32rpx;
+	color: #acacac;
+	line-height: 100rpx;
 }

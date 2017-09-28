@@ -1,61 +1,55 @@
 // pages/common/pages/products_list/products_list.js
+const APP = getApp();
+import API from '../../../utils/api.js';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    proList: [
-        {
-          src: '../../../../image/潮州旅游_03.png',
-          proName: '牌坊街牌坊街牌坊街牌坊街牌坊街',
-          distance: '湘桥区',
-          proCity: '湘桥区',
-          proArea: '湘桥区'
-        },
-        {
-          src: '../../../../image/潮州旅游_03.png',
-          proName: '牌坊街',
-          distance: '湘桥区',
-          proCity: '湘桥区',
-          proArea: '湘桥区'
-        },
-        {
-          src: '../../../../image/潮州旅游_03.png',
-          proName: '牌坊街',
-          distance: '湘桥区',
-          proCity: '湘桥区',
-          proArea: '湘桥区'
-        },
-        {
-          src: '../../../../image/潮州旅游_03.png',
-          proName: '牌坊街',
-          distance: '湘桥区',
-          proCity: '湘桥区',
-          proArea: '湘桥区'
-        },
-        {
-          src: '../../../../image/潮州旅游_03.png',
-          proName: '牌坊街',
-          distance: '湘桥区',
-          proCity: '湘桥区',
-          proArea: '湘桥区'
-        },
-        {
-          src: '../../../../image/潮州旅游_03.png',
-          proName: '牌坊街',
-          distance: '湘桥区',
-          proCity: '湘桥区',
-          proArea: '湘桥区'
-        }
-      ],
+    https: 'https://cpc.find360.cn/',
+    proList: []
   },
-
+  jumpFn: function(e){
+    console.log(e)
+    var url = '../details/details' + '?id=' + e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: url
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var self = this
+    console.log('products_list.js------------')
+    console.log(options)
+    // 获取当前的地理位置
+    wx.getLocation({
+      type: 'wgs84',
+      success: function(res) {
+        var latitude = res.latitude //纬度
+        var longitude = res.longitude //经度
+        var speed = res.speed
+        var accuracy = res.accuracy
+        console.log('getLocation--')
+        console.log(res)
+        var op = '?category_id=' + options.id + "&lon=" + longitude + "&lat=" + latitude
+        console.log(options.type)
+        if (options.type) {
+          op += ('&type=' + options.type)
+        }
+        APP.requestData(API.proList + op, {}, (err, data) =>{
+          console.log('proList')
+          console.log(data)
+          if (data) {
+            self.setData({
+              "proList": data
+            })
+          }
+        })
+      }
+    })
   },
 
   /**
@@ -105,11 +99,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  },
-    // 跳页面
-  jumpFn: function(e){
-    wx.navigateTo({
-      url: '../details/details'
-    })
   }
 })
