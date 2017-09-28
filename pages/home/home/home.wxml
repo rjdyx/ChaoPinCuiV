@@ -3,7 +3,7 @@
 <!-- 轮播图 -->
   <view class="swiper-container">
         <swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-            <block wx:for="{{banners}}">
+            <block wx:for="{{banners}}" wx:key="">
                 <swiper-item>
                     <image bindtap="catchTapCategory" src="{{item}}" class="slide-image" height="150"/>
                 </swiper-item>
@@ -14,9 +14,9 @@
 <!-- 分类导航 -->
    <view class="navs">
     <block wx:for="{{navs}}" wx:key="name">
-      <view class="nav-item" data-type="{{item.name}}" data-typeid="{{item.typeId}}">  
-        <navigator url="">
-          <image src='{{item.icon}}' class='nav-image'></image>
+      <view class="nav-item" data-type="{{item.name}}">  
+        <navigator url="{{navUrl + item.id}}">
+          <image src='{{https+item.img}}' class='nav-image'></image>
           <text>{{item.name}}</text>
         </navigator>
       </view>
