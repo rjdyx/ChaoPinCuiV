@@ -2,8 +2,7 @@
 App({
   globalData: {
     openid: '',
-    bindState: false,
-    loginState: false,
+    bindState: false, 
     userInfo: null,//用户登录存储对象
     loginUrl: 'pages/loginOrregister/login/login'
   },
@@ -45,11 +44,18 @@ App({
                       openid: res.data.openid
                     },
                     success: function(res) {
-                      if (res.data == 200) {
-                        d.bindState = false
-                      } else if (res.data == 400) {
-                        b.bindState = true
+                      // console.log(res)
+                      if (res.data != null) {
+                        that.globalData.userInfo = {
+                          id : res.data.id,
+                          openid: res.data.openid
+                        }
+                      } else {
+                        wx.redirectTo({
+                          url: '../../../pages/loginOrregister/loginOrigister/loginOrigister',
+                        })
                       }
+                      console.log(that.globalData.userInfo)
                     }
                   })
                 }
@@ -66,6 +72,12 @@ App({
          wx.setStorageSync('token', res.data)
        }
      })
+     wx.request({
+       url: 'https://cpc.find360.cn/auth',
+       success: function(res){
+         console.log(res)
+       }
+     })
   },
   checkLoginInfo: function(url){
     if (this.globalData.userInfo==null){
@@ -76,7 +88,6 @@ App({
   },
   getCurrentUrl: function () {//获取当前页面全路径
     var url = getCurrentPages()[getCurrentPages().length - 1].__route__;
-    console.log(url)
     url = url.replace("pages/person/person/person", "..");//替换路径全路径。修改该路径为相对路径
     return url;
   },
@@ -93,20 +104,21 @@ App({
       formData: null,
       success: (resp) => {
         success++;
-        console.log(resp)
         console.log(i);
       },
-      fail: (res) => {  
+      fail: (res) => {
         fail++;
         console.log('fail:' + i + "fail:" + fail);
       },
       complete: () => {
         console.log(i);
         i++;
-        if (i == data.path.length) {   //当图片传完时，停止调用 
+        if (i == data.path.length) {   
+          //当图片传完时，停止调用 
           console.log('执行完毕');
           console.log('成功：' + success + " 失败：" + fail);
-        } else {//若图片还没有传完，则继续调用函数
+        } else {
+          //若图片还没有传完，则继续调用函数
           console.log(i);
           data.i = i;
           data.success = success;
@@ -114,6 +126,14 @@ App({
           that.uploadimg(data);
         }
       }
+    })
+  },
+  // 弹出框
+  showToast: function (title,icon,duration) {
+    wx.showToast({
+      title: title,
+      icon: icon,
+      duration: duration
     })
   }
 })

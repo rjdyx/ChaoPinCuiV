@@ -27,7 +27,7 @@ Page({
     isTouchMove:false,
   },
   selectLeft: function (e) {
-    console.log(2333)
+    console.log(e)
     var key = e.currentTarget.dataset.key
     if (this.data.key == 0.5 && e.currentTarget.dataset.key == 0.5) {
       //只有一颗星的时候,再次点击,变为0颗

@@ -48,6 +48,7 @@ Page({
   onLoad: function (options) {
     wx.request({
       url: 'https://cpc.find360.cn/api/home/comment',
+      method: 'GET',
       success: function(res){
         console.log(res)
       }

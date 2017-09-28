@@ -2,13 +2,18 @@
 <view class='container'>
 <!-- 轮播图 -->
   <view class="swiper-container">
-        <swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-            <block wx:for="{{banners}}">
+        <swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
+            <block wx:for="{{banners}}" wx:key="unique">
                 <swiper-item>
-                    <image bindtap="catchTapCategory" src="{{item}}" class="slide-image" height="150"/>
+                    <image bindtap="catchTapCategory" src="https://cpc.find360.cn/{{item.img}}" class="slide-image" height="370" data-id="{{item.id}}"/>
                 </swiper-item>
             </block>
         </swiper>
+        <view class="dots">  
+            <block wx:for="{{banners}}" wx:key="unique">  
+                <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>  
+            </block>  
+        </view>
    </view>
 
 <!-- 分类导航 -->
@@ -16,7 +21,7 @@
     <block wx:for="{{navs}}" wx:key="name">
       <view class="nav-item" data-type="{{item.name}}" data-typeid="{{item.typeId}}">  
         <navigator>
-          <image src='{{item.icon}}' class='nav-image'></image>
+          <image src="{{item.icon}}" class='nav-image'></image>
           <text>{{item.name}}</text>
         </navigator>
       </view>
@@ -32,7 +37,7 @@
   <view class='relist'>
      <block wx:for="{{list}}" wx:key="name"> 
       <view class="list-item" catchtap='catchTapCategory' data-type="{{item.name}}" data-typeid="{{item.id}}">  
-         <!-- <image src='{{item.icon}}' class='list-image'></image>  -->
+          <image src='https://cpc.find360.cn/{{item.img}}' class='list-image'></image>  
          <text>{{item.name}}</text> 
       </view>
     </block>

@@ -22,7 +22,7 @@
 
           <!-- 评分 -->
           <view class='fiveStars'>
-            <block wx:for="{{stars}}">
+            <block wx:for="{{stars}}" wx:for-index="id" wx:key="" data-id="{{item.id}}">
             <image class="star-image" style="left: {{item*40}}rpx" src="{{key > item ?(key-item == 0.5?halfSrc:selectedSrc) : normalSrc}}">
               <view class="item" data-key="{{item+0.5}}" bindtap="selectLeft"></view>
               <view class="item" data-key="{{item+1}}" bindtap="selectRight"></view>

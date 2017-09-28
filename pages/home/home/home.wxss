@@ -8,10 +8,37 @@
   margin: 0;
 }
 .swiper-container{
+  position: relative;
   width: 100%;
+}
+.swiper_box{
+  width: 100%;
+  height: 370rpx;
 }
 .swiper-container image{
   width: 100%;
+  height:370rpx;
+}
+.dots{  
+  position: absolute;  
+  left: 0;  
+  right: 0;  
+  bottom: 20rpx;  
+  display: flex;  
+  justify-content: center;  
+}  
+.dots .dot{  
+  margin: 0 8rpx;  
+  width: 14rpx;  
+  height: 14rpx;  
+  background: #fff;  
+  border-radius: 50%;  
+  transition: all .6s;  
+  opacity: .5;
+}  
+.dots .dot.active{  
+  width: 14rpx;  
+  opacity: 1;
 }
 .navs{
   width: 100%;

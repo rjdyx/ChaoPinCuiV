@@ -44,6 +44,8 @@ Page({
         })
     var openid = wx.getStorageSync('user')
     var url = wx.getStorageSync('currentUrl')
+    var cururl = '../../../' + url
+    // var loginState = wx.getStorageSync('loginState')
     wx.request({
       url: 'https://cpc.find360.cn/api/home/wx/login',
       header: {
@@ -57,6 +59,18 @@ Page({
       method: "POST", 
       success: function(res) {
         console.log(res)
+        if (res.data.id != undefined) {
+          app.showToast('登录成功', 'success', 1500)
+          wx.navigateBack({
+            delta: 1
+          })
+        } else{
+          if (res.data == 300) {
+            app.showToast('微信号已被使用', 'success', 1500)
+          } else if (res.data == 400) {
+            app.showToast('用户名或密码错误', 'success', 1500)
+          }
+        }
       }
     })
   }

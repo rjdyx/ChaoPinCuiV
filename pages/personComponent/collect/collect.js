@@ -1,3 +1,4 @@
+var app = getApp()
 Page({
 
   /**
@@ -27,7 +28,6 @@ Page({
     isTouchMove: false,
   },
   selectLeft: function (e) {
-    console.log(2333)
     var key = e.currentTarget.dataset.key
     if (this.data.key == 0.5 && e.currentTarget.dataset.key == 0.5) {
       //只有一颗星的时候,再次点击,变为0颗
@@ -39,7 +39,7 @@ Page({
     })
 
   },
-  //点击左边,整颗星
+  //点击右边,整颗星
   selectRight: function (e) {
     var key = e.currentTarget.dataset.key
     console.log("得" + key + "分")
@@ -62,6 +62,7 @@ Page({
   },
   //滑动事件处理
   touchmove: function (e) {
+    console.log(e)
     var that = this,
       index = e.currentTarget.dataset.index,//当前索引
       startX = that.data.startX,//开始X坐标
@@ -111,21 +112,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var state = wx.getStorageSync('loginState')
-    console.log(state)
-    if (!state) {
+    //判断是否需要登录
+    if (app.globalData.userInfo == null && app.globalData.userInfo == undefined) {
       wx.redirectTo({
-        url: '../../loginOrregister/loginOrigister/loginOrigister',
+        url: '../../loginOrregister/login/login',
       })
     }
     // 获取当前页面的路径
     var url = getCurrentPages()[getCurrentPages().length - 1].__route__;
     wx.setStorageSync('currentUrl',url)
     console.log(url)
+    //请求数据
     wx.request({
       url: 'https://cpc.find360.cn/api/home/collect',
+      data: {
+        openid: app.globalData.userInfo.openid,
+        id: app.globalData.userInfo.id
+      },
+      method: 'GET',
       success: function(res){
-        console.lo
+        console.log(res)
       }
     })
   },

@@ -47,7 +47,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 37rpx;
+  padding: 37rpx 0;
 }
 .nav-item .nav-image{
   width: 100rpx;
@@ -106,7 +106,7 @@
   font-size: 29rpx;
 }
 .interest-item:first-child,.interest-item:nth-child(4){
-  margin-left: 20rpx;
+  margin-left: 24rpx;
 }
 .aboutIcon:after{
   content: '\e604';
