@@ -11,13 +11,8 @@ Page({
       { icon: '../../../image/art.png', name: '我的评价', typeId: 2, url: 'evaluate' },
       { icon: '../../../image/technique.png', name: '意见反馈', typeId: 3, url: 'feedback' },
     ],
-    prints: [
-      { title: '牌坊街', spot: '../../../image/icon8.jpg', spotDesc: '潮州市' },
-      { title: '牌坊街', spot: '../../../image/icon8.jpg', spotDesc: '潮州市' },
-      { title: '牌坊街', spot: '../../../image/icon8.jpg', spotDesc: '潮州市' },
-      { title: '牌坊街', spot: '../../../image/icon8.jpg', spotDesc: '潮州市' },
-      { title: '牌坊街', spot: '../../../image/icon8.jpg', spotDesc: '潮州市' },
-    ],
+    apiUrl: app.globalData.apiUrl,
+    prints: [],
     stars: [0, 1, 2, 3, 4],
     normalSrc: '../../../image/星.png',
     selectedSrc: '../../../image/星_1.png',
@@ -27,25 +22,16 @@ Page({
     startY: 0,
     isTouchMove: false,
   },
-  selectLeft: function (e) {
-    var key = e.currentTarget.dataset.key
-    if (this.data.key == 0.5 && e.currentTarget.dataset.key == 0.5) {
-      //只有一颗星的时候,再次点击,变为0颗
-      key = 0;
-    }
-    console.log("得" + key + "分")
-    this.setData({
-      key: key
+  // 跳转
+  productSkip: function (e) {
+    wx.navigateTo({
+      url: '../../home/details/details?id='+ e.currentTarget.dataset.pid
     })
-
+  },
+  selectLeft: function (e) {
   },
   //点击右边,整颗星
   selectRight: function (e) {
-    var key = e.currentTarget.dataset.key
-    console.log("得" + key + "分")
-    this.setData({
-      key: key
-    })
   },
   //手指触摸动作开始 记录起点X坐标
   touchstart: function (e) {
@@ -100,40 +86,63 @@ Page({
   },
   //删除事件
   del: function (e) {
-    this.data.prints.splice(e.currentTarget.dataset.index, 1)
-    this.setData({
-      prints: this.data.prints
+    var _this = this
+    wx.request({
+      url: 'https://cpc.find360.cn/api/home/collect/'+e.currentTarget.dataset.pid,
+      data: {},
+      method: 'DELETE',
+      success: function (res) {
+        if (res.data) {
+          _this.data.prints.splice(e.currentTarget.dataset.index, 1)
+          _this.setData({
+            prints: _this.data.prints
+          })
+          wx.showToast({
+            title: '取消成功',
+            icon: 'succes',
+            duration: 1000,
+            mask:true
+          })
+        } else {
+          wx.showToast({
+            title: '取消失败',
+            icon: 'succes',
+            duration: 1000,
+            mask:true
+          })
+        }
+      }
     })
-  },
-  itemTo: function () {
-    console.log(634489)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //判断是否需要登录
-    if (app.globalData.userInfo == null && app.globalData.userInfo == undefined) {
+    //判断是否登录
+    if (app.globalData.userInfo.id == null || app.globalData.userInfo.id == undefined) {
       wx.redirectTo({
-        url: '../../loginOrregister/login/login',
+        url: '../../loginOrregister/loginOrigister/loginOrigister',
+      })
+    } else {
+      // 获取当前页面的路径
+      var url = getCurrentPages()[getCurrentPages().length - 1].__route__;
+      wx.setStorageSync('currentUrl', url)
+      //请求数据
+      var _this = this
+      wx.request({
+        url: 'https://cpc.find360.cn/api/home/collect',
+        data: {
+          openid: app.globalData.userInfo.openid,
+          user_id: app.globalData.userInfo.id
+        },
+        method: 'GET',
+        success: function (res) {
+          _this.setData({
+            prints: res.data
+          })
+        }
       })
     }
-    // 获取当前页面的路径
-    var url = getCurrentPages()[getCurrentPages().length - 1].__route__;
-    wx.setStorageSync('currentUrl',url)
-    console.log(url)
-    //请求数据
-    wx.request({
-      url: 'https://cpc.find360.cn/api/home/collect',
-      data: {
-        openid: app.globalData.userInfo.openid,
-        id: app.globalData.userInfo.id
-      },
-      method: 'GET',
-      success: function(res){
-        console.log(res)
-      }
-    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

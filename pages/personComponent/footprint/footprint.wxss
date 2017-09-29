@@ -70,6 +70,7 @@
 }
 .grade{
   font-size: 29rpx;
+  margin-bottom: 10px;
 }
 .grade .point{
   color: red;
@@ -103,12 +104,18 @@
   left:20rpx;
 }
 .spotDesc{
+  line-height: 22px;
   color: #ababab;
   font-size: 29rpx;
+  overflow:hidden; 
+  text-overflow:ellipsis;
+  display:-webkit-box; 
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:4; 
+  text-indent:2em;
 }
-
 .del{
-background-color: orangered;
+background-color: #ffd102;
 height: 354rpx;
  width: 110px;
  display: flex;

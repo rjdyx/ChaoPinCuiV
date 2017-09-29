@@ -3,9 +3,9 @@
 <view class='prints'>
  <block wx:for="{{prints}}"  wx:key="title">
 <!-- 头部 -->
-  <view class='print-item' bindtap='itemTo'>
+  <view class='print-item'  bindtap="productSkip" data-pid="{{item.id}}">
     <view class='print-title'>
-      <text>{{item.title}}</text>
+      <text>{{item.name}}</text>
       <image src='../../../image/arrow_down.png'></image>
     </view>
 <!-- 中间内容 -->
@@ -13,31 +13,33 @@
       <view class='content'>
       <!-- 图片 -->
         <view class='print-spot flex-item'>
-        <image src='{{item.spot}}'></image>
-      </view>
+        <image src='{{apiUrl}}/{{item.img}}'></image>
+        </view>
       <!-- 右侧评分和描述 -->
       <view class='print-desc flex-item'>
         <view class='grade'>
-          <text class=''>景点评分：</text>
+          <text class=''>综合评分：</text>
 
           <!-- 评分 -->
           <view class='fiveStars'>
-            <block wx:for="{{stars}}"  wx:for-index="id" wx:for-item="item">
-            <image class="star-image" style="left: {{item*40}}rpx" src="{{key > item ?(key-item == 0.5?halfSrc:selectedSrc) : normalSrc}}">
-              <view class="item" data-key="{{item+0.5}}" bindtap="selectLeft"></view>
-              <view class="item" data-key="{{item+1}}" bindtap="selectRight"></view>
+            <block wx:for="{{stars}}"  wx:for-index="id" wx:for-item="k">
+            <image class="star-image" style="left: {{k*40}}rpx" 
+            src="{{(item.comment/20) > k ?((item.comment/20)-k == 0.5?halfSrc:selectedSrc) : normalSrc}}"
+            >
+              <view class="item" data-key="{{k+0.5}}" bindtap="selectLeft"></view>
+              <view class="item" data-key="{{k+1}}" bindtap="selectRight"></view>
             </image>
           </block>
           </view>
-
-          <text class='point'>{{key}}分</text>
+  
+          <text class='point'>{{item.comment}}分</text>
         </view>
-        <text class='spotDesc'>{{item.spotDesc}}</text>
+        <text class='spotDesc'>{{item.desc}}</text>
       </view>
       </view>
 
       <!-- 删除 -->
-      <view class='del' catchtap='del' data-index='{{index}}'>取消收藏</view>
+      <view class='del' catchtap='del' data-index='{{index}}' data-pid='{{item.collect_id}}'>取消收藏</view>
     </view>
     
   </view>

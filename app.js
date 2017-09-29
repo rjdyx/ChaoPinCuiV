@@ -4,7 +4,8 @@ App({
     openid: '',
     bindState: false, 
     userInfo: null,//用户登录存储对象
-    loginUrl: 'pages/loginOrregister/login/login'
+    loginUrl: 'pages/loginOrregister/login/login',
+    apiUrl: 'https://cpc.find360.cn'
   },
   onLaunch: function () {
      var that = this
