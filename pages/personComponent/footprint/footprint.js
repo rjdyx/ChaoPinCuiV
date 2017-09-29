@@ -1,3 +1,4 @@
+var app = getApp()
 Page({
 
   /**
@@ -10,13 +11,8 @@ Page({
       { icon: '../../../image/art.png', name: '我的评价', typeId: 2, url: 'evaluate' },
       { icon: '../../../image/technique.png', name: '意见反馈', typeId: 3, url: 'feedback' },
     ],
-    prints: [
-      { title: '牌坊街', spot: '../../../image/icon8.jpg', spotDesc: '潮州市'},
-      { title: '牌坊街', spot: '../../../image/icon8.jpg', spotDesc: '潮州市'},
-      { title: '牌坊街', spot: '../../../image/icon8.jpg', spotDesc: '潮州市'},
-      { title: '牌坊街', spot: '../../../image/icon8.jpg', spotDesc: '潮州市'},
-      { title: '牌坊街', spot: '../../../image/icon8.jpg', spotDesc: '潮州市'},
-    ],
+    prints: [],
+    apiUrl: app.globalData.apiUrl,
     stars: [0, 1, 2, 3, 4],
     normalSrc: '../../../image/星.png',
     selectedSrc: '../../../image/星_1.png',
@@ -26,26 +22,16 @@ Page({
     startY: 0,
     isTouchMove:false,
   },
-  selectLeft: function (e) {
-    console.log(e)
-    var key = e.currentTarget.dataset.key
-    if (this.data.key == 0.5 && e.currentTarget.dataset.key == 0.5) {
-      //只有一颗星的时候,再次点击,变为0颗
-      key = 0;
-    }
-    console.log("得" + key + "分")
-    this.setData({
-      key: key
+  // 跳转
+  productSkip: function (e) {
+    wx.navigateTo({
+      url: '../../home/details/details?id='+ e.currentTarget.dataset.pid
     })
-
+  },
+  selectLeft: function (e) {
   },
   //点击左边,整颗星
   selectRight: function (e) {
-    var key = e.currentTarget.dataset.key
-    console.log("得" + key + "分")
-    this.setData({
-      key: key
-    })
   },
   //手指触摸动作开始 记录起点X坐标
   touchstart: function (e) {
@@ -100,20 +86,38 @@ Page({
   //删除事件
   del: function (e) {
     this.data.prints.splice(e.currentTarget.dataset.index, 1)
-    this.setData({
-      prints: this.data.prints
+    var _this = this
+    wx.setStorage({
+      key:"footprint",
+      data: _this.data.prints
     })
+    this.getStorageFoot()
   },
   itemTo: function (){
-    console.log(634489)
+    // console.log(634489)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.getStorageFoot()
   },
-
+  getStorageFoot: function () {
+    var _this = this
+    wx.getStorage({
+      key: 'footprint',
+      success: function (res) {
+        _this.setData({
+          "prints": res.data
+        })
+      },
+      fail: function (res) {
+        _this.setData({
+          "prints": {}
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

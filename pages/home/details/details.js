@@ -1,5 +1,6 @@
 // pages/home/details/details.js
 const APP = getApp();
+const util = require('../../../utils/util.js');  
 import API from '../../../utils/api.js';
 Page({
   /**
@@ -54,6 +55,7 @@ Page({
       clickable: true
     }],
     other: [],//其他人还看了
+    storageFoots: [], // 足迹缓存
     options:{} // 页面传入的参数
   },
   // tab切换
@@ -145,6 +147,7 @@ Page({
             "proComment": data.comment,
             "proRecommend": data.recommend
           })
+          self.footprintStorage()
         }
       })
     }   
@@ -155,7 +158,40 @@ Page({
    */
   onReady: function () {
   },
-
+  // 足迹存入缓存
+  footprintStorage: function () {
+    var _this = this
+    wx.getStorage({
+      key: 'footprint',
+      success: function(res) {
+        console.log(res.data)
+        _this.setData({
+          "storageFoots": res.data
+        })
+        _this.setStorageFoots()
+      },
+    })
+  },
+  setStorageFoots: function () {
+    var _this = this
+    var datas = []
+    var info = {}
+    info['datetime'] = util.formatTime(new Date())
+    info['img'] = this.data.proInfo.img
+    info['id'] = this.data.proInfo.id
+    info['name'] = this.data.proInfo.name
+    info['desc'] = this.data.proInfo.desc
+    info['comment'] = this.data.proInfo.comment
+    datas = this.data.storageFoots
+    datas.unshift(info)
+    if (datas.length > 50) {
+      datas.pop()
+    }
+    wx.setStorage({
+      key:"footprint",
+      data: datas
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
