@@ -3,9 +3,9 @@ App({
   globalData: {
     openid: '',
     bindState: false, 
-    userInfo: null,//用户登录存储对象
-    loginUrl: 'pages/loginOrregister/login/login',
-    apiUrl: 'https://cpc.find360.cn'
+    apiUrl: 'https://cpc.find360.cn',
+    userInfo: {id: null, openid: null},//用户登录存储对象
+    loginUrl: 'pages/loginOrregister/login/login'
   },
   onLaunch: function () {
      var that = this
@@ -45,7 +45,6 @@ App({
                       openid: res.data.openid
                     },
                     success: function(res) {
-                      // console.log(res)
                       if (res.data != 400) {
                         that.globalData.userInfo = {
                           id : res.data.id,
@@ -56,6 +55,7 @@ App({
                           url: '../../../pages/loginOrregister/loginOrigister/loginOrigister',
                         })
                       }
+                      console.log('that.globalData.userInfo--')
                       console.log(that.globalData.userInfo)
                     }
                   })
@@ -137,11 +137,11 @@ App({
       duration: duration
       })
 },
-  requestData:function(url,params,callback,) {
+  requestData:function(url,params,callback,method) {
     wx.request({
       url: url,
       data: params,
-      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      method: method || 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       header: {'Content-Type':'application/json'}, // 设置请求的 header
       success: function(res){
         callback(null,res.data);

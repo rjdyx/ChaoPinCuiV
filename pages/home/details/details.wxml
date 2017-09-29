@@ -6,7 +6,7 @@
 		<view class="header_top">
 			<image 
 			class="header_bg_img" 
-			src="{{proInfo.img ? https + proInfo.img : ''}}">
+			src="{{proInfo.img ? https + proInfo.img : '../../../image/bg_logo.jpg'}}">
 			</image>
 		</view>
 		<view class="header_bottom">
@@ -109,13 +109,13 @@
 							<view>{{proInfo.comment}}分</view>
 							<view>{{proComment.length}}条评论</view>
 							<view class="padding_top30">
-								<template is="star" data="{{...score}}"/>
+								<template is="star" data="{{...proInfo}}"/>
 							</view>
 							<view class="user_comment">
 								<block wx:for="{{proComment}}" wx:key="">
 									<view class="user_comment_item" >
 										<view class="user_comment_item_t clear">
-											<image class="user_header fl" src="{{item.user_img ? https + item.user_img : ''}}"></image>
+											<image class="user_header fl" src="{{item.user_img ? https + item.user_img : '../../../image/d_header.png'}}"></image>
 											<view class="user_comment_item_t_r fl">
 												<text class="t">{{item.user_name}}</text>
 												<template is="star" data="{{...item}}"/>
@@ -123,7 +123,7 @@
 										</view>
 										<view class="user_comment_item_b">
 											<text>{{item.content}}</text>
-											<view class="user_comment_item_img">
+											<view class="user_comment_item_img" wx:if="{{item.img[0] != ''}}">
 											    <scroll-view scroll-x="true" class="imgScroll">
 											        <block wx:for="{{item.img}}" wx:key="">
 											           <image src="{{item ?  https + item : ''}}"></image>
@@ -207,11 +207,11 @@
     <view class="pop_up_wrap" wx:if="{{isShowPop.bol}}">
 		<view class="pop_up_inner">
 			<image class="close_icon" catchtap="closeFn" src="../../../image/x.png"></image>
-			<view class="pop_up_title">{{proInfo.name}}历史来源</view>
+			<view class="pop_up_title">{{isShowPop.name}}</view>
 			<scroll-view wx:if="{{isShowPop.name === 'source'}}" scroll-y="true" class="pop_up_text">
 				{{proInfo.desc}}
 			 </scroll-view>
-			<map wx:if="{{isShowPop.name === 'map'}}" class="map" longitude="113.324520" latitude="23.099994" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location ></map>
+			<map wx:if="{{isShowPop.name === 'map'}}" class="map" longitude="{{proInfo.meridian}}" latitude="{{proInfo.weft}}" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location ></map>
 		</view>
     </view>
 </view>

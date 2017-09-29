@@ -13,9 +13,18 @@ Page({
   jumpFn: function(e){
     console.log(e)
     var url = '../details/details' + '?id=' + e.currentTarget.dataset.id
-    wx.navigateTo({
-      url: url
-    })
+    let pages = getCurrentPages()
+    console.log(pages)
+    console.log('pages----')
+    if (pages.length >= 5) {
+        wx.redirectTo({
+          url: url
+        })
+    }else{
+      wx.navigateTo({
+        url: url
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -24,6 +33,7 @@ Page({
     var self = this
     console.log('products_list.js------------')
     console.log(options)
+    wx.setNavigationBarTitle({title: options.name})
     // 获取当前的地理位置
     wx.getLocation({
       type: 'wgs84',
@@ -34,12 +44,19 @@ Page({
         var accuracy = res.accuracy
         console.log('getLocation--')
         console.log(res)
-        var op = '?category_id=' + options.id + "&lon=" + longitude + "&lat=" + latitude
+        var op = {
+          category_id:  options.id,
+          lon: longitude,
+          lat: latitude
+        }
         console.log(options.type)
         if (options.type) {
-          op += ('&type=' + options.type)
+          op.type= options.type
         }
-        APP.requestData(API.proList + op, {}, (err, data) =>{
+        if (options.searchName) {
+          op.name= options.searchName
+        }
+        APP.requestData(API.proList, op, (err, data) =>{
           console.log('proList')
           console.log(data)
           if (data) {

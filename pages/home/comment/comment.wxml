@@ -1,10 +1,9 @@
 <!--pages/home/comment/comment.wxml-->
 <view class="comment">
-  <view class="com_form">
-    <!-- <form class="dis_ib" bindsubmit="bindFormSubmit"> -->
-        <textarea class="com_textArea width700" placeholder="广济桥景色美" name="textarea"/>
+<form bindsubmit="formSubmit">
+  <view class="textarea">
+        <textarea class="com_textArea width700" placeholder="广济桥景色美" name="content"/>
         <!-- <button form-type="submit"> 提交 </button> -->
-    <!-- </form> -->
   </view>
   <view class='putOutImg width700'>
     <view class='a_putOutImg'>
@@ -27,15 +26,17 @@
   <view class="grade width700">
 	   <text class="t">景点评分</text>
 	    <block wx:for="{{stars}}" wx:key="">
-	        <image class="star-image" src="{{key > item ?(key-item == 0.5?halfSrc:selectedSrc) : normalSrc}}">
-	          <view class="item" data-key="{{item+0.5}}" bindtap="selectLeft"></view>
-	          <view class="item" data-key="{{item+1}}" bindtap="selectRight"></view>
+	        <image class="star-image" src="{{key > item ?(key-item == 10?halfSrc:selectedSrc) : normalSrc}}">
+	          <view class="item" data-key="{{item+10}}" bindtap="selectLeft"></view>
+	          <view class="item" data-key="{{item+20}}" bindtap="selectRight"></view>
 	        </image>
 	     </block>
   </view>
   <view class="footer clear">
-  	<view class="footer_l t fl"><icon type="success" size="20" color="{{userNameCol}}" bind:tap="changeUserNameColFn"/>
+  	<view class="footer_l t fl">
+      <icon type="success" size="20" color="{{userNameCol}}" bind:tap="changeUserNameColFn"/>
     匿名评价</view>
-    <button class='footer_r fr'>发表评论</button>
+    <button class='footer_r fr' formType="submit">发表评论</button>
   </view>
+</form>
 </view>

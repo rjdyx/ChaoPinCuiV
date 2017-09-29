@@ -118,4 +118,5 @@
   font-size: 29rpx;
   line-height:196rpx;
   text-align: center;
+  white-space: wrap;
 }

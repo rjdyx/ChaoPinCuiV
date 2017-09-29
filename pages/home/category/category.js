@@ -11,9 +11,7 @@ Page({
     detailsUrl: '../details/details',
     proListUrl: '../products_list/products_list',
     categoryUrl: './category',
-    placeholder: '请输入你想了解的景点',
     isShowMC: false,
-    main_title: '景点推荐',
     scenicCategory: [],
     category: [], // 推荐分类
     moreCategory: [], //更多分类
@@ -31,12 +29,37 @@ Page({
         url = this.data.detailsUrl + '?id=' + e.currentTarget.dataset.id
         break
       case 'products_list':
-        url = this.data.proListUrl + '?id=' + this.data.options.id + '&type=recommend'
+        url = this.data.proListUrl + '?id=' + this.data.options.id + '&type=recommend'+ '&name=更多' + this.data.options.name
         break
     }
-    wx.navigateTo({
-      url: url
-    })
+    let pages = getCurrentPages()
+    console.log('pages----')
+    console.log(pages)
+    if (pages.length >= 5) {
+        wx.redirectTo({
+          url: url
+        })
+    }else{
+      wx.navigateTo({
+        url: url
+      })
+    }
+  },
+  formSearch: function (e){
+    console.log(e.detail.value)
+    if(e.detail.value.searchName){
+      var url = this.data.proListUrl + '?id=' + this.data.options.id + '&type=search'+ '&name=搜索' + this.data.options.name + '&searchName=' + e.detail.value.searchName
+      let pages = getCurrentPages()
+      if (pages.length >= 5) {
+        wx.redirectTo({
+          url: url
+        })
+      }else{
+        wx.navigateTo({
+          url: url
+        })
+      }
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -62,9 +85,10 @@ Page({
       self.setData({
         "options": options
       })
+      wx.setNavigationBarTitle({  title: '潮州' + options.name})
     }
     // 当前分类代表性产品数据
-    APP.requestData(API.product + '?category_id=' + options.id, {}, (err, data) =>{
+    APP.requestData(API.product, {category_id: options.id}, (err, data) =>{
       console.log('product---')
       console.log(data)
       if (data) {
@@ -74,7 +98,7 @@ Page({
       }
     })
     // 当前分类下的二级分类
-    APP.requestData(API.categoryChild + '?pid=' + options.id, {}, (err, data) =>{
+    APP.requestData(API.categoryChild, {pid: options.id}, (err, data) =>{
       console.log('category---')
       console.log(data)
       if (data) {
@@ -85,7 +109,7 @@ Page({
       }
     })
     // 榜单推荐（默认6个）
-    APP.requestData(API.categoryRecommend + '?category_id=' + options.id + '?num=' + 6, {}, (err, data) =>{
+    APP.requestData(API.categoryRecommend, {category_id: options.id, num: 6}, (err, data) =>{
       console.log('recommend_products_arr---')
       console.log(data)
       if (data.data) {
@@ -95,7 +119,7 @@ Page({
       }
     })
     // 其他人还看了
-    APP.requestData(API.other + '?category_id=' + options.id, {}, (err, data) =>{
+    APP.requestData(API.other, {category_id: options.id}, (err, data) =>{
       console.log('other---')
       console.log(data)
       if (data.data) {

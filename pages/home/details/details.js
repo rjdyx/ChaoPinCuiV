@@ -17,13 +17,8 @@ Page({
     nearbysProList: [], //附近产品列表
     tabArr: ['景点详情', '景点图片', '附近景点'],
     star: 'AAAA',
-    score: {
-      score: 5.9,
-      comment: 523,
-      level: 4.5
-    },
     isShowPop: {bol: false, name: ''},
-    markers: [{
+    markers: [{ //标记点
       iconPath: "/resources/others.png",
       id: 0,
       latitude: 23.099994,
@@ -31,7 +26,7 @@ Page({
       width: 50,
       height: 50
     }],
-    polyline: [{
+    polyline: [{ //路线 指定一系列坐标点，从数组第一项连线至最后一项
       points: [{
         longitude: 113.3245211,
         latitude: 23.10229
@@ -43,7 +38,7 @@ Page({
       width: 2,
       dottedLine: true
     }],
-    controls: [{
+    controls: [{ //控件
       id: 1,
       iconPath: '/resources/location.png',
       position: {
@@ -65,7 +60,7 @@ Page({
     if (e.target.dataset.id === 1) {
       if (this.data.options.id !== 'undefined' && !this.data.proImgs.length){
         // 获取产品图片
-        APP.requestData(API.proImgs + '?product_id=' + this.data.options.id, {}, (err, data) =>{
+        APP.requestData(API.proImgs, {product_id: this.data.options.id}, (err, data) =>{
           console.log('proImgs')
           console.log(data)
           if (data) {
@@ -78,7 +73,7 @@ Page({
     } else if (e.target.dataset.id === 2) {
       if (this.data.options.id !== 'undefined' && self.data.proInfo.meridian && self.data.proInfo.weft && !this.data.nearbysProList.length){
         // 获取附近产品
-        APP.requestData(API.nearbysPro + '?id=' + this.data.options.id + "&lon=" + self.data.proInfo.meridian + "&lat=" + self.data.proInfo.weft, {}, (err, data) =>{
+        APP.requestData(API.nearbysPro, {id: this.data.options.id, lon: self.data.proInfo.meridian, lat: self.data.proInfo.weft}, (err, data) =>{
           console.log('nearbysPro')
           console.log(data)
           if (data.data) {
@@ -91,7 +86,7 @@ Page({
     }
     // 其他人还看了 //id??
     if (!this.data.other.length) {
-      APP.requestData(API.other + '?category_id=' + this.data.proInfo.category_id, {}, (err, data) =>{
+      APP.requestData(API.other, {category_id: this.data.proInfo.category_id}, (err, data) =>{
         console.log('other---')
         console.log(data)
         if (data.data) {
@@ -110,20 +105,27 @@ Page({
     var url = ''
     switch (e.currentTarget.dataset.url) {
       case 'details':
-        url = '../details/details' + '?id=' + e.currentTarget.dataset.id
+        url = '../details/details?id=' + e.currentTarget.dataset.id
         break
       case 'products_list':
-        url = '../products_list/products_list?id=' + this.data.options.id + '&type=nearby'
+        url = '../products_list/products_list?id=' + this.data.options.id + '&type=nearby' + '&name=更多附近' + this.data.proInfo.parent_name
         break
       case 'comment':
-        url = '../comment/comment'
+        url = '../comment/comment?id=' + this.data.options.id
         break
     }
-    console.log('没错')
-    console.log(url)
-    wx.redirectTo({
-      url: url
-    })
+    let pages = getCurrentPages()
+    console.log('pages----')
+    console.log(pages)
+    if (pages.length >= 5) {
+        wx.redirectTo({
+          url: url
+        })
+    }else{
+      wx.navigateTo({
+        url: url
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -138,7 +140,7 @@ Page({
     })
     // 获取产品详情数据
     if (options.id !== 'undefined'){
-      APP.requestData(API.proDetails + '?id=' + options.id, {}, (err, data) =>{
+      APP.requestData(API.proDetails, {id: options.id}, (err, data) =>{
         console.log('proDetails')
         console.log(data)
         if (data) {
@@ -148,6 +150,10 @@ Page({
             "proRecommend": data.recommend
           })
           self.footprintStorage()
+          self.setData({
+            "proInfo.level": self.data.proInfo.comment
+          })
+          wx.setNavigationBarTitle({title: self.data.proInfo.category_name})
         }
       })
     }   
@@ -237,14 +243,14 @@ Page({
   lookSourceFn () {
     this.setData({
       "isShowPop.bol": true,
-      "isShowPop.name": 'source'
+      "isShowPop.name": this.data.proInfo.name + '历史来源'
     })
   },
   // 查看地图
   lookMapFn () {
     this.setData({
       "isShowPop.bol": true,
-      "isShowPop.name": 'map'
+      "isShowPop.name": this.data.proInfo.name
     })
   },
   // 关闭弹窗

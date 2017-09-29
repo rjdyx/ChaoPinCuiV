@@ -13,6 +13,8 @@ const api = {
     proImgs: https + 'api/home/product/imgs', // 3.2产品图片数据
     nearbysPro: https + 'api/home/product/nearbys', // 3.3附近的产品数据
     // 4.产品列表页
-    proList: https + 'api/home/product/lists' //4.1产品列表数据
+    proList: https + 'api/home/product/lists', //4.1产品列表数据
+    // 7.2 评价提交
+    comment: https + 'api/home/comment'
 }
 module.exports = api;

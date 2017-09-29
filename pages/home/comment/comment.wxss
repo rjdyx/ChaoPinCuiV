@@ -11,7 +11,7 @@
 	font-size: 32rpx;
 	color:#414141;
 }
-.com_form{
+.textarea{
 	padding: 20rpx 0rpx;
 	text-align: center;
 	border:1px solid #eae9ea;
