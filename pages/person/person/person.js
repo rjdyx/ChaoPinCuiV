@@ -24,10 +24,16 @@ Page({
       { name: '茶馆', typeId: 4 },
       { name: '明信片', typeId: 5 }
     ],
-    userInfo:{},
+    img:'',
+    name: '',
     bindLogin: ''
   },
-
+  // 编辑个人信息
+  toEdit: function() {
+    wx.navigateTo({
+      url: '../../personComponent/editMsg/editMsg'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -35,6 +41,49 @@ Page({
     // 获取当前页面的路径
     var url = getCurrentPages()[getCurrentPages().length - 1].__route__;
     console.log(url)
+    this.login()
+  },
+  login: function() {
+    var that = this
+    var userId = app.globalData.userInfo.id
+    wx.request({
+      url: 'https://cpc.find360.cn/api/home/user/' + userId + '/edit',
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          img: res.data.img,
+          name: res.data.name
+        })
+        if (res.data.id != null || res.data.id != undefined) {
+          that.setData({
+            bindLogin: '退出登录'
+          })
+        }
+      }
+    })
+  },
+  loginState: function(e) {
+    var that = this
+    var userId = app.globalData.userInfo.id
+    console.log(e)
+    wx.request({
+      url: 'https://cpc.find360.cn/api/home/wx/relieve',
+      data: {user_id:userId},
+      success: function(res){
+        console.log(res)
+        that.setData({
+          bindLogin: '登录',
+          img: '' ,
+          name: ''
+        })
+      }
+    })
+    if (that.data.bindLogin == '登录') {
+      wx.navigateTo({
+        url: '../../loginOrregister/login/login'
+      })
+      that.login()
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -47,7 +96,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    // 上一个页面返回此页面立即刷新数据
+    var that = this
+    var mydata = wx.getStorageSync('mydata')
+    console.log(mydata.name)
+    if (mydata != null||mydata !=undefined) {
+      that.setData({
+        img: mydata.img,
+        name: mydata.name
+      })
+    }
   },
 
   /**

@@ -47,13 +47,14 @@ Page({
   onReady: function () {
     var that = this
     wx.request({
-      url: 'https://cpc.find360.cn/api/home/index/categorys', 
+      url: 'https://cpc.find360.cn/api/home/index/recommend', 
       header: {
         'content-type': 'application/json'
       },
       success: function (res) {
+        console.log(res)
         that.setData({
-          'list': res.data
+          'list': res.data.data
         })
       }
     })
@@ -69,6 +70,11 @@ Page({
   swiperchange: function(e){
     this.setData({
       swiperCurrent: e.detail.current
+    })
+  },
+  toDetail: function(e) {
+    wx.navigateTo({
+      url: '../details/details?id=' + e.currentTarget.dataset.id
     })
   },
   /**

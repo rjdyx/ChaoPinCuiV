@@ -1,4 +1,5 @@
 // pages/personComponent/evaluate/evaluate.js
+var app = getApp()
 Page({
 
   /**
@@ -46,13 +47,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var userId = app.globalData.userInfo.id
+    var openid = app.globalData.userInfo.openid
     wx.request({
       url: 'https://cpc.find360.cn/api/home/comment',
+      data: {
+        user_id: userId,
+        openid: openid 
+      },
       method: 'GET',
       success: function(res){
         console.log(res)
       }
     })
+    //判断是否需要登录
+    if (app.globalData.userInfo == null && app.globalData.userInfo == undefined) {
+      wx.redirectTo({
+        url: '../../loginOrregister/login/login',
+      })
+    }
   },
 
   /**

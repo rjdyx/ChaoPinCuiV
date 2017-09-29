@@ -28,11 +28,8 @@ Page({
     })
   },
   uploadimg: function(){
-    var pics = this.data.pics
-    app.uploadimg({
-      url: 'https://cpc.find360.cn/api/home/feedback',
-      path: pics
-    })
+    // app.showToast('上传成功','success',1500)
+    // this.data.pics = []
   },
   previewImage: function(e){
     var current = e.target.dataset.src
@@ -42,5 +39,20 @@ Page({
     })
   },
   onShareAppMessage: function () {
+  },
+  formSubmit: function(e){
+    var pics = this.data.pics
+    app.uploadimg({
+      url: 'https://cpc.find360.cn/api/home/feedback',
+      path: pics
+    })
+    wx.request({
+      url:'https://cpc.find360.cn/api/home/feedback',
+      method: 'POST',
+      success: function(res){
+        console.log(res)
+      }
+    })
+    console.log(e)
   }
 })

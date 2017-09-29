@@ -7,13 +7,13 @@
     "pages/home/category/category",
     "pages/home/details/details",
     "pages/home/products_list/products_list",
-    "pages/home/comment/comment",
     "pages/person/person/person",
     "pages/personComponent/feedback/feedback",
     "pages/personComponent/collect/collect",
     "pages/personComponent/evaluate/evaluate",
     "pages/personComponent/footprint/footprint",
-    "pages/personComponent/aboutUs/aboutUs"
+    "pages/personComponent/aboutUs/aboutUs",
+    "pages/personComponent/editMsg/editMsg"
   ],
   "window": {
     "backgroundTextStyle": "light",

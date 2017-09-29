@@ -1,9 +1,14 @@
 <view class="contact">
   <view class='phone'>
-    <text>客服电话：020-4821647</text>
-    <text class='dial' bindtap='calling'>拨打</text>
+    <text>地址：{{address}}</text>
   </view>
   <view class='phone'>
-    <text>客服邮箱：455010904@qq.com</text>
+    <text>客服邮箱：{{email}}</text>
   </view>
+  <view class='phone'>
+    <text>客服电话：{{phone}}</text>
+    <text class='dial' bindtap='calling'>拨打</text>
+  </view>
+  
+  
 </view>

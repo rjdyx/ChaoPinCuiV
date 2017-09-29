@@ -45,13 +45,13 @@ App({
                     },
                     success: function(res) {
                       // console.log(res)
-                      if (res.data != null) {
+                      if (res.data != 400) {
                         that.globalData.userInfo = {
                           id : res.data.id,
                           openid: res.data.openid
                         }
                       } else {
-                        wx.redirectTo({
+                        wx.navigateTo({
                           url: '../../../pages/loginOrregister/loginOrigister/loginOrigister',
                         })
                       }

@@ -1,13 +1,31 @@
 // pages/personComponent/contact/contact.js
 Page({
-   calling:function(){
-     wx.makePhoneCall({
-       phoneNumber: '020-4821647',
-       success:function(){
-         console.log('成功')
-       },
-       fail:function() {
-         console.log('失败')
+  data: {
+    phone: '',
+    email: ''
+  },
+  calling:function(){
+    wx.makePhoneCall({
+      phoneNumber: this.data.phone,
+      success:function(){
+        console.log('成功')
+      },
+      fail:function() {
+        console.log('失败')
+      }
+    })
+  },
+   onLoad: function(){
+     var that = this
+     wx.request({
+       url: 'https://cpc.find360.cn/api/home/company',
+       success: function(res){
+         console.log(res)
+         that.setData({
+           phone:res.data.phone,
+           email: res.data.email,
+           address: res.data.address
+         })
        }
      })
    }

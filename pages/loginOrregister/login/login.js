@@ -39,9 +39,7 @@ Page({
   //   }
   // },
   formSubmit: function(e) {
-    wx.navigateTo({
-          url: '../../personComponent/collect/collect'
-        })
+    
     var openid = wx.getStorageSync('user')
     var url = wx.getStorageSync('currentUrl')
     var cururl = '../../../' + url
@@ -62,8 +60,11 @@ Page({
         if (res.data.id != undefined) {
           app.showToast('登录成功', 'success', 1500)
           wx.navigateBack({
-            delta: 1
+            delta: 2
           })
+          // wx.navigateTo({
+          //   url: '../../home/home/home'
+          // })
         } else{
           if (res.data == 300) {
             app.showToast('微信号已被使用', 'success', 1500)
