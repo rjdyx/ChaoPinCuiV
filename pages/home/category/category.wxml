@@ -4,14 +4,20 @@
 		<view class="header_top">
 			<image 
 			class="header_bg_img" 
-			src="{{product.img ? https + product.img : ''}}">
+			src="{{product.img ? https + product.img : '../../../image/bg_logo.jpg'}}">
 			</image>
 			<!-- 搜索框 -->
 			<view class="search clear">
+				<form bindsubmit="formSearch">
 				<view class="search_icon fl">
 					<image src="../../../image/search.png"></image>
+					<button 
+					class="submitBtn" 
+					formType="submit"
+					></button>
 				</view>
-	            <input placeholder="{{placeholder}}" type="text" class="fl" />
+	            <input placeholder="请输入你想了解的{{options.name}}" type="text" class="fl" name="searchName"/>
+	            </form>
 	        </view>
 	        <!-- 推荐产品 -->
 	        <view class="bgName">
@@ -30,7 +36,7 @@
 				<block wx:for="{{category}}" wx:key="">
 					<navigator 
 					class="class_box" 
-					url="{{proListUrl + '?id=' + item.pid}}">
+					url="{{proListUrl + '?id=' + item.pid + '&name=' + item.name}}">
 						{{item.name}}
 					</navigator>
 				</block>
@@ -44,7 +50,7 @@
     	<view class="main_inner">
     		<view class="main_con">
     			<view class="main_title clear">
-					<view class='fl'>{{main_title}}</view>
+					<view class='fl'>{{options.name}}推荐</view>
 					<view class="fr" 
 						data-url="products_list" 
 						catch:tap="jumpFn">
@@ -58,7 +64,7 @@
 		    			data-id="{{item.id}}" 
 		    			data-url="details" 
 		    			catch:tap="jumpFn">
-							<image src="{{item.img ? https + item.img : ''}}"></image>
+							<image src="{{item.img ? https + item.img : '../../../image/bg_logo.jpg'}}"></image>
 							<view>
 								<text class="pro_name tv_el dis_ib">{{item.name}}</text>
 								<view class="pro_place">{{item.address}}</view>

@@ -3,7 +3,7 @@
 		<text class="title">看来此目的地的人还看了</text>
 		<view class="looked_class">
 			<block wx:for="{{other}}" wx:key="">
-				<navigator class="looked_box" url="{{categoryUrl + '?id=' + item.id}}">
+				<navigator class="looked_box" url="{{categoryUrl + '?id=' + item.id + '&name=' + item.name}}"  open-type="redirectTo">
 					{{item.name}}
 				</navigator>
 			</block>

@@ -17,7 +17,7 @@ Page({
   autoplay: true,
   interval: 3000,
   duration: 1000,
-  navUrl: '../category/category?id=',
+  navUrl: '../category/category',
   navs: [],
   list: [],
   },
@@ -39,6 +39,15 @@ Page({
         })
       }
     })
+    // APP.requestData(API.homeCategorys, {}, (err, data) =>{
+    //   console.log('home----------------------')
+    //   console.log(data)
+    //   if (data) {
+    //     self.setData({
+    //       "navs": data
+    //     })
+    //   }
+    // })
   },
 
   /**

@@ -117,4 +117,5 @@
   color: #fff;
   line-height: 200rpx;
   text-align: center;
+  white-space: wrap;
 }

@@ -21,7 +21,7 @@
    <view class="navs">
     <block wx:for="{{navs}}" wx:key="name">
       <view class="nav-item" data-type="{{item.name}}">  
-        <navigator url="{{navUrl + item.id}}">
+        <navigator url="{{navUrl + '?id=' + item.id + '&name=' + item.name}}">
           <image src='{{https+item.img}}' class='nav-image'></image>
           <text>{{item.name}}</text>
         </navigator>
