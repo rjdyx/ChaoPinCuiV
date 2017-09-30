@@ -11,14 +11,38 @@ Page({
     height: 20,
     focus: false,
     stars: [0, 20, 40, 60, 80],
-    normalSrc: '../../../../image/star2.png',
-    selectedSrc: '../../../../image/全星.png',
-    halfSrc: '../../../../image/半星.png',
+    normalSrc: '../../../image/star2.png',
+    selectedSrc: '../../../image/全星.png',
+    halfSrc: '../../../image/半星.png',
     key: 0 ,//评分,
     isUserName: true,
     userNameCol: '#ff713f', //默认匿名
     options: {},
     imgArr: []
+  },
+  addImgFn: function(e) {
+    var self = this
+    if (self.data.imgArr.length < 6) {
+       wx.chooseImage({
+        count: 1, // 默认9
+        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+        success: function (res) {
+          // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+          var tempFilePaths = res.tempFilePaths
+          console.log(res)
+          if (res.errMsg == "chooseImage:ok") {
+            self.data.imgArr.push(res.tempFilePaths[0])
+            self.setData({
+              'imgArr':self.data.imgArr
+            })
+            console.log('this.data.imgArr')
+            console.log(self.data.imgArr)
+          }
+        }
+      })
+    }
+     
   },
   formSubmit: function(e){
     console.log(e.detail.value)
@@ -38,19 +62,73 @@ Page({
       if(key === 'product_id' || key === 'content' || key === 'level' || key === 'user_id' || key === 'openid' ){
         console.log(key + ":" +form[key])
         if (!form[key]){
-          console.log('请输入' + key)
+          var tip = ''
+          switch (key) {
+            case 'content':
+              tip = '内容'
+              break
+            case 'level':
+              tip = '评分'
+              break
+          }
+          wx.showToast({
+            title: '请输入' + tip,
+            image: '../../../image/gth.png',
+            duration:2000,
+          })
           return true
         }
       }
     }
-    console.log(form)
+    wx.showLoading({
+      title: '提交中',
+    })
+    // if (this.data.imgArr.length) {
+    //   wx.uploadFile({
+    //     url: API.commentImg, //仅为示例，非真实的接口地址
+    //     filePath: this.data.imgArr[0],
+    //     'content-type': 'multipart/form-data',
+    //     name: 'img',
+    //     success: function(res){
+    //       var data = res.data
+    //       //do something
+    //       console.log('图片上传成功')
+    //       console.log(res)
+    //     }
+    //   })
+    // }
     APP.requestData(API.comment, form, (err, data) =>{
       console.log('product---')
       console.log(data)
+      wx.hideLoading()
       if (data) {
-        wx.navigateBack({
-          delta: 1
-        })
+        wx.showToast({
+          title: '提交成功',
+          icon: 'success',
+          duration:2000,
+          success: function(){
+            var timer = setTimeout(() =>{
+              wx.navigateBack({
+                delta: 1
+              })
+              clearTimeout(timer)
+             }, 2000)
+          }
+        })  
+      } else{
+        wx.showToast({
+          title: '提交失败',
+          image: '../../../image/gth.png',
+          duration:2000,
+          success: function(){
+            var timer = setTimeout(() =>{
+              wx.navigateBack({
+                delta: 1
+              })
+              clearTimeout(timer)
+             }, 3000)
+          }
+        })  
       }
     },'POST')
   },

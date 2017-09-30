@@ -137,6 +137,7 @@ Page({
         },
         method: 'GET',
         success: function (res) {
+          console.log(res)
           _this.setData({
             prints: res.data
           })

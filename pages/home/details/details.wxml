@@ -8,11 +8,12 @@
 			class="header_bg_img" 
 			src="{{proInfo.img ? https + proInfo.img : '../../../image/bg_logo.jpg'}}">
 			</image>
+			<view>
+			<image class="love" src="{{loveUrl}}" alt="" data-bol="{{false}}" catch:tap="loveFn"></image></view>
 		</view>
 		<view class="header_bottom">
 			<text class="pro_name t dis_ib">{{proInfo.name}}</text>
-			<view class="pro_place">目的地：{{proInfo.address}}
-			</view>
+			<view class="pro_place">目的地：{{proInfo.address}}</view>
 		</view>
     </view>
     <view class="bg_gray_line"></view>
@@ -46,7 +47,7 @@
 							</view>
     					</view>
 						<view class="source_text line-height40 font_size30">
-							<view>{{proInfo.desc}}</view>
+							<view class="desc">{{proInfo.desc}}</view>
 							<view 
 							class="look_more dis_ib" 
 							catchtap="lookSourceFn">
@@ -116,8 +117,9 @@
 									<view class="user_comment_item" >
 										<view class="user_comment_item_t clear">
 											<image class="user_header fl" src="{{item.user_img ? https + item.user_img : '../../../image/d_header.png'}}"></image>
-											<view class="user_comment_item_t_r fl">
+											<view class="user_comment_item_t_r fl clear">
 												<text class="t">{{item.user_name}}</text>
+												<text class="t fr createdTime">{{item.created_at}}</text>
 												<template is="star" data="{{...item}}"/>
 											</view>
 										</view>
@@ -207,11 +209,11 @@
     <view class="pop_up_wrap" wx:if="{{isShowPop.bol}}">
 		<view class="pop_up_inner">
 			<image class="close_icon" catchtap="closeFn" src="../../../image/x.png"></image>
-			<view class="pop_up_title">{{isShowPop.name}}</view>
-			<scroll-view wx:if="{{isShowPop.name === 'source'}}" scroll-y="true" class="pop_up_text">
+			<view class="pop_up_title">{{isShowPop.title}}</view>
+			<scroll-view wx:if="{{isShowPop.type === 'source'}}" scroll-y="true" class="pop_up_text">
 				{{proInfo.desc}}
 			 </scroll-view>
-			<map wx:if="{{isShowPop.name === 'map'}}" class="map" longitude="{{proInfo.meridian}}" latitude="{{proInfo.weft}}" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location ></map>
+			<map wx:if="{{isShowPop.type === 'map'}}" class="map" longitude="{{proInfo.meridian}}" latitude="{{proInfo.weft}}" scale="14" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location></map>
 		</view>
     </view>
 </view>

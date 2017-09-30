@@ -39,6 +39,13 @@
 	position: relative;
 	background: #f4f4f6;
 }
+.header_top .love{
+	position: absolute;
+	top: 10rpx;
+	right: 20rpx;
+	width:50rpx;
+	height: 50rpx;
+}
 .header_top .header_bg_img{
 	width: 100%;
 	height: 100%;
@@ -100,6 +107,13 @@
 .source .source_text view:first-child, .details_tip{
 	width: 96%;
 	margin:0 auto;
+}
+.source .source_text .desc{
+	overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 7;
+	-webkit-box-orient: vertical;
 }
 .look_more{
 	color:#2370af;
@@ -195,6 +209,9 @@
 .user_comment_item_t_r{
     width: 580rpx;
     margin-left: 20rpx;
+}
+.user_comment_item_t_r .createdTime{
+	font-size:24rpx;
 }
 .user_comment_item_t_r .star_score_box image{
 	height: 40rpx;

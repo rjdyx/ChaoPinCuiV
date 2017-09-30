@@ -46,9 +46,9 @@
     <text class="interestTitle">你感兴趣的东西</text>
     <view class="interestTab">
       <block wx:for="{{interset}}">
-        <view class="interest-item" data-type="{{item.name}}" data-typeid="{{item.typeId}}">
+        <navigator class="interest-item" data-type="{{item.name}}" data-typeid="{{item.typeId}}" data-id="{{item.id}}" url="{{categoryUrl + '?id=' + item.id + '&name=' + item.name}}">
           <text>{{item.name}}</text>
-        </view>
+        </navigator>
       </block>
     </view>
   </view>
