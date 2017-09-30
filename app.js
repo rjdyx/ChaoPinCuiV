@@ -4,7 +4,7 @@ App({
     openid: '',
     bindState: false, 
     apiUrl: 'https://cpc.find360.cn',
-    userInfo: {id: null, openid: null},//用户登录存储对象
+    userInfo: {id: null, openid: null, name: ''},//用户登录存储对象
     loginUrl: 'pages/loginOrregister/login/login'
   },
   onLaunch: function () {
@@ -48,6 +48,7 @@ App({
                       if (res.data != 400) {
                         that.globalData.userInfo = {
                           id : res.data.id,
+                          name : res.data.name,
                           openid: res.data.openid
                         }
                       } else {

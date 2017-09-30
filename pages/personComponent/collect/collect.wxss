@@ -130,7 +130,6 @@ height: 354rpx;
  transition: all 0.4s;
 
 }
-
 .touch-move-active .content,
 .touch-move-active .del {
  -webkit-transform: translateX(0);

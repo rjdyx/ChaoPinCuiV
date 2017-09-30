@@ -13,6 +13,7 @@
     "pages/personComponent/evaluate/evaluate",
     "pages/personComponent/footprint/footprint",
     "pages/personComponent/aboutUs/aboutUs",
+    "pages/personComponent/resetPass/resetPass",
     "pages/personComponent/editMsg/editMsg"
   ],
   "window": {

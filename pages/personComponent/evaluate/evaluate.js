@@ -7,14 +7,10 @@ Page({
    */
   data: {
     num: 0,
-    prints: [
-      { title: '牌坊街', spot: '../../../image/icon8.jpg', spotDesc: '潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市潮州市',icon: '../../../image/home.png' },
-      { title: '牌坊街', spot: '../../../image/icon8.jpg', spotDesc: '潮州市' },
-      { title: '牌坊街', spot: '../../../image/icon8.jpg', spotDesc: '潮州市' },
-      { title: '牌坊街', spot: '../../../image/icon8.jpg', spotDesc: '潮州市' },
-      { title: '牌坊街', spot: '../../../image/icon8.jpg', spotDesc: '潮州市' },
-    ],
+    prints: [],
     stars: [0, 1, 2, 3, 4],
+    userName: '',
+    apiUrl: app.globalData.apiUrl,
     normalSrc: '../../../image/星.png',
     selectedSrc: '../../../image/星_1.png',
     halfSrc: '../../../image/评分半颗五角星.png',
@@ -22,7 +18,6 @@ Page({
   
   },
   selectLeft: function (e) {
-    console.log(2333)
     var key = e.currentTarget.dataset.key
     if (this.data.key == 0.5 && e.currentTarget.dataset.key == 0.5) {
       //只有一颗星的时候,再次点击,变为0颗
@@ -47,25 +42,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var userId = app.globalData.userInfo.id
-    var openid = app.globalData.userInfo.openid
+    this.setData({
+      userName: app.globalData.userInfo.name
+    })
+    var _this = this
     wx.request({
       url: 'https://cpc.find360.cn/api/home/comment',
-      data: {
-        user_id: userId,
-        openid: openid 
-      },
       method: 'GET',
+      data: {
+        user_id: app.globalData.userInfo.id,
+        openid: app.globalData.userInfo.openid
+      },
       success: function(res){
-        console.log(res)
+        _this.setData({
+          prints: res.data
+        })
+        _this.setData({
+          num: res.data.length
+        })
       }
     })
-    //判断是否需要登录
-    if (app.globalData.userInfo == null && app.globalData.userInfo == undefined) {
-      wx.redirectTo({
-        url: '../../loginOrregister/login/login',
-      })
-    }
   },
 
   /**

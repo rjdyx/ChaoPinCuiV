@@ -1,0 +1,31 @@
+
+<view class="msg">
+  <form  bindsubmit="formSubmit">
+    <view class="msgWrap">
+      <view class="input common" >
+        <text>当前密码</text>
+          <view class="editInput"  data-id="0">
+            <input value="" class="inputEdit" bindblur="hideInp" name="orin_pass"></input> 
+          <image src="../../../image/arrow_down.png" class="arrow"></image>
+        </view>
+      </view>
+      <view class="input common" >
+        <text>修改密码</text>
+          <view class="editInput"  data-id="0">
+            <input value="" class="inputEdit" bindblur="hideInp" name="now_pass"></input> 
+          <image src="../../../image/arrow_down.png" class="arrow"></image>
+        </view>
+      </view>
+            <view class="input common" >
+        <text>确认密码</text>
+          <view class="editInput"  data-id="0">
+            <input value="" class="inputEdit" bindblur="hideInp" name="now_pass_rep"></input> 
+          <image src="../../../image/arrow_down.png" class="arrow"></image>
+        </view>
+      </view>
+    </view>
+  <view class="btn">
+      <button class="submit" formType="submit">保存</button>
+  </view>
+  </form>
+</view>

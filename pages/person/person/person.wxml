@@ -54,6 +54,9 @@
   </view>
 
   <view class='bind'>
+    <button class="bindLogin" data-id="bindLogin"></button>
+  </view>
+  <view class='bind'>
     <button class="bindLogin" bindtap="loginState" data-id="bindLogin">{{bindLogin}}</button>
   </view>
 </view>
