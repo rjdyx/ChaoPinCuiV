@@ -71,12 +71,16 @@ Page({
             // wx.navigateTo({
             //   url: '../../home/home/home'
             // })
-            wx.navigateBack({
-              delta: 3
-            })
+            that.homeUrl()
           },1000)
         }
       }
+    })
+  },
+  // 跳转
+  homeUrl: function(){
+    wx.reLaunch({
+      url: '../../home/home/home'
     })
   }
 })
