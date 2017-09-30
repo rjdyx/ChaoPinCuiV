@@ -355,7 +355,7 @@
 .tab_con3_inner .a_product .pro_name{
 	max-width: 340rpx;
 	display: inline-block;
-    line-height: 60rpx
+    line-height: 60rpx;
     color:#2370af;
     font-size: 32rpx;
 }
