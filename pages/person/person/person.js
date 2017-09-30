@@ -1,11 +1,13 @@
 // pages/person/person/person.js
 var app = getApp()
+import API from '../../../utils/api.js';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    categoryUrl: '../../home/category/category',
     navs: [
       { navIcon: 'likeIcon', name: '我的收藏', typeId: 0, url: 'collect' },
       { navIcon: 'footIcon', name: '我的足迹', typeId: 1, url: 'footprint' },
@@ -13,17 +15,10 @@ Page({
       { navIcon: 'ideasIcon', name: '意见反馈', typeId: 3,url:'feedback' },
     ],
     knows: [
-      { knowicon: 'aboutIcon', name: '关于我们', typeId: 0,url:'aboutUs' },
+      { knowicon: 'haha', name: '关于我们', typeId: 0,url:'aboutUs' },
       { knowicon: 'bindIcon', name:'绑定手机',typeId: 1,url:'bindPhone'},
     ],
-    interset: [
-      { name: '特色美食', typeId: 0 },
-      { name: '风味小吃', typeId: 1 },
-      { name: '工艺', typeId: 2 },
-      { name: '茶叶', typeId: 3 },
-      { name: '茶馆', typeId: 4 },
-      { name: '明信片', typeId: 5 }
-    ],
+    interset: [],
     img:'',
     name: '',
     bindLogin: ''
@@ -42,6 +37,19 @@ Page({
     var url = getCurrentPages()[getCurrentPages().length - 1].__route__;
     console.log(url)
     this.login()
+        // 其他人还看了
+    app.requestData(API.categoryRand, {}, (err, data) =>{
+      console.log('interset---')
+      console.log(data)
+      console.log(data != undefined)
+      if (data != undefined) {
+        this.setData({
+          "interset": data.data
+        })
+        console.log('this.data.interset')
+        console.log(this.data.interset)
+      }
+    })
   },
   login: function() {
     var that = this
@@ -49,6 +57,7 @@ Page({
     wx.request({
       url: 'https://cpc.find360.cn/api/home/user/' + userId + '/edit',
       success: function (res) {
+        console.log('user--')
         console.log(res)
         that.setData({
           img: res.data.img,
@@ -84,6 +93,9 @@ Page({
       })
       that.login()
     }
+  },
+  interestFn: function(){
+    console.log(55555)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

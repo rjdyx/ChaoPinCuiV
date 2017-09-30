@@ -14,7 +14,11 @@ const api = {
     nearbysPro: https + 'api/home/product/nearbys', // 3.3附近的产品数据
     // 4.产品列表页
     proList: https + 'api/home/product/lists', //4.1产品列表数据
+    // 6. 我的收藏
+    collect: https + 'api/home/collect/user',
     // 7.2 评价提交
-    comment: https + 'api/home/comment'
+    comment: https + 'api/home/comment', 
+    commentImg: https + 'api/home/comment/img', // 提交图片
+    categoryRand: https + 'api/home/category/rand'
 }
 module.exports = api;

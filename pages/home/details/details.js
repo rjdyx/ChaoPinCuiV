@@ -17,37 +17,29 @@ Page({
     nearbysProList: [], //附近产品列表
     tabArr: ['景点详情', '景点图片', '附近景点'],
     star: 'AAAA',
-    isShowPop: {bol: false, name: ''},
+    isShowPop: {bol: false, type: 'source', title: ''},
+    ifLove: false,
+    loveUrl: '../../../image/no_love.png',
     markers: [{ //标记点
-      iconPath: "/resources/others.png",
+      iconPath: "../../../image/location_address.png",
       id: 0,
-      latitude: 23.099994,
-      longitude: 113.324520,
+      latitude: 0,
+      longitude: 0,
       width: 50,
-      height: 50
+      height: 50,
+      alpha: 0.5
     }],
     polyline: [{ //路线 指定一系列坐标点，从数组第一项连线至最后一项
       points: [{
-        longitude: 113.3245211,
-        latitude: 23.10229
+        longitude: 0,
+        latitude: 0
       }, {
-        longitude: 113.324520,
-        latitude: 23.21229
+        longitude: 0,
+        latitude: 0
       }],
-      color:"#FF0000DD",
+      color:"#13a0f7",
       width: 2,
       dottedLine: true
-    }],
-    controls: [{ //控件
-      id: 1,
-      iconPath: '/resources/location.png',
-      position: {
-        left: 0,
-        top: 300 - 50,
-        width: 50,
-        height: 50
-      },
-      clickable: true
     }],
     other: [],//其他人还看了
     storageFoots: [], // 足迹缓存
@@ -63,7 +55,7 @@ Page({
         APP.requestData(API.proImgs, {product_id: this.data.options.id}, (err, data) =>{
           console.log('proImgs')
           console.log(data)
-          if (data) {
+          if (data != undefined) {
             this.setData({
               "proImgs": data
             })
@@ -76,12 +68,16 @@ Page({
         APP.requestData(API.nearbysPro, {id: this.data.options.id, lon: self.data.proInfo.meridian, lat: self.data.proInfo.weft}, (err, data) =>{
           console.log('nearbysPro')
           console.log(data)
-          if (data.data) {
+          if (data != undefined) {
             self.setData({
               "nearbysProList": data.data
             })
           }
         })
+      }
+    } else if (e.target.dataset.id === 0) {
+      if (this.data.proInfo.length){
+        this.getPro()
       }
     }
     // 其他人还看了 //id??
@@ -89,7 +85,7 @@ Page({
       APP.requestData(API.other, {category_id: this.data.proInfo.category_id}, (err, data) =>{
         console.log('other---')
         console.log(data)
-        if (data.data) {
+        if (data != undefined) {
           self.setData({
             "other": data.data
           })
@@ -127,23 +123,47 @@ Page({
       })
     }
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    console.log('details.js-----------------------')
-    console.log('options---')
-    console.log(options)
-    var self = this
-    self.setData({
-      "options": options
+  // 收藏
+  loveFn: function(e){
+    if (this.data.loveUrl == '../../../image/no_love.png' ){
+      this.setData({
+        'loveUrl' : '../../../image/love.png',
+        'ifLove': true
+       })
+    } else{
+      this.setData({
+       'loveUrl' : '../../../image/no_love.png' ,
+       'ifLove': false
+      })
+    }
+    APP.requestData(API.collect, {openid: APP.globalData.userInfo.openid, user_id: APP.globalData.userInfo.id, product_id: this.data.options.id, type: this.data.ifLove}, (err, data) =>{
+        console.log('collect--')
+        console.log(data)
+        if (data != undefined) {
+          if (this.data.loveUrl == '../../../image/love.png' ){
+            wx.showToast({
+              title: '收藏成功',
+              icon: 'success',
+              duration:1000
+            }) 
+          } else{
+            wx.showToast({
+              title: '取消收藏',
+              image: '../../../image/gth.png',
+              duration:1000
+            }) 
+          }
+        }
     })
+  },  
+  getPro: function() {
+    var self = this
     // 获取产品详情数据
-    if (options.id !== 'undefined'){
-      APP.requestData(API.proDetails, {id: options.id}, (err, data) =>{
+    if (this.data.options.id !== 'undefined'){
+      APP.requestData(API.proDetails, {id: this.data.options.id}, (err, data) =>{
         console.log('proDetails')
         console.log(data)
-        if (data) {
+        if (data != undefined) {
           self.setData({
             "proInfo": data.info,
             "proComment": data.comment,
@@ -151,12 +171,26 @@ Page({
           })
           self.footprintStorage()
           self.setData({
-            "proInfo.level": self.data.proInfo.comment
+            "proInfo.level": self.data.proInfo.comment,
+            "loveUrl": data.info.is_collect ? '../../../image/love.png' : '../../../image/no_love.png'
           })
           wx.setNavigationBarTitle({title: self.data.proInfo.category_name})
         }
       })
     }   
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    console.log('details.js-----------------------')
+    console.log('options---')
+    console.log(options)
+    this.setData({
+      "options": options
+    })
+    // 获取产品详情数据
+    this.getPro()
   },
 
   /**
@@ -202,7 +236,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    console.log(66666666)
+    this.getPro()
   },
 
   /**
@@ -243,15 +278,45 @@ Page({
   lookSourceFn () {
     this.setData({
       "isShowPop.bol": true,
-      "isShowPop.name": this.data.proInfo.name + '历史来源'
+      "isShowPop.title": this.data.proInfo.name + '历史来源',
+      "isShowPop.type": 'source'
     })
+    console.log('this.data.isShowPop----')
+    console.log(this.data.isShowPop)
+    console.log(this.data.proInfo.desc)
   },
   // 查看地图
   lookMapFn () {
-    this.setData({
-      "isShowPop.bol": true,
-      "isShowPop.name": this.data.proInfo.name
+    var self = this
+    wx.getLocation({
+      type: 'wgs84',
+      success: function(res) {
+        var latitude = res.latitude
+        var longitude = res.longitude
+        var speed = res.speed
+        var accuracy = res.accuracy
+        console.log('longitude:' + longitude)
+        console.log('latitude:' + latitude)
+        self.setData({
+          "polyline[0].points[0].longitude": longitude,
+          'polyline[0].points[0].latitude': latitude,
+          "polyline[0].points[1].longitude": self.data.proInfo.meridian,
+          'polyline[0].points[1].latitude': self.data.proInfo.weft
+        })
+      }
     })
+    self.setData({
+      "isShowPop.bol": true,
+      "isShowPop.title": self.data.proInfo.name,
+      "isShowPop.type": 'map',
+      'markers[0].longitude': self.data.proInfo.meridian,
+      'markers[0].latitude': self.data.proInfo.weft
+    })
+    console.log('this.data.isShowPop----')
+    console.log(self.data.isShowPop)
+    console.log(self.data.proInfo)
+    console.log(self.data.markers)
+    console.log(self.data.polyline)
   },
   // 关闭弹窗
   closeFn () {
