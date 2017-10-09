@@ -23,32 +23,24 @@ Page({
   addImgFn: function(e) {
     var self = this
     if (self.data.imgArr.length < 6) {
-       wx.chooseImage({
-        count: 1, // 默认9
-        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-        success: function (res) {
-          // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-          var tempFilePaths = res.tempFilePaths
-          console.log(res)
-          if (res.errMsg == "chooseImage:ok") {
-            self.data.imgArr.push(res.tempFilePaths[0])
-            self.setData({
-              'imgArr':self.data.imgArr
-            })
-            console.log('this.data.imgArr')
-            console.log(self.data.imgArr)
-          }
-        }
-      })
+        wx.chooseImage({
+            count: 1, // 默认9
+            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+            success: function (res) {
+                // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+                var tempFilePaths = res.tempFilePaths
+                if (res.errMsg == "chooseImage:ok") {
+                    self.data.imgArr.push(res.tempFilePaths[0])
+                    self.setData({
+                        'imgArr':self.data.imgArr
+                    })
+                }
+            }
+        })
     }
-     
   },
   formSubmit: function(e){
-    console.log(e.detail.value)
-    console.log(this.data.key)
-    console.log(this.data.isUserName)
-    console.log(APP.globalData.userInfo)
     var form = {
       product_id: this.data.options.id,
       content: e.detail.value.content,
@@ -83,23 +75,8 @@ Page({
     wx.showLoading({
       title: '提交中',
     })
-    // if (this.data.imgArr.length) {
-    //   wx.uploadFile({
-    //     url: API.commentImg, //仅为示例，非真实的接口地址
-    //     filePath: this.data.imgArr[0],
-    //     'content-type': 'multipart/form-data',
-    //     name: 'img',
-    //     success: function(res){
-    //       var data = res.data
-    //       //do something
-    //       console.log('图片上传成功')
-    //       console.log(res)
-    //     }
-    //   })
-    // }
+    console.log(form)
     APP.requestData(API.comment, form, (err, data) =>{
-      console.log('product---')
-      console.log(data)
       wx.hideLoading()
       if (data) {
         wx.showToast({
@@ -139,7 +116,6 @@ Page({
       //只有一颗星的时候,再次点击,变为0颗
       key = 0;
     }
-    console.log("得" + key + "分")
     this.setData({
       key: key
     })
