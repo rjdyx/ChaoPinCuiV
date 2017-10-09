@@ -6,6 +6,7 @@ Page({
   /**
    * 页面的初始数据
    */
+  apiUrl: app.globalData.apiUrl,
   data: {
     categoryUrl: '../../home/category/category',
     navs: [
@@ -64,10 +65,8 @@ Page({
     wx.request({
       url: 'https://cpc.find360.cn/api/home/user/' + userId + '/edit',
       success: function (res) {
-        console.log('user--')
-        console.log(res)
         that.setData({
-          img: res.data.img,
+          img: 'https://cpc.find360.cn/' + res.data.img,
           name: res.data.name
         })
         that.setData({

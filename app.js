@@ -1,4 +1,5 @@
 //app.js
+import wxValidate from 'utils/wxValidate'
 App({
   globalData: {
     openid: '',
@@ -7,6 +8,7 @@ App({
     userInfo: {id: null, openid: null, name: ''},//用户登录存储对象
     loginUrl: 'pages/loginOrregister/login/login'
   },
+  WxValidate: (rules, messages) => new wxValidate(rules, messages),
   onLaunch: function () {
      var that = this
      var user = wx.getStorageSync('user') || {}

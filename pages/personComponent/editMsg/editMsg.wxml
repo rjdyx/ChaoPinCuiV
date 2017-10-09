@@ -7,7 +7,7 @@
     <view class="avataUrl common" bindtap="chooseImage">
       <text>头像</text>
         <view class="img">
-             <image src="{{https+image}}" data-src="{{image}}" class="chooseImg" name="img"></image>
+             <image src="{{https+img}}" data-src="{{img}}" class="chooseImg" name="img"></image>
         </view>
       <image src="../../../image/arrow_down.png" class="arrow"></image>
     </view>
@@ -40,6 +40,14 @@
       </view>
     </view>
 
+    <view class="input common" >
+      <text>邮箱</text>
+        <view class="editInput"  data-id="2">
+          <input value="{{email}}" class="inputEdit" bindblur="hideInp" name="email"></input> 
+        <image src="../../../image/arrow_down.png" class="arrow"></image>
+      </view>
+    </view>
+
     <!-- 性别 -->
     <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" class="input common" name="sex">
       <view class="section__title">性别</view>
@@ -50,20 +58,20 @@
     </picker> 
 
     <!-- 出生日期 -->
-    <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange" class="input common" name="date">
+    <picker mode="date" value="{{age}}" start="1905-09-01" end="2017-09-01" bindchange="bindDateChange" class="input common" name="age">
       <view class="section__title">出生日期</view>
         <view class="picker">
-            {{date}}
+            {{age}}
         </view>
         <image src="../../../image/arrow_down.png" class="arrow"></image>
     </picker>
 
 
     <!-- 地址 -->
-    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" class="input common" name="address">
+    <picker mode="region" bindchange="bindRegionChange" value="{{address}}" class="input common" name="address">
       <view class="section__title">地址</view>
         <view class="picker">
-          {{region[0]}}，{{region[1]}}，{{region[2]}}
+          {{address[0]}}，{{address[1]}}，{{address[2]}}
         </view>
       <image src="../../../image/arrow_down.png" class="arrow"></image>
     </picker>
