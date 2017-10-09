@@ -5,6 +5,7 @@ Page({
   /**
    * 页面的初始数据
    */
+  apiUrl: app.globalData.apiUrl,
   data: {
     navs: [
       { navIcon: 'likeIcon', name: '我的收藏', typeId: 0, url: 'collect' },
@@ -49,9 +50,9 @@ Page({
     wx.request({
       url: 'https://cpc.find360.cn/api/home/user/' + userId + '/edit',
       success: function (res) {
-        console.log(res)
+        console.log(that.apiUrl)
         that.setData({
-          img: res.data.img,
+          img: 'https://cpc.find360.cn/' + res.data.img,
           name: res.data.name
         })
         if (res.data.id != null || res.data.id != undefined) {
