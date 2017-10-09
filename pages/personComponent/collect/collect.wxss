@@ -10,9 +10,10 @@
   justify-content: space-between;
 }
 .prints{
-  width:819rpx;
+  width:100%;
 }
 .print-item{
+  width: 100%;
   flex-grow: 1;
   height:466rpx;
   background: #fff;
@@ -40,19 +41,19 @@
   top: 29rpx;
 }
 .print-content{
-  width: 819rpx;
+  width:100%;
   display: flex;
   padding-top: 50rpx;
 }
 .content{
-   display: flex;
-  width: 819rpx;
+  display: flex;
+  width: 96%;
   margin-right:0;
  -webkit-transition: all 0.4s;
  transition: all 0.4s;
- -webkit-transform: translateX(127px);
- transform: translateX(127px);
- margin-left: -127px;
+ -webkit-transform: translateX(111px);
+ transform: translateX(111px);
+ margin-left: -111px;
 }
 .print-spot{
   flex: 2;
@@ -60,7 +61,7 @@
 }
 .print-desc{
   flex: 3;
-  padding-right: 37rpx;  
+   padding-right:16rpx;   
 }
 .print-spot image{
   width: 250rpx;

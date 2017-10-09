@@ -19,25 +19,6 @@ Page({
     paraObj[objId] = event.detail.value
     this.setData(paraObj)
   },
-  // loginClick: function(){
-  //   var loginName = this.data.loginName
-  //   var password = this.data.password
-  //   if (loginName != null && password != null) {
-  //     var backUrl = this.data.backUrl
-  //     app.globalData.userInfo = {
-  //       loginName: loginName,
-  //       password: password
-  //     }
-  //     wx.redirectTo({
-  //       url: backUrl
-  //     })
-  //   } else {
-  //     this.setData({
-  //       loginName: null,
-  //       password: null
-  //     })
-  //   }
-  // },
   formSubmit: function(e) {
     var that = this
     var openid = wx.getStorageSync('user')
@@ -57,30 +38,21 @@ Page({
       method: "POST", 
       success: function(res) {
         if (res.data == 300) {
-          app.showToast('微信号已被使用', 'success', 1500)
+          app.showToast('微信号已被使用', '../../../image/gth.png', 1500)
         } else if (res.data == 400) {
-          app.showToast('用户名或密码错误', 'success', 1500)
+          app.showToast('用户名或密码错误', '../../../image/gth.png', 1500)
         } else {
-          app.showToast('登录成功', 'success', 1500)
+          app.showToast('登录成功', '../../../image/pass.png', 1500)
           app.globalData.userInfo = {
               id : res.data.id,
               name : res.data.name,
               openid: res.data.openid              
           }
           setTimeout(function(){
-            // wx.navigateTo({
-            //   url: '../../home/home/home'
-            // })
-            that.homeUrl()
+            app.homeUrl()
           },1000)
         }
       }
-    })
-  },
-  // 跳转
-  homeUrl: function(){
-    wx.reLaunch({
-      url: '../../home/home/home'
     })
   }
 })

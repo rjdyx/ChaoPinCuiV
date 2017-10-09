@@ -14,7 +14,7 @@
       <view class='content'>
       <!-- 图片 -->
         <view class='print-spot flex-item'>
-        <image src='{{apiUrl}}/{{item.img}}'></image>
+          <image src='{{apiUrl}}/{{item.img}}'></image>
         </view>
       <!-- 右侧评分和描述 -->
       <view class='print-desc flex-item'>

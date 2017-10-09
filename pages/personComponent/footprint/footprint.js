@@ -88,13 +88,10 @@ Page({
     this.data.prints.splice(e.currentTarget.dataset.index, 1)
     var _this = this
     wx.setStorage({
-      key:"footprint",
+      key: "footprint",
       data: _this.data.prints
     })
     this.getStorageFoot()
-  },
-  itemTo: function (){
-    // console.log(634489)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -122,14 +119,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    console.log(this.data.prints)
+    this.getStorageFoot()
   },
 
   /**

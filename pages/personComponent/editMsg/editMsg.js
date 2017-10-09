@@ -119,8 +119,7 @@ Page({
                 email: e.detail.value.email,
                 sex: e.detail.value.sex,
                 id: userId,
-                img: that.defaultImg,
-                _token: token
+                img: that.defaultImg
             },
             success: function(res){
                 that.getRes(res)
