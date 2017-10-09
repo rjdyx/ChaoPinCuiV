@@ -108,6 +108,10 @@
 .interest-item:first-child,.interest-item:nth-child(4){
   margin-left: 24rpx;
 }
+.haha:after{
+  content: "\e606"; 
+  color:red;
+}
 .aboutIcon:after{
   content: '\e604';
   color: #1f1f1f;

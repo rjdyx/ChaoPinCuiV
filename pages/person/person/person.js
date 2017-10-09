@@ -1,5 +1,6 @@
 // pages/person/person/person.js
 var app = getApp()
+import API from '../../../utils/api.js';
 Page({
 
   /**
@@ -7,6 +8,7 @@ Page({
    */
   apiUrl: app.globalData.apiUrl,
   data: {
+    categoryUrl: '../../home/category/category',
     navs: [
       { navIcon: 'likeIcon', name: '我的收藏', typeId: 0, url: 'collect' },
       { navIcon: 'footIcon', name: '我的足迹', typeId: 1, url: 'footprint' },
@@ -16,18 +18,14 @@ Page({
     knows: [
       { knowicon: 'aboutIcon', name: '关于我们', typeId: 0,url:'aboutUs' },
       { knowicon: 'bindIcon', name:'绑定手机',typeId: 1,url:'bindPhone'},
+      { knowicon: 'bindIcon', name:'修改密码',typeId: 2,url:'resetPass'}
     ],
-    interset: [
-      { name: '特色美食', typeId: 0 },
-      { name: '风味小吃', typeId: 1 },
-      { name: '工艺', typeId: 2 },
-      { name: '茶叶', typeId: 3 },
-      { name: '茶馆', typeId: 4 },
-      { name: '明信片', typeId: 5 }
-    ],
+    interset: [],
     img:'',
     name: '',
-    bindLogin: ''
+    bindLogin: '',
+    userId: '',
+    openid: ''
   },
   // 编辑个人信息
   toEdit: function() {
@@ -41,50 +39,80 @@ Page({
   onLoad: function () {
     // 获取当前页面的路径
     var url = getCurrentPages()[getCurrentPages().length - 1].__route__;
-    console.log(url)
-    this.login()
+    this.setData({
+      userId: app.globalData.userInfo.id
+    })
+    var userId = this.data.userId
+    if (userId!= '' && userId!=undefined) {
+      this.login(userId)
+    }
+        // 其他人还看了
+    app.requestData(API.categoryRand, {}, (err, data) =>{
+      console.log('interset---')
+      console.log(data)
+      console.log(data != undefined)
+      if (data != undefined) {
+        this.setData({
+          "interset": data.data
+        })
+        console.log('this.data.interset')
+        console.log(this.data.interset)
+      }
+    })
   },
-  login: function() {
+  login: function(userId) {
     var that = this
-    var userId = app.globalData.userInfo.id
     wx.request({
       url: 'https://cpc.find360.cn/api/home/user/' + userId + '/edit',
       success: function (res) {
-        console.log(that.apiUrl)
         that.setData({
           img: 'https://cpc.find360.cn/' + res.data.img,
           name: res.data.name
         })
-        if (res.data.id != null || res.data.id != undefined) {
-          that.setData({
-            bindLogin: '退出登录'
-          })
-        }
+        that.setData({
+          bindLogin: '解除绑定'
+        })
       }
     })
   },
   loginState: function(e) {
     var that = this
-    var userId = app.globalData.userInfo.id
-    console.log(e)
+    var userId = this.data.userId
+    if (userId!= '' && userId != undefined) {
+      this.logouts(userId)
+    } else {
+      this.logins()
+    }
+  },
+  logins: function() {
+    wx.navigateTo({
+      url: '../../loginOrregister/login/login'
+    })
+  },
+  logouts: function(userId) {
+    var that = this
     wx.request({
       url: 'https://cpc.find360.cn/api/home/wx/relieve',
-      data: {user_id:userId},
+      data: {user_id: userId},
       success: function(res){
-        console.log(res)
+        app.showToast('解除绑定成功', 'success', 1500)
         that.setData({
-          bindLogin: '登录',
+          bindLogin: '绑定账户',
           img: '' ,
-          name: ''
+          name: '',
+          userId: '',
+          openid: ''
         })
+        app.globalData.userInfo = {
+          id : '',
+          name : '',
+          openid: ''              
+        }
       }
     })
-    if (that.data.bindLogin == '登录') {
-      wx.navigateTo({
-        url: '../../loginOrregister/login/login'
-      })
-      that.login()
-    }
+  },
+  interestFn: function(){
+    console.log(55555)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

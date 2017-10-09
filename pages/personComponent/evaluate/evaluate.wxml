@@ -7,7 +7,7 @@
     </view>
     <view class='user-msg'>
       <text>已贡献{{num}}条评价</text>
-      <text>名字：{{userInfo.name}}</text>
+      <text>名字：{{userName}}</text>
     </view>
   </view>
 
@@ -20,35 +20,35 @@
   <view class='print-item' bindtap='itemTo'>
     <view class='print-title'>
       <image src='{{item.icon}}' class='icon'></image>
-      <text>{{item.title}}</text>
+      <text>{{item.product_name}}</text>
       <image src='../../../image/arrow_down.png'></image>
     </view>
 <!-- 中间内容 -->
     <view class="print-content" data-index="{{index}}">
       <!-- 图片 -->
         <view class='print-spot flex-item'>
-          <image src='{{item.spot}}'></image>
+          <image src='{{apiUrl}}/{{item.product_thumb}}'></image>
         </view>
       <!-- 右侧评分和描述 -->
       <view class='print-desc flex-item'>
         <view class='grade'>
-          <text class=''>{{userName}}name</text>
-          <text class='time'>时间{{time}}</text>
+          <text class=''>{{item.user_name}}</text>
+          <text class='time'>{{item.updated_at}}</text>
         </view>
         <!-- 评分 -->
           <view>
             <text class='sortLabel'>{{sortName}}评论 : </text>
             <view class='fiveStars'>
-            <block wx:for="{{stars}}">
-            <image class="star-image" style="left: {{item*40}}rpx" src="{{key > item ?(key-item == 0.5?halfSrc:selectedSrc) : normalSrc}}">
-              <view class="item" data-key="{{item+0.5}}" bindtap="selectLeft"></view>
-              <view class="item" data-key="{{item+1}}" bindtap="selectRight"></view>
+            <block wx:for="{{stars}}" wx:for-item="k">
+            <image class="star-image" style="left: {{k*40}}rpx" src="{{(item.level/20) > k ?((item.level/20)-k == 0.5?halfSrc:selectedSrc) : normalSrc}}">
+              <view class="item" data-key="{{k+0.5}}" bindtap="selectLeft"></view>
+              <view class="item" data-key="{{k+1}}" bindtap="selectRight"></view>
             </image>
           </block>
           </view>
           </view>
 
-        <text class='spotDesc'>{{item.spotDesc}}</text>
+        <text class='spotDesc'>{{item.content}}</text>
       </view>
 
 

@@ -2,23 +2,16 @@
 <view class="comment">
 <form bindsubmit="formSubmit">
   <view class="textarea">
-        <textarea class="com_textArea width700" placeholder="广济桥景色美" name="content"/>
+        <textarea class="com_textArea width700" placeholder="(必填)" name="content"/>
         <!-- <button form-type="submit"> 提交 </button> -->
   </view>
   <view class='putOutImg width700'>
-    <view class='a_putOutImg'>
-      <image src='../../../../image/潮州旅游_03.png'></image>
-    </view>
-        <view class='a_putOutImg'>
-      <image src='../../../../image/潮州旅游_03.png'></image>
-    </view>    
-    <view class='a_putOutImg'>
-      <image src='../../../../image/潮州旅游_03.png'></image>
-    </view>    
-    <view class='a_putOutImg'>
-      <image src='../../../../image/潮州旅游_03.png'></image>
-    </view>
-    <view class='a_camera'>
+    <block wx:for="{{imgArr}}" wx:key="">
+      <view class='a_putOutImg'>
+        <image src='{{item}}'></image>
+      </view>
+    </block>
+    <view wx:if="{{imgArr.length < 6}}" class='a_camera' catch:tap="addImgFn">
       <image src='../../../../image/camera.png'></image>
     </view>
   </view>

@@ -33,7 +33,7 @@ Page({
     APP.requestData(API.homeCategorys, {}, (err, data) =>{
       console.log('home----------------------')
       console.log(data)
-      if (data) {
+      if (data != undefined) {
         self.setData({
           "navs": data
         })

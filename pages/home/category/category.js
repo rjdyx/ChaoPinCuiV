@@ -91,7 +91,7 @@ Page({
     APP.requestData(API.product, {category_id: options.id}, (err, data) =>{
       console.log('product---')
       console.log(data)
-      if (data) {
+      if (data != undefined) {
         self.setData({
           "product": data
         })
@@ -101,7 +101,7 @@ Page({
     APP.requestData(API.categoryChild, {pid: options.id}, (err, data) =>{
       console.log('category---')
       console.log(data)
-      if (data) {
+      if (data != undefined) {
         self.setData({
           "category": data
         })
@@ -112,7 +112,7 @@ Page({
     APP.requestData(API.categoryRecommend, {category_id: options.id, num: 6}, (err, data) =>{
       console.log('recommend_products_arr---')
       console.log(data)
-      if (data.data) {
+      if (data != undefined) {
         self.setData({
           "recommend_products_arr": data.data
         })
@@ -122,7 +122,7 @@ Page({
     APP.requestData(API.other, {category_id: options.id}, (err, data) =>{
       console.log('other---')
       console.log(data)
-      if (data.data) {
+      if (data != undefined) {
         self.setData({
           "other": data.data
         })

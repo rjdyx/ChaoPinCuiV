@@ -154,4 +154,11 @@
   font-size: 29rpx;
   display: block;
   padding:20rpx 20rpx 20rpx 0;
+  line-height: 25px;
+  overflow:hidden; 
+  text-overflow:ellipsis;
+  display:-webkit-box; 
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:4; 
+  text-indent:2em;
 }

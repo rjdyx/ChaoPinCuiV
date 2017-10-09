@@ -34,6 +34,9 @@ Page({
     console.log('products_list.js------------')
     console.log(options)
     wx.setNavigationBarTitle({title: options.name})
+    wx.showLoading({
+      title: '加载中',
+    })
     // 获取当前的地理位置
     wx.getLocation({
       type: 'wgs84',
@@ -59,11 +62,12 @@ Page({
         APP.requestData(API.proList, op, (err, data) =>{
           console.log('proList')
           console.log(data)
-          if (data) {
+          if (data != undefined) {
             self.setData({
               "proList": data
             })
           }
+          wx.hideLoading()
         })
       }
     })

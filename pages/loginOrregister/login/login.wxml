@@ -3,7 +3,7 @@
 
     <form bindsubmit="formSubmit">
       <view class='inputWrap'>
-        <input placeholder='手机号/电子邮箱' class='name' bindinput="inputClick" id="loginName" name="user"></input>  
+        <input placeholder='用户名/手机号/电子邮箱' class='name' bindinput="inputClick" id="loginName" name="user"></input>  
         <input placeholder='密码' class='passward' bindinput="inputClick" id="password" type="password" name="password"></input>
       </view>
 
