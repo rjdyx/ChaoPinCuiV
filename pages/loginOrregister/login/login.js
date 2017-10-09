@@ -19,25 +19,6 @@ Page({
     paraObj[objId] = event.detail.value
     this.setData(paraObj)
   },
-  // loginClick: function(){
-  //   var loginName = this.data.loginName
-  //   var password = this.data.password
-  //   if (loginName != null && password != null) {
-  //     var backUrl = this.data.backUrl
-  //     app.globalData.userInfo = {
-  //       loginName: loginName,
-  //       password: password
-  //     }
-  //     wx.redirectTo({
-  //       url: backUrl
-  //     })
-  //   } else {
-  //     this.setData({
-  //       loginName: null,
-  //       password: null
-  //     })
-  //   }
-  // },
   formSubmit: function(e) {
     var that = this
     var openid = wx.getStorageSync('user')
@@ -68,9 +49,6 @@ Page({
               openid: res.data.openid              
           }
           setTimeout(function(){
-            // wx.navigateTo({
-            //   url: '../../home/home/home'
-            // })
             app.homeUrl()
           },1000)
         }

@@ -12,7 +12,7 @@ Page({
       { navIcon: 'likeIcon', name: '我的收藏', typeId: 0, url: 'collect' },
       { navIcon: 'footIcon', name: '我的足迹', typeId: 1, url: 'footprint' },
       { navIcon: 'evaluate', name: '我的评价', typeId: 2, url: 'evaluate' },
-      { navIcon: 'ideasIcon', name: '意见反馈', typeId: 3,url:'feedback' },
+      { navIcon: 'ideasIcon', name: '意见反馈', typeId: 3,url: 'feedback' },
     ],
     knows: [
       { knowicon: 'aboutIcon', name: '关于我们', typeId: 0,url:'aboutUs' },
