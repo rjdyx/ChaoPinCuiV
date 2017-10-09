@@ -7,7 +7,7 @@
     <view class="avataUrl common" bindtap="chooseImage">
       <text>头像</text>
         <view class="img">
-             <image src="{{https+image}}" data-src="{{image}}" class="chooseImg" name="img"></image>
+             <image src="{{https+img}}" data-src="{{img}}" class="chooseImg" name="img"></image>
         </view>
       <image src="../../../image/arrow_down.png" class="arrow"></image>
     </view>
@@ -68,10 +68,10 @@
 
 
     <!-- 地址 -->
-    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" class="input common" name="address">
+    <picker mode="region" bindchange="bindRegionChange" value="{{address}}" class="input common" name="address">
       <view class="section__title">地址</view>
         <view class="picker">
-          {{region[0]}}，{{region[1]}}，{{region[2]}}
+          {{address[0]}}，{{address[1]}}，{{address[2]}}
         </view>
       <image src="../../../image/arrow_down.png" class="arrow"></image>
     </picker>
