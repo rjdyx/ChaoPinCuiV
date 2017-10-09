@@ -96,7 +96,7 @@ Page({
       url: 'https://cpc.find360.cn/api/home/wx/relieve',
       data: {user_id: userId},
       success: function(res){
-        app.showToast('解除绑定成功', 'success', 1500)
+        app.showToast('解除绑定成功','../../../image/pass.png',1500)
         that.setData({
           bindLogin: '绑定账户',
           img: '' ,

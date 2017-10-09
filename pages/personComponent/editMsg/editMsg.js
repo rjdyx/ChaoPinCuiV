@@ -83,8 +83,6 @@ Page({
         console.log(res)
         if (res.data == 101) {
           app.showToast('用户名已存在','success',1500)
-        } else if (res.data == 102) {
-          app.showToast('邮箱已存在', 'success', 1500)
         } else if (res.data == 103) {
           app.showToast('手机已存在', 'success', 1500)
         } else if (res.data != null || res.data != undefined) {

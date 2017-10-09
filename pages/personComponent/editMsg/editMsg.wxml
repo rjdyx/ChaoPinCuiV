@@ -72,7 +72,7 @@
   </view>
   <view class="btn">
       <button class="submit" formType="submit">保存</button>
-      <button class="quit">退出当前账号</button>
+      <!-- <button class="quit">退出当前账号</button> -->
   </view>
   </form>
 </view>

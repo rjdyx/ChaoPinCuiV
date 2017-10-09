@@ -1,5 +1,5 @@
 /* pages/person/person/person.wxss */
-@import '../../../iconfont/stylesheet.wxss';
+@import '/iconfont/stylesheet.wxss';
 .person{
   width: 100%;
   /* height: 100vh; */
@@ -93,14 +93,14 @@
 }
 .interest-item{
   display: inline-block;
-  width: 31%;
+  width: 28%;
   margin-bottom: 34rpx;
+  margin-right: 33rpx;
 }
 .interest-item text{
   display: block;
-  width: 85%;
+  width: 100%;
   background: #f3f4f6;
-  margin: 0 auto;
   text-align: center;
   padding: 10rpx 0;
   font-size: 29rpx;
@@ -110,7 +110,7 @@
 }
 .haha:after{
   content: "\e606"; 
-  color:red;
+  color: red;
 }
 .aboutIcon:after{
   content: '\e604';

@@ -119,6 +119,7 @@ App({
           //当图片传完时，停止调用 
           console.log('执行完毕');
           console.log('成功：' + success + " 失败：" + fail);
+          that.showToast('发送成功','success',1500)
         } else {
           //若图片还没有传完，则继续调用函数
           console.log(i);
@@ -134,7 +135,7 @@ App({
   showToast: function (title,icon,duration) {
     wx.showToast({
       title: title,
-      icon: icon,
+      image: icon,
       duration: duration
       })
 },
@@ -150,6 +151,12 @@ App({
       fail: function(e) {
         callback(e)
       }
+    })
+  },
+  // 跳转到首页
+  homeUrl: function () {
+    wx.reLaunch({
+      url: '../../home/home/home'
     })
   }
 })

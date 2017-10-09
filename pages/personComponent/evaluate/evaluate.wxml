@@ -12,7 +12,7 @@
   </view>
 
   <!-- 评价 -->
-  <scroll-view scroll-y="true" class="container" bindscrolltoupper="upper" upper-threshold="10" lower-threshold="5" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+  <scroll-view class="container" bindscrolltoupper="upper" upper-threshold="10" lower-threshold="5" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
 
 <view class='prints'>
  <block wx:for="{{prints}}"  wx:key="title">
@@ -21,7 +21,7 @@
     <view class='print-title'>
       <image src='{{item.icon}}' class='icon'></image>
       <text>{{item.product_name}}</text>
-      <image src='../../../image/arrow_down.png'></image>
+      <image src='{{apiUrl}}/{{item.img}}'></image>
     </view>
 <!-- 中间内容 -->
     <view class="print-content" data-index="{{index}}">

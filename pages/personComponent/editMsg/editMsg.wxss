@@ -92,7 +92,7 @@
 }
 .quit,.submit{
   display: inline-block;
-  width: 48%;
+  width: 100%;
   height: 110rpx;
   background: #ffd102;
   line-height: 110rpx;

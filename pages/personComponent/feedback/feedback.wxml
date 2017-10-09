@@ -11,6 +11,6 @@
   </view>
 
     <textarea class='feedText' placeholder='说些什么...' name="text"></textarea>
-    <button class='send' bindtap="uploadimg" formType="submit">发送</button>
+    <button class='send' formType="submit">发送</button>
 </form>
 </view>
