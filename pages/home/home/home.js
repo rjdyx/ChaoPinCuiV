@@ -31,8 +31,6 @@ Page({
   onLoad: function (options) {
     var self = this
     APP.requestData(API.homeCategorys, {}, (err, data) =>{
-      console.log('home----------------------')
-      console.log(data)
       if (data != undefined) {
         self.setData({
           "navs": data
@@ -40,8 +38,6 @@ Page({
       }
     })
     // APP.requestData(API.homeCategorys, {}, (err, data) =>{
-    //   console.log('home----------------------')
-    //   console.log(data)
     //   if (data) {
     //     self.setData({
     //       "navs": data
@@ -61,7 +57,6 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res)
         that.setData({
           'list': res.data.data
         })

@@ -20,6 +20,8 @@ Page({
     options: {},
     imgArr: []
   },
+  imgStr: '',
+  key: 0,
   addImgFn: function(e) {
     var self = this
     if (self.data.imgArr.length < 6) {
@@ -50,9 +52,9 @@ Page({
       user_id: APP.globalData.userInfo.id,
       openid:APP.globalData.userInfo.openid
     }
+    var that = this
     for(var key in form){
       if(key === 'product_id' || key === 'content' || key === 'level' || key === 'user_id' || key === 'openid' ){
-        console.log(key + ":" +form[key])
         if (!form[key]){
           var tip = ''
           switch (key) {
@@ -75,42 +77,67 @@ Page({
     wx.showLoading({
       title: '提交中',
     })
-    console.log(form)
+    if (this.data.imgArr.length !== 0) {
+        for (var i in that.data.imgArr) {
+            wx.uploadFile({
+                url: API.commentImg,
+                filePath: that.data.imgArr[i],
+                name: 'img',
+                formData: {},
+                success: function(res){
+                    that.key++
+                    if (that.imgStr !== '') {
+                        that.imgStr += ',' + res.data
+                    } else {
+                        that.imgStr += res.data
+                    }
+                    if (that.key == that.data.imgArr.length) {
+                        form['img'] = that.imgStr
+                        that.textContent(form)
+                    }
+                }
+            })
+        }
+    } else {
+        this.textContent(form)
+    }
+  },
+  // 文本评分提交
+  textContent: function (form) {
     APP.requestData(API.comment, form, (err, data) =>{
-      wx.hideLoading()
-      if (data) {
-        wx.showToast({
-          title: '提交成功',
-          icon: 'success',
-          duration:2000,
-          success: function(){
-            var timer = setTimeout(() =>{
-              wx.navigateBack({
-                delta: 1
-              })
-              clearTimeout(timer)
-             }, 2000)
-          }
-        })  
-      } else{
-        wx.showToast({
-          title: '提交失败',
-          image: '../../../image/gth.png',
-          duration:2000,
-          success: function(){
-            var timer = setTimeout(() =>{
-              wx.navigateBack({
-                delta: 1
-              })
-              clearTimeout(timer)
-             }, 3000)
-          }
-        })  
-      }
+        wx.hideLoading()
+        if (data) {
+            wx.showToast({
+                title: '提交成功',
+                icon: 'success',
+                duration:2000,
+                success: function(){
+                    var timer = setTimeout(() =>{
+                        wx.navigateBack({
+                            delta: 1
+                        })
+                        clearTimeout(timer)
+                    }, 2000)
+                }
+            })  
+        } else {
+            wx.showToast({
+                title: '提交失败',
+                image: '../../../image/gth.png',
+                duration:2000,
+                success: function() {
+                    var timer = setTimeout(() =>{
+                        wx.navigateBack({
+                        delta: 1
+                    })
+                    clearTimeout(timer)
+                    }, 3000)
+                }
+            })  
+        }
     },'POST')
   },
   selectLeft: function (e) {
-    console.log(2333)
     var key = e.currentTarget.dataset.key
     if (this.data.key == 10 && e.currentTarget.dataset.key == 10) {
       //只有一颗星的时候,再次点击,变为0颗
@@ -124,7 +151,6 @@ Page({
   //点击左边,整颗星
   selectRight: function (e) {
     var key = e.currentTarget.dataset.key
-    console.log("得" + key + "分")
     this.setData({
       key: key
     })
@@ -138,7 +164,6 @@ Page({
       this.setData({
         userNameCol: col
       })
-      console.log(this.data.isUserName)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -198,6 +223,5 @@ Page({
   
   },
   bindFormSubmit: function (e) {
-    console.log(e.detail.value.textarea)
   }
 })
