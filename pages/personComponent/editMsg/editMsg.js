@@ -12,6 +12,7 @@ Page({
     https: 'https://cpc.find360.cn/'
   },
   defaultImg: '',
+  uploadImg: '',
   onLoad: function(e) {
     this.WxValidate = app.WxValidate({
         name: {
@@ -40,6 +41,7 @@ Page({
         }
     })
     var that = this
+    this.uploadImg = ''
     var userId = app.globalData.userInfo.id
     var url = 'https://cpc.find360.cn/api/home/user/' + userId + '/edit'
     wx.request({
@@ -88,6 +90,7 @@ Page({
           img: res.tempFilePaths
         })
         wx.setStorageSync('img',res.tempFilePaths)
+        that.uploadImg = res.tempFilePaths
       }
     })
   },
@@ -104,8 +107,7 @@ Page({
     var userId = app.globalData.userInfo.id
     var url = 'https://cpc.find360.cn/api/home/user/setUpdate'
     var imgUrl = wx.getStorageSync('img')[0]
-    var token = wx.getStorageSync('token')
-    if (imgUrl !== undefined) {
+    if (this.uploadImg !== '') {
         wx.uploadFile({
             url: url,
             filePath: imgUrl,
@@ -138,8 +140,7 @@ Page({
                 email: e.detail.value.email,
                 sex: e.detail.value.sex,
                 id: userId,
-                img: that.defaultImg,
-                _token: token
+                img: that.defaultImg
             },
             success: function(res){
                 that.getRes(res)
@@ -162,7 +163,5 @@ Page({
     } else {
         app.showToast('提交失败', 'loading', 2000)
     }
-  },
-  userLogout: function() {
   }
 })

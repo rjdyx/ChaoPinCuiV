@@ -27,8 +27,8 @@ App({
                 }
               })
               var d = that.globalData
-              // console.log(d)
               var l = 'https://cpc.find360.cn/get/openid?js_code=' + res.code
+              console.log(l)
               wx.request({
                 url: l,
                 data: {},

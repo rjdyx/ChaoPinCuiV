@@ -7,7 +7,7 @@
     <view class="avataUrl common" bindtap="chooseImage">
       <text>头像</text>
         <view class="img">
-             <image src="{{https+img}}" data-src="{{img}}" class="chooseImg" name="img"></image>
+             <image wx:if="{{img}}" src="{{https+img}}" data-src="{{img}}" class="chooseImg" name="img"></image>
         </view>
       <image src="../../../image/arrow_down.png" class="arrow"></image>
     </view>

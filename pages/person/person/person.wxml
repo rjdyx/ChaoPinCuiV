@@ -4,7 +4,7 @@
 <!-- 头部个人信息 -->
   <view class='userMsg' bindtap="toEdit">
     <view class='user-avatar'>
-      <image background-size="cover" src='{{img}}'></image>
+      <image background-size="cover" wx:if="{{img}}" src='{{img}}'></image>
     </view>
     <view class='user-msg'>
       <text>个人信息</text>
@@ -45,7 +45,7 @@
   <view class="interest">
     <text class="interestTitle">你感兴趣的东西</text>
     <view class="interestTab">
-      <block wx:for="{{interset}}">
+      <block wx:for="{{interset}}" wx:key="name">
         <navigator class="interest-item" data-type="{{item.name}}" data-typeid="{{item.typeId}}" data-id="{{item.id}}" url="{{categoryUrl + '?id=' + item.id + '&name=' + item.name}}">
           <text>{{item.name}}</text>
         </navigator>

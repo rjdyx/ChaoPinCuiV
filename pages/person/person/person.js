@@ -2,7 +2,6 @@
 var app = getApp()
 import API from '../../../utils/api.js';
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -42,21 +41,20 @@ Page({
     this.setData({
       userId: app.globalData.userInfo.id
     })
+    this.initData()
+  },
+  // 预加载函数
+  initData: function() {
     var userId = this.data.userId
     if (userId!= '' && userId!=undefined) {
       this.login(userId)
     }
-        // 其他人还看了
+    // 其他人还看了
     app.requestData(API.categoryRand, {}, (err, data) =>{
-      console.log('interset---')
-      console.log(data)
-      console.log(data != undefined)
       if (data != undefined) {
         this.setData({
           "interset": data.data
         })
-        console.log('this.data.interset')
-        console.log(this.data.interset)
       }
     })
   },
@@ -118,23 +116,13 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // 上一个页面返回此页面立即刷新数据
-    var that = this
-    var mydata = wx.getStorageSync('mydata')
-    console.log(mydata.name)
-    if (mydata != null||mydata !=undefined) {
-      that.setData({
-        img: mydata.img,
-        name: mydata.name
-      })
-    }
+    this.initData()
   },
 
   /**
@@ -148,7 +136,6 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
   },
 
   /**
