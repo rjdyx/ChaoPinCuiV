@@ -52,18 +52,17 @@
   margin-right:0;
  -webkit-transition: all 0.4s;
  transition: all 0.4s;
- -webkit-transform: translateX(90px);
- transform: translateX(90px);
- margin-left: -90px;
+ -webkit-transform: translateX(110px);
+ transform: translateX(110px);
+ margin-left: -110px;
 }
 .print-spot{
-  flex: 2;
   margin-left: 37rpx;
 }
 .print-desc{
   width: 63%;
-  /* flex: 3; */
    padding-left:16rpx;   
+   padding-right:16rpx;   
 }
 .print-spot image{
   width: 250rpx;
@@ -127,8 +126,8 @@ height: 354rpx;
  align-items: center; 
  justify-content: center;  
  color: #fff;
- -webkit-transform: translateX(137px);
- transform: translateX(137px);
+ -webkit-transform: translateX(110px);
+ transform: translateX(110px);
  -webkit-transition: all 0.4s;
  transition: all 0.4s;
 
