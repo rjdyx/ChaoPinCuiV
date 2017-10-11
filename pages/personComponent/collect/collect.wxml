@@ -22,7 +22,7 @@
 
           <!-- 评分 -->
           <view class='fiveStars'>
-            <block wx:for="{{stars}}"  wx:for-index="id" wx:for-item="k">
+            <block wx:for="{{stars}}"  wx:for-index="id" wx:for-item="k" wx:key="name">
             <image class="star-image" style="left: {{k*40}}rpx" 
             src="{{(item.comment/20) > k ?((item.comment/20)-k == 0.5?halfSrc:selectedSrc) : normalSrc}}"
             >
