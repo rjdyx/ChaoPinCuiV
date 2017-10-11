@@ -159,6 +159,9 @@ Page({
             app.showToast('手机已存在', 'loading', 2000)
         } else if (res.data != null || res.data != undefined) {
             app.showToast('修改成功', 'success', 2000)
+            setTimeout(function(){
+                wx.navigateBack();   //返回上一个页面
+            },2000)
         }
     } else {
         app.showToast('提交失败', 'loading', 2000)
