@@ -154,7 +154,7 @@ Page({
     var self = this
     // 获取产品详情数据
     if (this.data.options.id !== 'undefined'){
-      APP.requestData(API.proDetails, {id: this.data.options.id}, (err, data) =>{
+      APP.requestData(API.proDetails, {id: this.data.options.id, user_id: APP.globalData.userInfo.id}, (err, data) =>{
         if (data != undefined) {
           self.setData({
             "proInfo": data.info,
