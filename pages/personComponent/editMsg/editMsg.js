@@ -1,7 +1,7 @@
 var app = getApp()
 Page({
   data:{
-    array:['男','女'],
+    array:['保密','男','女'],
     index: '',
     age: '2016-09-01',
     address: ['广东省', '广州市', '海珠区'],

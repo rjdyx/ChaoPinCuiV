@@ -10,7 +10,7 @@
     </view>
   </view>
 
-    <textarea class='feedText' placeholder='说些什么...' name="text"></textarea>
+    <textarea class='feedText' placeholder='说些什么...' name="content"></textarea>
     <button class='send' formType="submit">发送</button>
 </form>
 </view>
