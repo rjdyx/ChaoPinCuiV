@@ -127,8 +127,8 @@ height: 354rpx;
  align-items: center; 
  justify-content: center;  
  color: #fff;
- -webkit-transform: translateX(127px);
- transform: translateX(127px);
+ -webkit-transform: translateX(137px);
+ transform: translateX(137px);
  -webkit-transition: all 0.4s;
  transition: all 0.4s;
 

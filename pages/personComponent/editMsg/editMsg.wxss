@@ -12,7 +12,6 @@
   margin-top: 20rpx;
   display: flex;
   flex-direction: column;
-  height: 870rpx;
 }
 .common{
   position: relative;
