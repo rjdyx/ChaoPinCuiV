@@ -54,6 +54,7 @@ class wxValidate {
 				min: this.formatTpl('请输入不小于 {0} 的数值。'),
 				max: this.formatTpl('请输入不大于 {0} 的数值。'),
 				range: this.formatTpl('请输入范围在 {0} 到 {1} 之间的数值。'),
+				alnum: '请输入字母和数字的组合',
 			}
 		}
 	}
@@ -174,6 +175,12 @@ class wxValidate {
 			range(value, param) {
 				return that.optional(value) || (value >= param[0] && value <= param[1])
 			},
+			/**
+			 * 字母与数字集合
+			 */
+			alnum(value) {
+				return that.optional(value) || /^[A-Za-z].*[0-9].*[A-Za-z]|[A-Za-z].*[0-9]|[0-9].*[A-Za-z]|[0-9].*[A-Za-z].*[0-9]+$/.test(value);
+			}
 		}
 	}
 

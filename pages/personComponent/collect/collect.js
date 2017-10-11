@@ -119,6 +119,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getPro()
+  },
+  getPro: function () {
     //判断是否登录
     if (app.globalData.userInfo.id == null || app.globalData.userInfo.id == undefined) {
       wx.redirectTo({
@@ -187,7 +190,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getPro()
   },
 
   /**
