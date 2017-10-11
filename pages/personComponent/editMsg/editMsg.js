@@ -159,6 +159,12 @@ Page({
           app.showToast('手机已存在', '../../../image/gth.png', 2000)
         } else if (res.data != null || res.data != undefined) {
           app.showToast('修改成功', '../../../image/pass.png', 2000)
+          var timer = setTimeout(() =>{
+              wx.navigateBack({
+                  delta: 1
+              })
+              clearTimeout(timer)
+          }, 2000)
         }
     } else {
       app.showToast('提交失败', '../../../image/gth.png', 2000)
