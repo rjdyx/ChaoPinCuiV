@@ -189,6 +189,7 @@ Page({
   },
   // 足迹存入缓存
   footprintStorage: function () {
+    console.log(789789678)
     var _this = this
     wx.getStorage({
       key: 'footprint',
@@ -201,6 +202,7 @@ Page({
     })
   },
   setStorageFoots: function () {
+    console.log(1234)
     var _this = this
     var datas = []
     var info = {}
@@ -224,7 +226,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getPro()
   },
 
   /**

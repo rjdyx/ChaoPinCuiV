@@ -17,7 +17,7 @@
     <view class="input common" >
       <text>用户名</text>
         <view class="editInput"  data-id="0">
-          <input value="{{name}}" class="inputEdit" bindblur="hideInp" name="name"></input> 
+          <input value="{{name}}" class="inputEdit" name="name"></input> 
         <image src="../../../image/arrow_down.png" class="arrow"></image>
       </view>
     </view>
@@ -27,7 +27,7 @@
       <text>姓名</text>
         <view class="editInput" data-id="1">
           <!-- <text wx:if="{{hide}}">{{name}}</text>  -->
-          <input value="{{real_name}}" class="inputEdit" bindblur="hideInp" name="real_name"></input> 
+          <input value="{{real_name}}" class="inputEdit" name="real_name"></input> 
         <image src="../../../image/arrow_down.png" class="arrow"></image>
       </view>
     </view>
@@ -35,7 +35,7 @@
     <view class="input common" >
       <text>手机</text>
         <view class="editInput"  data-id="2">
-          <input value="{{phone}}" class="inputEdit" bindblur="hideInp" name="phone"></input> 
+          <input value="{{phone}}" class="inputEdit" name="phone"></input> 
         <image src="../../../image/arrow_down.png" class="arrow"></image>
       </view>
     </view>
@@ -43,7 +43,7 @@
     <view class="input common" >
       <text>邮箱</text>
         <view class="editInput"  data-id="2">
-          <input value="{{email}}" class="inputEdit" bindblur="hideInp" name="email"></input> 
+          <input value="{{email}}" class="inputEdit" name="email"></input> 
         <image src="../../../image/arrow_down.png" class="arrow"></image>
       </view>
     </view>

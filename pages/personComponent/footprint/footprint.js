@@ -107,6 +107,7 @@ Page({
         _this.setData({
           "prints": res.data
         })
+        console.log(res.data)
       },
       fail: function (res) {
         _this.setData({
@@ -126,7 +127,7 @@ Page({
    */
   onShow: function () {
     console.log(this.data.prints)
-    this.getStorageFoot()
+    // this.getStorageFoot()
   },
 
   /**

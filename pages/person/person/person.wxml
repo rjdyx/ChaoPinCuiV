@@ -15,11 +15,9 @@
   <!-- 分类导航 -->
   <view class="navs">
       <block wx:for="{{navs}}" wx:key="name"> 
-        <view class="nav-item" catchtap='catchTapCategory' data-type="{{item.name}}" data-typeid="{{item.typeId}}"> 
-          <navigator url="../../personComponent/{{item.url}}/{{item.url}}">
+        <view class="nav-item" data-type="{{item.name}}" data-typeid="{{item.typeId}}" bindtap='catchTo' data-url="{{item.url}}"> 
             <text class='nav-image {{item.navIcon}}'></text>
             <text>{{item.name}}</text>
-          </navigator>
         </view>
       </block>
   </view>

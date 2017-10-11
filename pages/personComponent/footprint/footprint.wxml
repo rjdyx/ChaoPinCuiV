@@ -1,12 +1,12 @@
 <scroll-view scroll-y="true" class="container" bindscrolltoupper="upper" upper-threshold="10" lower-threshold="5" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
 
 <view class='prints'>
- <block wx:for="{{prints}}" wx:key="title" wx:if="item.id">
+ <block wx:for="{{prints}}" wx:key="title">
 <!-- 头部 -->
-  <view class='print-item'  bindtap="productSkip" data-pid="{{item.id}}">
+  <view class='print-item'  bindtap="productSkip">
     <view class='print-title'>
       <text>{{item.name}}</text>
-      <text>{{item.datetime}}</text>
+      <!-- <text>{{item.datetime}}</text> -->
       <image src='../../../image/arrow_down.png'></image>
     </view>
 <!-- 中间内容 -->
