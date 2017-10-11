@@ -100,23 +100,29 @@ Page({
     switch (e.currentTarget.dataset.url) {
       case 'details':
         url = '../details/details?id=' + e.currentTarget.dataset.id
-        break
-      case 'products_list':
-        url = '../products_list/products_list?id=' + this.data.options.id + '&type=nearby' + '&name=更多附近' + this.data.proInfo.parent_name
-        break
-      case 'comment':
-        url = '../comment/comment?id=' + this.data.options.id
-        break
-    }
-    let pages = getCurrentPages()
-    if (pages.length >= 5) {
         wx.redirectTo({
           url: url
         })
-    }else{
-      wx.navigateTo({
-        url: url
-      })
+        break
+      case 'products_list':
+        url = '../products_list/products_list?id=' + this.data.options.id + '&type=nearby' + '&name=更多附近' + this.data.proInfo.parent_name
+        let pages = getCurrentPages()
+        if (pages.length >= 4) {
+            wx.redirectTo({
+              url: url
+            })
+        }else{
+          wx.navigateTo({
+            url: url
+          })
+        }
+        break
+      case 'comment':
+        url = '../comment/comment?id=' + this.data.options.id
+        wx.navigateTo({
+          url: url
+        })
+        break
     }
   },
   // 收藏
@@ -225,6 +231,9 @@ Page({
    */
   onShow: function () {
     this.getPro()
+    let pages = getCurrentPages()
+    console.log('pages---------')
+    console.log(pages)
   },
 
   /**
