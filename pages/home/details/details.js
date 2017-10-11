@@ -56,7 +56,7 @@ Page({
             this.setData({
               "proImgs": data
             })
-          }
+          } 
         })
       }
     } else if (e.target.dataset.id === 2) {
@@ -161,6 +161,7 @@ Page({
             "proComment": data.comment,
             "proRecommend": data.recommend
           })
+          console.log(self.data.proComment)
           self.footprintStorage()
           self.setData({
             "proInfo.level": self.data.proInfo.comment,

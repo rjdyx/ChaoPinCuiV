@@ -8,6 +8,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  overflow: hidden;
 }
 .prints{
   width:100%;
@@ -31,13 +32,13 @@
   position: relative;
 }
 .print-title text{
-  padding-left: 65rpx;
+  padding-left: 34rpx;
 }
 .print-title image{
   width: 71rpx;
   height: 57rpx;
   position: absolute;
-  right: 41rpx;
+  right: 67rpx;
   top: 29rpx;
 }
 .print-content{
@@ -47,21 +48,22 @@
 }
 .content{
   display: flex;
-  width: 96%;
+  width: 100%;
   margin-right:0;
  -webkit-transition: all 0.4s;
  transition: all 0.4s;
- -webkit-transform: translateX(111px);
- transform: translateX(111px);
- margin-left: -111px;
+ -webkit-transform: translateX(90px);
+ transform: translateX(90px);
+ margin-left: -90px;
 }
 .print-spot{
   flex: 2;
   margin-left: 37rpx;
 }
 .print-desc{
-  flex: 3;
-   padding-right:16rpx;   
+  width: 63%;
+  /* flex: 3; */
+   padding-left:16rpx;   
 }
 .print-spot image{
   width: 250rpx;
@@ -76,7 +78,7 @@
 .grade .point{
   color: red;
   float: right;
-  padding-right: 10rpx;
+  /* padding-right: 10rpx; */
 }
 .fiveStars{
   width: 208rpx;
@@ -125,8 +127,8 @@ height: 354rpx;
  align-items: center; 
  justify-content: center;  
  color: #fff;
- -webkit-transform: translateX(127px);
- transform: translateX(127px);
+ -webkit-transform: translateX(137px);
+ transform: translateX(137px);
  -webkit-transition: all 0.4s;
  transition: all 0.4s;
 

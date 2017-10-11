@@ -57,6 +57,7 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
+        console.log(res)
         that.setData({
           'list': res.data.data
         })
