@@ -67,6 +67,12 @@ Page({
             self.setData({
               "nearbysProList": data.data
             })
+            self.data.nearbysProList.forEach((objItem, i) => {
+              self.data.nearbysProList[i].dis = Number(self.data.nearbysProList[i].dis).toFixed(2)
+            })
+            self.setData({
+              "nearbysProList": self.data.nearbysProList
+            })
           }
         })
       }
@@ -75,7 +81,7 @@ Page({
         this.getPro()
       }
     }
-    // 其他人还看了 //id??
+    // 其他人还看了 
     if (!this.data.other.length) {
       APP.requestData(API.other, {category_id: this.data.proInfo.category_id}, (err, data) =>{
         if (data != undefined) {
