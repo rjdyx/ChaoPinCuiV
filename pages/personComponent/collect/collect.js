@@ -86,6 +86,7 @@ Page({
   },
   //删除事件
   del: function (e) {
+    console.log(e)
     var _this = this
     wx.request({
       url: 'https://cpc.find360.cn/api/home/collect/'+e.currentTarget.dataset.pid,
@@ -129,21 +130,51 @@ Page({
       wx.setStorageSync('currentUrl', url)
       //请求数据
       var _this = this
-      wx.request({
-        url: 'https://cpc.find360.cn/api/home/collect',
-        data: {
-          openid: app.globalData.userInfo.openid,
-          user_id: app.globalData.userInfo.id
-        },
-        method: 'GET',
-        success: function (res) {
-          console.log(res)
-          _this.setData({
-            prints: res.data
-          })
-        }
-      })
+      _this.getMsg()
     }
+  },
+  getMsg: function(){
+    var that = this
+    wx.request({
+      url: 'https://cpc.find360.cn/api/home/collect',
+      data: {
+        openid: app.globalData.userInfo.openid,
+        user_id: app.globalData.userInfo.id
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          prints: res.data
+        })
+      }
+    })
+  },
+  //向下滚动
+  lower: function () {
+    wx.showNavigationBarLoading();
+    var that = this;
+    setTimeout(function () { 
+      wx.hideNavigationBarLoading(); 
+      that.nextLoad(); 
+    }, 1000);
+  },
+  //向下刷新
+  nextLoad: function(){
+    var that = this
+    wx.showToast({
+      title: '刷新中',
+      icon: 'loading',
+      duration: 3000
+    })
+    that.getMsg()
+    setTimeout(function () {
+      wx.showToast({
+        title: '刷新成功',
+        icon: 'success',
+        duration: 2000
+      })
+    }, 2000)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

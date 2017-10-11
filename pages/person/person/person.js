@@ -36,7 +36,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
+  onLoad: function (options) {
     // 获取当前页面的路径
     var url = getCurrentPages()[getCurrentPages().length - 1].__route__;
     this.setData({
@@ -59,6 +59,19 @@ Page({
         console.log(this.data.interset)
       }
     })
+  },
+  catchTo: function(e){
+    var data = e.currentTarget.dataset.url
+    if (data == 'collect') {
+      wx.switchTab({
+        url: '../../personComponent/' + data + '/' + data
+      })
+    } else {
+      wx.navigateTo({
+        url: '../../personComponent/' + data + '/' + data,
+      })
+    }
+    
   },
   login: function(userId) {
     var that = this

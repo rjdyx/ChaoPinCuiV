@@ -15,11 +15,9 @@
   <!-- 分类导航 -->
   <view class="navs">
       <block wx:for="{{navs}}" wx:key="name"> 
-        <view class="nav-item" catchtap='catchTapCategory' data-type="{{item.name}}" data-typeid="{{item.typeId}}"> 
-          <navigator url="../../personComponent/{{item.url}}/{{item.url}}">
+        <view class="nav-item" data-type="{{item.name}}" data-typeid="{{item.typeId}}" bindtap='catchTo' data-url="{{item.url}}"> 
             <text class='nav-image {{item.navIcon}}'></text>
             <text>{{item.name}}</text>
-          </navigator>
         </view>
       </block>
   </view>
@@ -45,7 +43,7 @@
   <view class="interest">
     <text class="interestTitle">你感兴趣的东西</text>
     <view class="interestTab">
-      <block wx:for="{{interset}}">
+      <block wx:for="{{interset}}" wx:key="name">
         <navigator class="interest-item" data-type="{{item.name}}" data-typeid="{{item.typeId}}" data-id="{{item.id}}" url="{{categoryUrl + '?id=' + item.id + '&name=' + item.name}}">
           <text>{{item.name}}</text>
         </navigator>

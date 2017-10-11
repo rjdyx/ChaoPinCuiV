@@ -1,4 +1,4 @@
-<scroll-view scroll-y="true" class="container" bindscrolltoupper="upper" upper-threshold="10" lower-threshold="5" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+<scroll-view scroll-y="true" class="container" lower-threshold="1" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
 
 <view class='prints'>
  <block wx:for="{{prints}}"  wx:key="title">
@@ -22,7 +22,7 @@
 
           <!-- 评分 -->
           <view class='fiveStars'>
-            <block wx:for="{{stars}}"  wx:for-index="id" wx:for-item="k">
+            <block wx:for="{{stars}}"  wx:for-index="id" wx:for-item="k"  wx:key="name">
             <image class="star-image" style="left: {{k*40}}rpx" 
             src="{{(item.comment/20) > k ?((item.comment/20)-k == 0.5?halfSrc:selectedSrc) : normalSrc}}"
             >

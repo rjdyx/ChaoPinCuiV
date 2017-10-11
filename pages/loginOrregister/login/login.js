@@ -38,7 +38,11 @@ Page({
       method: "POST", 
       success: function(res) {
         if (res.data == 300) {
-          app.showToast('微信号已被使用', '../../../image/gth.png', 1500)
+          wx.showModal({
+            title: '提示',
+            content: '请填写手机号码',
+            showCancel: false
+          })
         } else if (res.data == 400) {
           app.showToast('用户名或密码错误', '../../../image/gth.png', 1500)
         } else {

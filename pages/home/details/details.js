@@ -200,11 +200,11 @@ Page({
   },
   // 足迹存入缓存
   footprintStorage: function () {
+    console.log(789789678)
     var _this = this
     wx.getStorage({
       key: 'footprint',
       success: function(res) {
-        console.log(res.data)
         _this.setData({
           "storageFoots": res.data
         })
@@ -213,6 +213,7 @@ Page({
     })
   },
   setStorageFoots: function () {
+    console.log(1234)
     var _this = this
     var datas = []
     var info = {}
@@ -237,7 +238,6 @@ Page({
    */
   onShow: function () {
     console.log(66666666)
-    this.getPro()
   },
 
   /**

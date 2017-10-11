@@ -25,7 +25,7 @@ Page({
     if (arr[0]!='' && arr[1]!='' && arr[2]!='') {
       this.submitTo(arr)
     } else {
-      app.showToast('请填写完整信息','success',1500)
+      app.showToast('请填写完整信息','../../../image/gth.png',1500)
     }
   },
   submitTo: function(arr){
@@ -43,18 +43,18 @@ Page({
       method: "POST",
       success: function(res){
         if (res.data == 100) {
-          app.showToast('参数错误！','success',1500)
+          app.showToast('参数错误！','../../../image/gth.png',1500)
         } else if (res.data == 101) {
-          app.showToast('两次密码不一致', 'success', 1500)
+          app.showToast('两次密码不一致', '../../../image/gth.png', 1500)
         } else if (res.data == 102) {
-          app.showToast('当前密码错误', 'success', 1500)
+          app.showToast('当前密码错误', '../../../image/gth.png', 1500)
         } else if (res.data == 200) {
-          app.showToast('修改成功', 'success', 1000)
+          app.showToast('修改成功', '../../../image/pass.png', 1000)
           setTimeout(function(){
             wx.navigateBack();   //返回上一个页面
           },1000)
         } else {
-          app.showToast('未知错误', 'success', 1500)
+          app.showToast('未知错误', '../../../image/gth.png', 1500)
         }
       }
     })

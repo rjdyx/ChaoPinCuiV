@@ -39,7 +39,7 @@
           <view>
             <text class='sortLabel'>{{sortName}}评论 : </text>
             <view class='fiveStars'>
-            <block wx:for="{{stars}}" wx:for-item="k">
+            <block wx:for="{{stars}}" wx:for-item="k"  wx:key="name">
             <image class="star-image" style="left: {{k*40}}rpx" src="{{(item.level/20) > k ?((item.level/20)-k == 0.5?halfSrc:selectedSrc) : normalSrc}}">
               <view class="item" data-key="{{k+0.5}}" bindtap="selectLeft"></view>
               <view class="item" data-key="{{k+1}}" bindtap="selectRight"></view>
