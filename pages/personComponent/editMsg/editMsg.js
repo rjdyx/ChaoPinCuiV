@@ -55,7 +55,7 @@ Page({
                 age: res.data.age,
                 real_name: res.data.real_name,
                 index: res.data.sex,
-                address: res.data.address.split(',')
+                address: (res.data.address !== null && res.data.address !== '') ? res.data.address.split(',') : that.data.address
             })
             that.defaultImg = res.data.img
         }

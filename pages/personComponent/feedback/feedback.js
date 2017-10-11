@@ -45,6 +45,9 @@ Page({
       user_id: APP.globalData.userInfo.id
     }
     var pics = this.data.pics
+    wx.showLoading({
+      title: '提交中',
+    })
     if (pics.length !== 0) {
         for (var i in pics) {
             wx.uploadFile({
@@ -99,7 +102,7 @@ Page({
                         delta: 1
                     })
                     clearTimeout(timer)
-                    }, 3000)
+                    }, 2000)
                 }
             })  
         }

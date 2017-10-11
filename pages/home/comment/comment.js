@@ -131,7 +131,7 @@ Page({
                         delta: 1
                     })
                     clearTimeout(timer)
-                    }, 3000)
+                    }, 2000)
                 }
             })  
         }
