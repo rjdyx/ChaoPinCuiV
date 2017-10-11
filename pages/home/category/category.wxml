@@ -38,6 +38,7 @@
 					class="class_box" 
 					url="{{proListUrl + '?id=' + item.pid + '&name=' + item.name}}">
 						{{item.name}}
+						<image class='hotIcon' src="../../../image/hot.png"></image>
 					</navigator>
 				</block>
 			</view>

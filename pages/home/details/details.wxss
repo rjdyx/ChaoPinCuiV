@@ -169,18 +169,19 @@
 	width: 100%;
 }
 .star_score_box>view{
- 	width: 435rpx;
+ 	width: 440rpx;
  	position: absolute;
 	left: 50%;
 	top: 0;
-	margin-left: -187.5rpx;
+	margin-left: -185rpx;
+  display: flex;
 }
 .star_score_box image{
 	width: 75rpx;
 	height: 75rpx;
 }
 .star_item>view{
-	margin-right: 15rpx;
+	 margin-right: 15rpx; 
 }
 .star_item>view:last-child{
 	margin-right: 0rpx;
@@ -234,6 +235,8 @@
 }
 .user_comment_item_b>text{
 	line-height: 50rpx;
+  word-break:break-all;
+  word-wrap:break-word;
 }
 .user_comment_item_img image{
 	width:310rpx;
