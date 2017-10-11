@@ -16,7 +16,6 @@ App({
      if (user.openid == null) {
         wx.login({
           success: function(res){
-            // console.log(res)
             if (res.code) {
               wx.getUserInfo({
                 success: function(res) {
@@ -27,14 +26,12 @@ App({
                 }
               })
               var d = that.globalData
-              // console.log(d)
               var l = 'https://cpc.find360.cn/get/openid?js_code=' + res.code
               wx.request({
                 url: l,
                 data: {},
                 method: 'GET',
                 success: function(res) {
-                  // console.log(res)
                   var openid = res.data.openid
                   wx.setStorageSync('user', openid)
                   wx.request({
@@ -58,8 +55,6 @@ App({
                           url: '../../../pages/loginOrregister/loginOrigister/loginOrigister',
                         })
                       }
-                      console.log('that.globalData.userInfo--')
-                      console.log(that.globalData.userInfo)
                     }
                   })
                 }
@@ -79,7 +74,6 @@ App({
      wx.request({
        url: 'https://cpc.find360.cn/auth',
        success: function(res){
-         console.log(res)
        }
      })
   },
@@ -108,23 +102,17 @@ App({
       formData: null,
       success: (resp) => {
         success++;
-        console.log(i);
       },
       fail: (res) => {
         fail++;
-        console.log('fail:' + i + "fail:" + fail);
       },
       complete: () => {
-        console.log(i);
         i++;
         if (i == data.path.length) {   
           //当图片传完时，停止调用 
-          console.log('执行完毕');
-          console.log('成功：' + success + " 失败：" + fail);
           that.showToast('发送成功','success',1500)
         } else {
           //若图片还没有传完，则继续调用函数
-          console.log(i);
           data.i = i;
           data.success = success;
           data.fail = fail;

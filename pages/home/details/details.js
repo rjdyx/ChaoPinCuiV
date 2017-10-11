@@ -48,13 +48,10 @@ Page({
   // tab切换
   changeTabIndexFn(e) {
     var self = this
-    console.log(e.target.dataset.id)
     if (e.target.dataset.id === 1) {
       if (this.data.options.id !== 'undefined' && !this.data.proImgs.length){
         // 获取产品图片
         APP.requestData(API.proImgs, {product_id: this.data.options.id}, (err, data) =>{
-          console.log('proImgs')
-          console.log(data)
           if (data != undefined) {
             this.setData({
               "proImgs": data
@@ -66,11 +63,15 @@ Page({
       if (this.data.options.id !== 'undefined' && self.data.proInfo.meridian && self.data.proInfo.weft && !this.data.nearbysProList.length){
         // 获取附近产品
         APP.requestData(API.nearbysPro, {id: this.data.options.id, lon: self.data.proInfo.meridian, lat: self.data.proInfo.weft}, (err, data) =>{
-          console.log('nearbysPro')
-          console.log(data)
           if (data != undefined) {
             self.setData({
               "nearbysProList": data.data
+            })
+            self.data.nearbysProList.forEach((objItem, i) => {
+              self.data.nearbysProList[i].dis = Number(self.data.nearbysProList[i].dis).toFixed(2)
+            })
+            self.setData({
+              "nearbysProList": self.data.nearbysProList
             })
           }
         })
@@ -80,11 +81,9 @@ Page({
         this.getPro()
       }
     }
-    // 其他人还看了 //id??
+    // 其他人还看了 
     if (!this.data.other.length) {
       APP.requestData(API.other, {category_id: this.data.proInfo.category_id}, (err, data) =>{
-        console.log('other---')
-        console.log(data)
         if (data != undefined) {
           self.setData({
             "other": data.data
@@ -97,7 +96,6 @@ Page({
     })
   },
   jumpFn: function(e){
-    console.log(e)
     var url = ''
     switch (e.currentTarget.dataset.url) {
       case 'details':
@@ -111,8 +109,6 @@ Page({
         break
     }
     let pages = getCurrentPages()
-    console.log('pages----')
-    console.log(pages)
     if (pages.length >= 5) {
         wx.redirectTo({
           url: url
@@ -137,8 +133,6 @@ Page({
       })
     }
     APP.requestData(API.collect, {openid: APP.globalData.userInfo.openid, user_id: APP.globalData.userInfo.id, product_id: this.data.options.id, type: this.data.ifLove}, (err, data) =>{
-        console.log('collect--')
-        console.log(data)
         if (data != undefined) {
           if (this.data.loveUrl == '../../../image/love.png' ){
             wx.showToast({
@@ -160,9 +154,7 @@ Page({
     var self = this
     // 获取产品详情数据
     if (this.data.options.id !== 'undefined'){
-      APP.requestData(API.proDetails, {id: this.data.options.id}, (err, data) =>{
-        console.log('proDetails')
-        console.log(data)
+      APP.requestData(API.proDetails, {id: this.data.options.id, user_id: APP.globalData.userInfo.id}, (err, data) =>{
         if (data != undefined) {
           self.setData({
             "proInfo": data.info,
@@ -183,9 +175,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('details.js-----------------------')
-    console.log('options---')
-    console.log(options)
     this.setData({
       "options": options
     })
@@ -237,7 +226,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log(66666666)
   },
 
   /**
@@ -281,9 +269,6 @@ Page({
       "isShowPop.title": this.data.proInfo.name + '历史来源',
       "isShowPop.type": 'source'
     })
-    console.log('this.data.isShowPop----')
-    console.log(this.data.isShowPop)
-    console.log(this.data.proInfo.desc)
   },
   // 查看地图
   lookMapFn () {
@@ -295,8 +280,6 @@ Page({
         var longitude = res.longitude
         var speed = res.speed
         var accuracy = res.accuracy
-        console.log('longitude:' + longitude)
-        console.log('latitude:' + latitude)
         self.setData({
           "polyline[0].points[0].longitude": longitude,
           'polyline[0].points[0].latitude': latitude,
@@ -312,11 +295,6 @@ Page({
       'markers[0].longitude': self.data.proInfo.meridian,
       'markers[0].latitude': self.data.proInfo.weft
     })
-    console.log('this.data.isShowPop----')
-    console.log(self.data.isShowPop)
-    console.log(self.data.proInfo)
-    console.log(self.data.markers)
-    console.log(self.data.polyline)
   },
   // 关闭弹窗
   closeFn () {
@@ -326,16 +304,12 @@ Page({
   },
   // 地图方法
   gionchange(e) {
-    console.log(e.type)
   },
   markertap(e) {
-    console.log(e.markerId)
   },
   controltap(e) {
-    console.log(e.controlId)
   },
   // 发布评论
   putOutCommentFn:function(){
-    console.log(2525)
   }
 })

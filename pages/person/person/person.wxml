@@ -4,7 +4,7 @@
 <!-- 头部个人信息 -->
   <view class='userMsg' bindtap="toEdit">
     <view class='user-avatar'>
-      <image background-size="cover" src='{{img}}'></image>
+      <image background-size="cover" wx:if="{{img}}" src='{{img}}'></image>
     </view>
     <view class='user-msg'>
       <text>个人信息</text>

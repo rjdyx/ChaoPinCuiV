@@ -8,7 +8,9 @@ Page({
    */
   data: {
     https: 'https://cpc.find360.cn/',
-    proList: []
+    proList: [],
+    tip: '加载更多',
+    op: {}
   },
   jumpFn: function(e){
     console.log(e)
@@ -31,6 +33,9 @@ Page({
    */
   onLoad: function (options) {
     var self = this
+    self.setData({
+      'options': options
+    })
     console.log('products_list.js------------')
     console.log(options)
     wx.setNavigationBarTitle({title: options.name})
@@ -59,20 +64,32 @@ Page({
         if (options.searchName) {
           op.name= options.searchName
         }
-        APP.requestData(API.proList, op, (err, data) =>{
-          console.log('proList')
-          console.log(data)
-          if (data != undefined) {
-            self.setData({
-              "proList": data
-            })
-          }
-          wx.hideLoading()
+        self.setData({
+          'op': op
         })
+        self.dataLoadFn()
       }
     })
   },
-
+  dataLoadFn: function(){
+    var self = this
+    APP.requestData(API.proList, this.data.op, (err, data) =>{
+      console.log('proList')
+      console.log(data)
+      if (data != undefined) {
+        self.setData({
+          "proList": data
+        })
+        self.data.proList.forEach((objItem, i) => {
+          self.data.proList[i].dis = Number(self.data.proList[i].dis).toFixed(2)
+        })
+        self.setData({
+          "proList": self.data.proList
+        })
+      }
+      wx.hideLoading()
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -105,14 +122,15 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+   
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+   console.log('pull')
+   // this.dataLoadFn()
   },
 
   /**

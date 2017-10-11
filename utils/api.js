@@ -19,6 +19,9 @@ const api = {
     // 7.2 评价提交
     comment: https + 'api/home/comment', 
     commentImg: https + 'api/home/comment/img', // 提交图片
-    categoryRand: https + 'api/home/category/rand'
+    categoryRand: https + 'api/home/category/rand',
+    // 用户反馈
+    feedbackImg: https + 'api/home/feedback/img',
+    feedback: https + 'api/home/feedback',
 }
 module.exports = api;
