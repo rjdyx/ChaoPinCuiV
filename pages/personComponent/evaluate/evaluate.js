@@ -10,11 +10,14 @@ Page({
     prints: [],
     stars: [0, 1, 2, 3, 4],
     userName: '',
+    commentimg:[],
+    img:'',
     apiUrl: app.globalData.apiUrl,
     normalSrc: '../../../image/星.png',
     selectedSrc: '../../../image/星_1.png',
     halfSrc: '../../../image/评分半颗五角星.png',
     key: 0,//评分,
+    https:'https://cpc.find360.cn/'
   
   },
   selectLeft: function (e) {
@@ -42,8 +45,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      userName: app.globalData.userInfo.name
+    var that = this
+    wx.request({
+      url: 'https://cpc.find360.cn/api/home/user/' + app.globalData.userInfo.id + '/edit',
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          img: 'https://cpc.find360.cn/' + res.data.img,
+          userName: res.data.name
+        })
+      }
     })
     var _this = this
     wx.request({
@@ -54,10 +65,16 @@ Page({
         openid: app.globalData.userInfo.openid
       },
       success: function(res){
-        console.log(res)
+        for (var i = 0;i<res.data.length;i++){
+          if (res.data[i].img != null) {
+            res.data[i].img = res.data[i].img.split(',')
+            console.log(res.data[i].img)
+          }
+        }
         _this.setData({
           prints: res.data
         })
+        console.log(_this.data.prints)
         _this.setData({
           num: res.data.length
         })

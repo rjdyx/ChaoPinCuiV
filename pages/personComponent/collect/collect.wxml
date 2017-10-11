@@ -1,6 +1,6 @@
-<scroll-view scroll-y="true" class="container" lower-threshold="1" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+<!-- <scroll-view scroll-y="true" class="container" lower-threshold="1" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}"> -->
 
-<view class='prints'>
+<view class='prints container'>
  <block wx:for="{{prints}}"  wx:key="title">
 <!-- 头部 -->
   <view class='print-item'  bindtap="productSkip" data-pid="{{item.id}}">
@@ -46,4 +46,4 @@
 </block>
 </view>
 
-</scroll-view>
+<!-- </scroll-view> -->

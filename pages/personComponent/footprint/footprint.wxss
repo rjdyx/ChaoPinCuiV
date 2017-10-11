@@ -10,7 +10,7 @@
   justify-content: space-between;
 }
 .prints{
-  width:819rpx;
+  /* width:819rpx; */
 }
 .print-item{
   flex-grow: 1;

@@ -3,7 +3,7 @@
   <!-- 头部个人信息 -->
   <view class='userMsg'>
     <view class='user-avatar'>
-      <image background-size="cover" src='../../../image/eg.png'></image>
+      <image background-size="cover" src='{{img}}'></image>
     </view>
     <view class='user-msg'>
       <text>已贡献{{num}}条评价</text>
@@ -12,7 +12,7 @@
   </view>
 
   <!-- 评价 -->
-  <scroll-view class="container" bindscrolltoupper="upper" upper-threshold="10" lower-threshold="5" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+  <!-- <scroll-view class="container" bindscrolltoupper="upper" upper-threshold="10" lower-threshold="5" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}"> -->
 
 <view class='prints'>
  <block wx:for="{{prints}}"  wx:key="title">
@@ -49,6 +49,13 @@
           </view>
 
         <text class='spotDesc'>{{item.content}}</text>
+         <view class="user_comment_item_img" wx:if="{{item.img[0] != ''}}">
+            <scroll-view scroll-x="true" class="imgScroll">
+                <block wx:for="{{item.img}}" wx:key="">
+                      <image src="{{item ?  https + item : ''}}"></image>  
+                </block>
+            </scroll-view>
+        </view>
       </view>
 
 
@@ -58,5 +65,5 @@
 </block>
 </view>
 
-  </scroll-view>
+  <!-- </scroll-view> -->
 </view>

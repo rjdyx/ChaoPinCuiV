@@ -98,7 +98,7 @@ Page({
     //提交错误描述
     if (!this.WxValidate.checkForm(e)) {
         const error = this.WxValidate.errorList[0]
-        app.showToast(error.msg,'loading',2000)
+        app.showToast(error.msg,'../../../image/gth.png',2000)
         return false
     }
     var that = this
@@ -152,16 +152,16 @@ Page({
   getRes: function(res) {
     if (res.statusCode === 200) {
         if (res.data == 101) {
-            app.showToast('用户名已存在','loading',2000)
+            app.showToast('用户名已存在','../../../image/gth.png',2000)
         } else if (res.data == 102) {
-            app.showToast('邮箱已存在', 'loading', 2000)
+          app.showToast('邮箱已存在', '../../../image/gth.png', 2000)
         } else if (res.data == 103) {
-            app.showToast('手机已存在', 'loading', 2000)
+          app.showToast('手机已存在', '../../../image/gth.png', 2000)
         } else if (res.data != null || res.data != undefined) {
-            app.showToast('修改成功', 'success', 2000)
+          app.showToast('修改成功', '../../../image/pass.png', 2000)
         }
     } else {
-        app.showToast('提交失败', 'loading', 2000)
+      app.showToast('提交失败', '../../../image/gth.png', 2000)
     }
   }
 })
