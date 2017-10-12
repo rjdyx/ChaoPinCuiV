@@ -128,7 +128,7 @@ Page({
    */
   onReachBottom: function () {
     if (this.data.pageNum < this.data.totalPage) {
-      var pageNum = this.data.pageNum + 1
+      var pageNum = this.data.pageNum += 1
       this.setData({
         'isLoading': true,
         'page': pageNum,
