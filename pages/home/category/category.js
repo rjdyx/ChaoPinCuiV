@@ -32,18 +32,9 @@ Page({
         url = this.data.proListUrl + '?id=' + this.data.options.id + '&type=recommend'+ '&name=更多' + this.data.options.name
         break
     }
-    let pages = getCurrentPages()
-    console.log('pages----')
-    console.log(pages)
-    if (pages.length >= 5) {
-        wx.redirectTo({
-          url: url
-        })
-    }else{
-      wx.navigateTo({
-        url: url
-      })
-    }
+    wx.navigateTo({
+      url: url
+    })
   },
   formSearch: function (e){
     console.log(e.detail.value)

@@ -52,7 +52,7 @@
 .editInput{
   float: right;
   /* border: 1px solid; */
-  width: 50%;
+  width: 80%;
   height: 120rpx;
   margin-right:-58rpx;
   font-size: 28rpx;
@@ -62,7 +62,7 @@
   margin-right: 70rpx;
 }
 .inputEdit{
-  width:65%;
+  width:89%;
   height: 100%;
    /* border: 1px solid;  */
    margin-right: 50rpx;

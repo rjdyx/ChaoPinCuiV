@@ -18,7 +18,7 @@ Page({
     let pages = getCurrentPages()
     console.log(pages)
     console.log('pages----')
-    if (pages.length >= 5) {
+    if (pages.length >= 4) {
         wx.redirectTo({
           url: url
         })
@@ -101,7 +101,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+        console.log('pages---------')
+      let pages = getCurrentPages()
+    console.log(pages)
   },
 
   /**

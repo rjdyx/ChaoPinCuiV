@@ -1,5 +1,10 @@
 @import "../../common/wxss/comWxss.wxss"
 @import "../../common/wxss/looked.wxss"
+@import "../../../iconfont/stylesheet.wxss"
+.csIcon:after{
+  content: '\e606';
+  font-family: 'iconfont';
+}
 .category{
 	font-size: 30rpx;
 	color:#a3a3a4;
@@ -88,6 +93,14 @@
 	line-height: 90rpx;
 	margin-bottom: 27rpx;
 	text-align: center;
+	position: relative;
+}
+.hotIcon{
+	width: 60rpx;
+	height: 40rpx;
+	position: absolute;
+	top: -10rpx;
+	right: -15rpx;
 }
 .hb_class .class_box:nth-of-type(3n-1){
 	margin: 0rpx 27rpx;
