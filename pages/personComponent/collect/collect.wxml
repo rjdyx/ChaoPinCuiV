@@ -1,12 +1,12 @@
-<!-- <scroll-view scroll-y="true" class="container" lower-threshold="1" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}"> -->
+ <scroll-view scroll-y="true" class="container" lower-threshold="1" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}"> 
 
 <view class='prints container'>
  <block wx:for="{{prints}}"  wx:key="title">
 <!-- 头部 -->
   <view class='print-item'  bindtap="productSkip" data-pid="{{item.id}}">
     <view class='print-title'>
-      <text>{{item.name}}</text>
-      <image src='../../../image/arrow_down.png'></image>
+      <text class='item_name'>{{item.name}}</text>
+      <text class='arrow'></text>
     </view>
 <!-- 中间内容 -->
     <view class="print-content {{item.isTouchMove ? 'touch-move-active' : ''}}"  data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove='touchmove'>
@@ -46,4 +46,4 @@
 </block>
 </view>
 
-<!-- </scroll-view> -->
+ </scroll-view> 

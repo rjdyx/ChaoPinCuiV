@@ -91,6 +91,7 @@ Page({
         })
         wx.setStorageSync('img',res.tempFilePaths)
         that.uploadImg = res.tempFilePaths
+        console.log(that.uploadImg)
       }
     })
   },

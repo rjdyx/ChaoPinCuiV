@@ -17,7 +17,7 @@ Page({
     knows: [
       { knowicon: 'aboutIcon', name: '关于我们', typeId: 0,url:'aboutUs' },
       { knowicon: 'bindIcon', name:'绑定手机',typeId: 1,url:'bindPhone'},
-      { knowicon: 'bindIcon', name:'修改密码',typeId: 2,url:'resetPass'}
+      { knowicon: 'password', name:'修改密码',typeId: 2,url:'resetPass'}
     ],
     interset: [],
     img:'',

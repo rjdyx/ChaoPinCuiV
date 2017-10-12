@@ -10,15 +10,21 @@ Page({
     prints: [],
     stars: [0, 1, 2, 3, 4],
     userName: '',
-    commentimg:[],
     img:'',
     apiUrl: app.globalData.apiUrl,
-    normalSrc: '../../../image/星.png',
-    selectedSrc: '../../../image/星_1.png',
-    halfSrc: '../../../image/评分半颗五角星.png',
+    normalSrc: '../../../image/star2.png',
+    selectedSrc: '../../../image/全星.png',
+    halfSrc: '../../../image/半星.png',
     key: 0,//评分,
     https:'https://cpc.find360.cn/'
   
+  },
+  // 跳转
+  productSkip: function (e) {
+    console.log(e)
+    wx.navigateTo({
+      url: '../../home/details/details?id=' + e.currentTarget.dataset.pid
+    })
   },
   selectLeft: function (e) {
     var key = e.currentTarget.dataset.key
@@ -51,14 +57,14 @@ Page({
       success: function (res) {
         console.log(res)
         that.setData({
-          img: 'https://cpc.find360.cn/' + res.data.img,
+          img: that.data.https + res.data.img,
           userName: res.data.name
         })
       }
     })
     var _this = this
     wx.request({
-      url: 'https://cpc.find360.cn/api/home/comment',
+      url: that.data.https+'/api/home/comment',
       method: 'GET',
       data: {
         user_id: app.globalData.userInfo.id,
