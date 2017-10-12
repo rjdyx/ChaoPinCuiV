@@ -108,7 +108,6 @@ Page({
         _this.setData({
           "prints": res.data
         })
-        console.log(res.data)
       },
       fail: function (res) {
         _this.setData({
@@ -127,8 +126,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log(this.data.prints)
-    // this.getStorageFoot()
   },
 
   /**

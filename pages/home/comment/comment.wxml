@@ -12,7 +12,7 @@
       </view>
     </block>
     <view wx:if="{{imgArr.length < 6}}" class='a_camera' catch:tap="addImgFn">
-      <image src='../../../../image/camera.png'></image>
+      <image src='../../../image/camera.png'></image>
     </view>
   </view>
   <view class="bg_gray_line"></view>

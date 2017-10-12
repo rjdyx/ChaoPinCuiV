@@ -108,7 +108,7 @@
     					</view>
     					<view class="score">
 							<view>{{proInfo.comment}}分</view>
-							<view>{{proComment.length}}条评论</view>
+							<view>{{totalCom}}条评论</view>
 							<view class="padding_top30">
 								<template is="star" data="{{...proInfo}}"/>
 							</view>

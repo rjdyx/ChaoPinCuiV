@@ -32,7 +32,6 @@ Page({
       //只有一颗星的时候,再次点击,变为0颗
       key = 0;
     }
-    console.log("得" + key + "分")
     this.setData({
       key: key
     })
@@ -41,7 +40,6 @@ Page({
   //点击左边,整颗星
   selectRight: function (e) {
     var key = e.currentTarget.dataset.key
-    console.log("得" + key + "分")
     this.setData({
       key: key
     })
@@ -55,7 +53,6 @@ Page({
     wx.request({
       url: 'https://cpc.find360.cn/api/home/user/' + app.globalData.userInfo.id + '/edit',
       success: function (res) {
-        console.log(res)
         that.setData({
           img: that.data.https + res.data.img,
           userName: res.data.name
@@ -74,13 +71,11 @@ Page({
         for (var i = 0;i<res.data.length;i++){
           if (res.data[i].img != null) {
             res.data[i].img = res.data[i].img.split(',')
-            console.log(res.data[i].img)
           }
         }
         _this.setData({
           prints: res.data
         })
-        console.log(_this.data.prints)
         _this.setData({
           num: res.data.length
         })

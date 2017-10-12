@@ -39,7 +39,8 @@ Page({
       }],
       color:"#13a0f7",
       width: 2,
-      dottedLine: true
+      dottedLine: true,
+      totalCom: ''
     }],
     other: [],//其他人还看了
     storageFoots: [], // 足迹缓存
@@ -100,23 +101,29 @@ Page({
     switch (e.currentTarget.dataset.url) {
       case 'details':
         url = '../details/details?id=' + e.currentTarget.dataset.id
-        break
-      case 'products_list':
-        url = '../products_list/products_list?id=' + this.data.options.id + '&type=nearby' + '&name=更多附近' + this.data.proInfo.parent_name
-        break
-      case 'comment':
-        url = '../comment/comment?id=' + this.data.options.id
-        break
-    }
-    let pages = getCurrentPages()
-    if (pages.length >= 5) {
         wx.redirectTo({
           url: url
         })
-    }else{
-      wx.navigateTo({
-        url: url
-      })
+        break
+      case 'products_list':
+        url = '../products_list/products_list?id=' + this.data.options.id + '&type=nearby' + '&name=更多附近' + this.data.proInfo.parent_name
+        let pages = getCurrentPages()
+        if (pages.length >= 4) {
+            wx.redirectTo({
+              url: url
+            })
+        }else{
+          wx.navigateTo({
+            url: url
+          })
+        }
+        break
+      case 'comment':
+        url = '../comment/comment?id=' + this.data.options.id
+        wx.navigateTo({
+          url: url
+        })
+        break
     }
   },
   // 收藏
@@ -156,12 +163,15 @@ Page({
     if (this.data.options.id !== 'undefined'){
       APP.requestData(API.proDetails, {id: this.data.options.id, user_id: APP.globalData.userInfo.id}, (err, data) =>{
         if (data != undefined) {
+          for (var i in data.comment.data){
+             data.comment.data[i].img = (data.comment.data[i].img !== null && data.comment.data[i].img !== '') ? data.comment.data[i].img.split(',') : []
+          }
           self.setData({
             "proInfo": data.info,
-            "proComment": data.comment,
-            "proRecommend": data.recommend
+            "proComment": data.comment.data,
+            "proRecommend": data.recommend,
+            "totalCom": data.comment.total
           })
-          console.log(self.data.proComment)
           self.footprintStorage()
           self.setData({
             "proInfo.level": self.data.proInfo.comment,
@@ -203,7 +213,6 @@ Page({
     })
   },
   setStorageFoots: function () {
-    console.log(1234)
     var _this = this
     var datas = []
     var info = {}
@@ -227,6 +236,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.getPro()
+    let pages = getCurrentPages()
+    console.log('pages---------')
+    console.log(pages)
   },
 
   /**

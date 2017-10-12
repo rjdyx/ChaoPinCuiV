@@ -10,7 +10,11 @@ Page({
     https: 'https://cpc.find360.cn/',
     proList: [],
     tip: '加载更多',
-    op: {}
+    op: {},
+    pageNum: 0, //页数
+    isLoading: false,
+    proLoadList: [],
+    totalPage: 5 //总页数
   },
   jumpFn: function(e){
     console.log(e)
@@ -18,7 +22,7 @@ Page({
     let pages = getCurrentPages()
     console.log(pages)
     console.log('pages----')
-    if (pages.length >= 5) {
+    if (pages.length >= 4) {
         wx.redirectTo({
           url: url
         })
@@ -55,7 +59,8 @@ Page({
         var op = {
           category_id:  options.id,
           lon: longitude,
-          lat: latitude
+          lat: latitude,
+          pageNum: self.data.pageNum
         }
         console.log(options.type)
         if (options.type) {
@@ -78,13 +83,15 @@ Page({
       console.log(data)
       if (data != undefined) {
         self.setData({
-          "proList": data
+          "proLoadList": data
         })
-        self.data.proList.forEach((objItem, i) => {
-          self.data.proList[i].dis = Number(self.data.proList[i].dis).toFixed(2)
+        self.data.proLoadList.forEach((objItem, i) => {
+          self.data.proLoadList[i].dis = Number(self.data.proLoadList[i].dis).toFixed(2)
         })
         self.setData({
-          "proList": self.data.proList
+          "proLoadList": self.data.proLoadList,
+          'isLoading': false,
+          'proList': self.data.proList.concat(self.data.proLoadList)
         })
       }
       wx.hideLoading()
@@ -101,7 +108,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+        console.log('pages---------')
+      let pages = getCurrentPages()
+    console.log(pages)
   },
 
   /**
@@ -130,7 +139,16 @@ Page({
    */
   onReachBottom: function () {
    console.log('pull')
-   // this.dataLoadFn()
+    if (this.data.pageNum < this.data.totalPage) {
+      var pageNum = this.data.pageNum + 1
+      this.setData({
+        'isLoading': true,
+        'pageNum': pageNum,
+        'op.pageNum': pageNum,
+      })
+      this.dataLoadFn()
+    }
+      
   },
 
   /**
