@@ -11,17 +11,14 @@ Page({
     proList: [],
     tip: '加载更多',
     op: {},
-    pageNum: 0, //页数
+    pageNum: 1, //页数
     isLoading: false,
     proLoadList: [],
-    totalPage: 5 //总页数
+    totalPage: 0 //总数量
   },
   jumpFn: function(e){
-    console.log(e)
     var url = '../details/details' + '?id=' + e.currentTarget.dataset.id
     let pages = getCurrentPages()
-    console.log(pages)
-    console.log('pages----')
     if (pages.length >= 4) {
         wx.redirectTo({
           url: url
@@ -40,8 +37,6 @@ Page({
     self.setData({
       'options': options
     })
-    console.log('products_list.js------------')
-    console.log(options)
     wx.setNavigationBarTitle({title: options.name})
     wx.showLoading({
       title: '加载中',
@@ -54,15 +49,12 @@ Page({
         var longitude = res.longitude //经度
         var speed = res.speed
         var accuracy = res.accuracy
-        console.log('getLocation--')
-        console.log(res)
         var op = {
           category_id:  options.id,
           lon: longitude,
           lat: latitude,
-          pageNum: self.data.pageNum
+          page: self.data.pageNum
         }
-        console.log(options.type)
         if (options.type) {
           op.type= options.type
         }
@@ -79,11 +71,10 @@ Page({
   dataLoadFn: function(){
     var self = this
     APP.requestData(API.proList, this.data.op, (err, data) =>{
-      console.log('proList')
-      console.log(data)
       if (data != undefined) {
         self.setData({
-          "proLoadList": data
+          "proLoadList": data.data,
+          'totalPage': data.last_page
         })
         self.data.proLoadList.forEach((objItem, i) => {
           self.data.proLoadList[i].dis = Number(self.data.proLoadList[i].dis).toFixed(2)
@@ -108,9 +99,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-        console.log('pages---------')
       let pages = getCurrentPages()
-    console.log(pages)
   },
 
   /**
@@ -138,17 +127,15 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-   console.log('pull')
     if (this.data.pageNum < this.data.totalPage) {
       var pageNum = this.data.pageNum + 1
       this.setData({
         'isLoading': true,
-        'pageNum': pageNum,
-        'op.pageNum': pageNum,
+        'page': pageNum,
+        'op.page': pageNum,
       })
       this.dataLoadFn()
-    }
-      
+    }  
   },
 
   /**
