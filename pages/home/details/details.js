@@ -39,7 +39,8 @@ Page({
       }],
       color:"#13a0f7",
       width: 2,
-      dottedLine: true
+      dottedLine: true,
+      totalCom: ''
     }],
     other: [],//其他人还看了
     storageFoots: [], // 足迹缓存
@@ -156,12 +157,15 @@ Page({
     if (this.data.options.id !== 'undefined'){
       APP.requestData(API.proDetails, {id: this.data.options.id, user_id: APP.globalData.userInfo.id}, (err, data) =>{
         if (data != undefined) {
+          for (var i in data.comment.data){
+             data.comment.data[i].img = (data.comment.data[i].img !== null && data.comment.data[i].img !== '') ? data.comment.data[i].img.split(',') : []
+          }
           self.setData({
             "proInfo": data.info,
-            "proComment": data.comment,
-            "proRecommend": data.recommend
+            "proComment": data.comment.data,
+            "proRecommend": data.recommend,
+            "totalCom": data.comment.total
           })
-          console.log(self.data.proComment)
           self.footprintStorage()
           self.setData({
             "proInfo.level": self.data.proInfo.comment,
@@ -203,7 +207,6 @@ Page({
     })
   },
   setStorageFoots: function () {
-    console.log(1234)
     var _this = this
     var datas = []
     var info = {}

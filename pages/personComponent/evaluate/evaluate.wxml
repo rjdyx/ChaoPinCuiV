@@ -3,7 +3,7 @@
   <!-- 头部个人信息 -->
   <view class='userMsg'>
     <view class='user-avatar'>
-      <image background-size="cover" src='{{img}}'></image>
+      <image wx:if="{{img}}" background-size="cover" src='{{img}}'></image>
     </view>
     <view class='user-msg'>
       <text>已贡献{{num}}条评价</text>
@@ -18,16 +18,12 @@
  <block wx:for="{{prints}}"  wx:key="title">
 <!-- 头部 -->
   <view class='print-item' bindtap='itemTo'>
-    <view class='print-title'>
-      <image src='{{item.icon}}' class='icon'></image>
-      <text>{{item.product_name}}</text>
-      <image src='{{apiUrl}}/{{item.img}}'></image>
-    </view>
+    
 <!-- 中间内容 -->
     <view class="print-content" data-index="{{index}}">
       <!-- 图片 -->
         <view class='print-spot flex-item'>
-          <image src='{{apiUrl}}/{{item.product_thumb}}'></image>
+          <image wx:if="{{apiUrl}}/{{item.product_thumb}}" src='{{apiUrl}}/{{item.product_thumb}}'></image>
         </view>
       <!-- 右侧评分和描述 -->
       <view class='print-desc flex-item'>
