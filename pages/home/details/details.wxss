@@ -14,6 +14,7 @@
 	font-size: 32rpx;
 	color: #acacac;
 	line-height: 100rpx;
+	padding-bottom:50rpx;
 }
 .bg_gray_line{
 	height: 20rpx;
@@ -375,4 +376,3 @@
 .tab_con3_inner .a_product .pro_distance text:last-child{
 	color:#cc5b5f;
 }
-
