@@ -133,6 +133,10 @@
 .ideasIcon:after{
   content: '\e66d';
 }
+.password::after{
+  content: '\e657';
+  color: #1f1f1f;
+}
 .bind{
   width: 100%;
   background: #fff;

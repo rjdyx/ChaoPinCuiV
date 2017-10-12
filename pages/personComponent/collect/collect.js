@@ -15,9 +15,9 @@ Page({
     apiUrl: app.globalData.apiUrl,
     prints: [],
     stars: [0, 1, 2, 3, 4],
-    normalSrc: '../../../image/星.png',
-    selectedSrc: '../../../image/星_1.png',
-    halfSrc: '../../../image/评分半颗五角星.png',
+    normalSrc: '../../../image/star2.png',
+    selectedSrc: '../../../image/全星.png',
+    halfSrc: '../../../image/半星.png',
     key: 0,//评分,
     startX: 0,
     startY: 0,
@@ -25,6 +25,7 @@ Page({
   },
   // 跳转
   productSkip: function (e) {
+    console.log(e)
     wx.navigateTo({
       url: '../../home/details/details?id='+ e.currentTarget.dataset.pid
     })

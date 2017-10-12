@@ -89,38 +89,6 @@ App({
     url = url.replace("pages/person/person/person", "..");//替换路径全路径。修改该路径为相对路径
     return url;
   },
-  //多张图片上传
-  uploadimg: function(data){
-    var that= this,
-    i=data.i ? data.i : 0,
-    success=data.success ? data.success : 0,
-    fail=data.fail ? data.fail : 0;
-    wx.uploadFile({
-      url: data.url,
-      filePath: data.path[i],
-      name: 'fileData',
-      formData: null,
-      success: (resp) => {
-        success++;
-      },
-      fail: (res) => {
-        fail++;
-      },
-      complete: () => {
-        i++;
-        if (i == data.path.length) {   
-          //当图片传完时，停止调用 
-          that.showToast('发送成功','success',1500)
-        } else {
-          //若图片还没有传完，则继续调用函数
-          data.i = i;
-          data.success = success;
-          data.fail = fail;
-          that.uploadimg(data);
-        }
-      }
-    })
-  },
   // 弹出框
   showToast: function (title,icon,duration) {
     wx.showToast({

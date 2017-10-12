@@ -12,12 +12,16 @@
   </view>
 
   <!-- 评价 -->
-  <!-- <scroll-view class="container" bindscrolltoupper="upper" upper-threshold="10" lower-threshold="5" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}"> -->
+   <scroll-view class="container" bindscrolltoupper="upper" upper-threshold="10" lower-threshold="5" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}"> 
 
 <view class='prints'>
  <block wx:for="{{prints}}"  wx:key="title">
 <!-- 头部 -->
   <view class='print-item' bindtap='itemTo'>
+    <view class='print-title'  bindtap="productSkip" data-pid="{{item.product_id}}">
+        <text class='product_name'>{{item.product_name}}</text>     
+        <text class='arrow'></text>
+    </view>
     
 <!-- 中间内容 -->
     <view class="print-content" data-index="{{index}}">
@@ -61,5 +65,5 @@
 </block>
 </view>
 
-  <!-- </scroll-view> -->
+   </scroll-view> 
 </view>
