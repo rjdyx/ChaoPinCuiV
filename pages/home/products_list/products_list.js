@@ -89,7 +89,7 @@ Page({
           self.data.proLoadList[i].dis = Number(self.data.proLoadList[i].dis).toFixed(2)
         })
         self.setData({
-          "proLoadList": self.data.proLoadList
+          "proLoadList": self.data.proLoadList,
           'isLoading': false,
           'proList': self.data.proList.concat(self.data.proLoadList)
         })

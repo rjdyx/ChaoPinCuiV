@@ -12,6 +12,7 @@ const api = {
     proDetails: https + 'api/home/product/details', //3.1产品详情数据
     proImgs: https + 'api/home/product/imgs', // 3.2产品图片数据
     nearbysPro: https + 'api/home/product/nearbys', // 3.3附近的产品数据
+    commentReload: https + 'api/home/product/reload', // 3.3附近的产品数据
     // 4.产品列表页
     proList: https + 'api/home/product/lists', //4.1产品列表数据
     // 6. 我的收藏
