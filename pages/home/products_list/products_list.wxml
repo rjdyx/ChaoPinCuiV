@@ -20,5 +20,5 @@
 		</block>
 	</view>
 	<view class="no_data" wx:else>暂无数据，尽情期待以后内容</view>
-	<view class="no_data">{{tip}}</view>
+	<!-- <view class="no_data" wx:if="{{isLoading}}">{{tip}}</view> -->
 </view>
