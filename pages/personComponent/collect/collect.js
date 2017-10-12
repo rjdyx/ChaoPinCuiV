@@ -1,4 +1,5 @@
 var app = getApp()
+import API from '../../../utils/api.js';
 Page({
 
   /**
@@ -48,7 +49,6 @@ Page({
   },
   //滑动事件处理
   touchmove: function (e) {
-    console.log(e)
     var that = this,
       index = e.currentTarget.dataset.index,//当前索引
       startX = that.data.startX,//开始X坐标
@@ -86,12 +86,15 @@ Page({
   },
   //删除事件
   del: function (e) {
-    console.log(e)
     var _this = this
     wx.request({
-      url: 'https://cpc.find360.cn/api/home/collect/'+e.currentTarget.dataset.pid,
-      data: {},
-      method: 'DELETE',
+      url: API.collect,
+      data: {
+        user_id: app.globalData.userInfo.id, 
+        product_id: e.currentTarget.dataset.pid,
+        type: 'false'
+      },
+      method: 'get',
       success: function (res) {
         if (res.data) {
           _this.data.prints.splice(e.currentTarget.dataset.index, 1)
@@ -146,7 +149,6 @@ Page({
       },
       method: 'GET',
       success: function (res) {
-        console.log(res)
         that.setData({
           prints: res.data
         })
