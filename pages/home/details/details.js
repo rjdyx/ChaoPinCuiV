@@ -10,17 +10,17 @@ Page({
     https: 'https://cpc.find360.cn/',
     categoryUrl: '../category/category',
     tabIndex: 0,
-    proInfo: {}, //产品基础信息
-    proComment: [], //评论信息
-    proRecommend: [], //自定义数据
-    proImgs: [], //产品图片列表
+    proInfo: {},        //产品基础信息
+    proComment: [],     //评论信息
+    proRecommend: [],   //自定义数据
+    proImgs: [],        //产品图片列表
     nearbysProList: [], //附近产品列表
     tabArr: ['景点详情', '景点图片', '附近景点'],
     star: 'AAAA',
     isShowPop: {bol: false, type: 'source', title: ''},
     ifLove: false,
     loveUrl: '../../../image/no_love.png',
-    markers: [{ //标记点
+    markers: [{        //标记点
       iconPath: "../../../image/location_address.png",
       id: 0,
       latitude: 0,
@@ -29,7 +29,7 @@ Page({
       height: 50,
       alpha: 0.5
     }],
-    polyline: [{ //路线 指定一系列坐标点，从数组第一项连线至最后一项
+    polyline: [{       //路线 指定一系列坐标点，从数组第一项连线至最后一项
       points: [{
         longitude: 0,
         latitude: 0
@@ -39,12 +39,15 @@ Page({
       }],
       color:"#13a0f7",
       width: 2,
-      dottedLine: true,
-      totalCom: ''
+      dottedLine: true
     }],
-    other: [],//其他人还看了
+    other: [],        //其他人还看了
     storageFoots: [], // 足迹缓存
-    options:{} // 页面传入的参数
+    options:{},       // 页面传入的参数,
+    comNum: 1,        //页数
+    isLoading: false,
+    proLoadList: [],
+    totalCom: 0
   },
   // tab切换
   changeTabIndexFn(e) {
@@ -200,7 +203,6 @@ Page({
   },
   // 足迹存入缓存
   footprintStorage: function () {
-    console.log(789789678)
     var _this = this
     wx.getStorage({
       key: 'footprint',
@@ -236,9 +238,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.setData({
+      'comNum': 1
+    })
     this.getPro()
-    let pages = getCurrentPages()
     console.log('pages---------')
+      let pages = getCurrentPages()
     console.log(pages)
   },
 
@@ -267,9 +272,29 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    if (this.data.comNum < Math.ceil(this.data.totalCom/10) ) {
+      this.setData({
+        'isLoading': true,
+        'comNum': ++this.data.comNum
+      })
+      this.getReload(this.data.comNum)
+    }
   },
 
+  getReload: function (comNum) {
+    var that = this
+     APP.requestData(API.commentReload, {id: this.data.options.id, page: comNum}, (err, data) =>{
+        if (data != undefined) {
+          for (var i in data.data){
+             data.data[i].img = (data.data[i].img !== null && data.data[i].img !== '') ? data.data[i].img.split(',') : []
+          }
+          that.setData({
+            'isLoading': false, 
+            "proComment": this.data.proComment.concat(data.data)
+          })
+        }
+      })
+  },
   /**
    * 用户点击右上角分享
    */
