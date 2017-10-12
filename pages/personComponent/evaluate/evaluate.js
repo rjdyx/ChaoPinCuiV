@@ -13,8 +13,8 @@ Page({
     img:'',
     apiUrl: app.globalData.apiUrl,
     normalSrc: '../../../image/star2.png',
-    selectedSrc: '../../../image/全星.png',
-    halfSrc: '../../../image/半星.png',
+    selectedSrc: '../../../image/allstar.png',
+    halfSrc: '../../../image/halfstar.png',
     key: 0,//评分,
     https:'https://cpc.find360.cn/'
   

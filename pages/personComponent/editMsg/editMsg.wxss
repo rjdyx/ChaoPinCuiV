@@ -62,10 +62,10 @@
   margin-right: 70rpx;
 }
 .inputEdit{
-  width:89%;
+  width:460rpx;
   height: 100%;
-   /* border: 1px solid;  */
-   margin-right: 50rpx;
+  /* border: 1px solid;   */
+  margin-right: 50rpx;
   /* background: red; */
   display: inline-block;
   text-align: right;

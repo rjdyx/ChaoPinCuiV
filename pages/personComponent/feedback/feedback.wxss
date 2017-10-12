@@ -39,7 +39,7 @@
   font-family: 'iconfont';
   font-weight: bold;
   font-style: normal;
-  content: '\e649';
+  content: '\e606';
   color: #b5b5b7;
   font-size: 70rpx;
 }

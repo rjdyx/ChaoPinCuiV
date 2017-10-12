@@ -2,14 +2,10 @@
 
 .container{
   /* width: 100%; */
-  height: 100vh;
+    height: 100%;  
   background: #F2f2f2;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   overflow: hidden;
 }
 .prints{
@@ -97,7 +93,7 @@
   position: absolute;
   width: 37rpx;
   height:43rpx;
-  src: "../../../image/全星.png";
+  src: "../../../image/allstar.png";
 }
 
 .item {
