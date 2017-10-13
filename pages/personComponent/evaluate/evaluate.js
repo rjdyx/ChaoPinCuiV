@@ -50,37 +50,43 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    wx.request({
-      url: 'https://cpc.find360.cn/api/home/user/' + app.globalData.userInfo.id + '/edit',
-      success: function (res) {
-        that.setData({
-          img: that.data.https + res.data.img,
-          userName: res.data.name
-        })
-      }
+    wx.showToast({
+      title: '加载中',
+      icon:'loading',
+      duration:1000
     })
-    var _this = this
-    wx.request({
-      url: that.data.https+'/api/home/comment',
-      method: 'GET',
-      data: {
-        user_id: app.globalData.userInfo.id,
-        openid: app.globalData.userInfo.openid
-      },
-      success: function(res){
-        for (var i = 0;i<res.data.length;i++){
-          if (res.data[i].img != null) {
-            res.data[i].img = res.data[i].img.split(',')
-          }
+    setTimeout(function () {
+      wx.request({
+        url:that.data.https+'/api/home/user/' + app.globalData.userInfo.id + '/edit',
+        success: function (res) {
+          that.setData({
+            img: that.data.https + res.data.img,
+            userName: res.data.name
+          })
         }
-        _this.setData({
-          prints: res.data
-        })
-        _this.setData({
-          num: res.data.length
-        })
-      }
-    })
+      })
+      wx.request({
+        url: that.data.https + '/api/home/comment',
+        method: 'GET',
+        data: {
+          user_id: app.globalData.userInfo.id,
+          openid: app.globalData.userInfo.openid
+        },
+        success: function (res) {
+          for (var i = 0; i < res.data.length; i++) {
+            if (res.data[i].img != null) {
+              res.data[i].img = res.data[i].img.split(',')
+            }
+          }
+          that.setData({
+            prints: res.data
+          })
+          that.setData({
+            num: res.data.length
+          })
+        }
+      })
+    }, 1000)
   },
 
   /**
