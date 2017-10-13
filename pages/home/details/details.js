@@ -47,7 +47,8 @@ Page({
     comNum: 1,        //页数
     isLoading: false,
     proLoadList: [],
-    totalCom: 0
+    totalCom: 0,
+    totalPage: 0
   },
   // tab切换
   changeTabIndexFn(e) {
@@ -173,7 +174,8 @@ Page({
             "proInfo": data.info,
             "proComment": data.comment.data,
             "proRecommend": data.recommend,
-            "totalCom": data.comment.total
+            "totalCom": data.comment.total,
+            "totalPage": data.comment.last_page
           })
           self.footprintStorage()
           self.setData({
@@ -288,7 +290,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if (this.data.comNum < Math.ceil(this.data.totalCom/10) ) {
+    if (this.data.comNum < this.data.totalPage) {
       this.setData({
         'isLoading': true,
         'comNum': ++this.data.comNum

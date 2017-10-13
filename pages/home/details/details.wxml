@@ -112,7 +112,7 @@
 							<view class="padding_top30">
 								<template is="star" data="{{...proInfo}}"/>
 							</view>
-							<view class="user_comment">
+							<view class="user_comment" wx:if="{{proComment.length}}">
 								<block wx:for="{{proComment}}" wx:key="">
 									<view class="user_comment_item" >
 										<view class="user_comment_item_t clear">

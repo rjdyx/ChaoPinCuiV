@@ -1,0 +1,33 @@
+<!--pages/home/search/search.wxml-->
+<text>pages/home/search/search.wxml</text>
+<view class="searchPage">
+	<!-- 搜索框 -->
+	<view class="search clear">
+		<form bindsubmit="formSearch">
+		<view class="search_icon fl">
+			<image src="../../../image/search.png"></image>
+			<button 
+			class="submitBtn" 
+			formType="submit"
+			></button>
+		</view>
+	    <input focus="{{true}}" placeholder="请输入你想了解的{{options.name}}" type="text" class="fl" name="searchName" bindinput="inputChangeFn"/>
+	   	<view class="cancelSearch fr" catch:tap="cancelSearchFn">取消</view>
+	    </form>
+	</view>
+	
+	<!-- 列表 -->
+	<view class="searchMain">
+		<view></view>
+		<block wx:for="{{searchList}}" wx:key="">
+			<view 
+			class="searchItem" 
+			data-url="details" 
+        	catch:tap="jumpFn" 
+        	data-id="{{item.id}}">
+				{{item.name}}
+			</view>
+		</block>
+	</view>
+</view>
+	
