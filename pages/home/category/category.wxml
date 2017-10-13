@@ -12,12 +12,8 @@
 				<form>
 				<view class="search_icon fl">
 					<image src="../../../image/search.png"></image>
-					<button 
-					class="submitBtn" 
-					formType="submit"
-					></button>
 				</view>
-	            <input placeholder="请输入你想了解的{{options.name}}" type="text" class="fl" name="searchName" catch:tap="showSearchPageFn"/>
+	            <input placeholder="请输入你想了解的{{options.name}}" type="text" class="fl" name="searchName" catch:tap="showSearchPageFn" disabled="true"/>
 	            </form>
 	        </view>
 
