@@ -52,7 +52,7 @@ Page({
   onReady: function () {
     var that = this
     wx.request({
-      url: 'https://cpc.find360.cn/api/home/index/recommend', 
+      url: that.data.https+'/api/home/index/recommend', 
       header: {
         'content-type': 'application/json'
       },
@@ -64,7 +64,7 @@ Page({
       }
     })
     wx.request({
-      url: 'https://cpc.find360.cn/api/home/index/turns',
+      url: that.data.https+'/api/home/index/turns',
       success: function(res){
         that.setData({
           'banners': res.data.data
@@ -86,7 +86,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
   },
 
   /**

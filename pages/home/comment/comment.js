@@ -12,8 +12,8 @@ Page({
     focus: false,
     stars: [0, 20, 40, 60, 80],
     normalSrc: '../../../image/star2.png',
-    selectedSrc: '../../../image/全星.png',
-    halfSrc: '../../../image/半星.png',
+    selectedSrc: '../../../image/allstar.png',
+    halfSrc: '../../../image/halfstar.png',
     key: 0 ,//评分,
     isUserName: true,
     userNameCol: '#ff713f', //默认匿名
