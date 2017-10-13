@@ -10,7 +10,7 @@
 				<view>
 					<view class="pro_name">
 						<text class="tv_el dis_ib fl">{{item.name}}</text>
-						<text class="tv_el dis_ib fr">距离：{{item.dis}}kg</text>
+						<text class="tv_el dis_ib fr">距离：{{item.dis}}km</text>
 					</view>
 					<view class="pro_place">
 						{{item.address}}

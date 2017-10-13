@@ -25,8 +25,7 @@ Page({
     searchList: []               
   },
   // 跳页面
-  jumpFn: function(e){
-    console.log(e)
+  jumpFn: function(e) {
     var url = ''
     switch (e.currentTarget.dataset.url) {
       case 'details':  
@@ -98,9 +97,6 @@ Page({
    */
   onLoad: function (options) {
     var self = this
-    console.log('cetagory.js------------')
-    console.log('options---')
-    console.log(options)
         // 获取当前的地理位置
     wx.getLocation({
       type: 'wgs84',
@@ -119,8 +115,6 @@ Page({
     }
     // 当前分类代表性产品数据
     APP.requestData(API.product, {category_id: options.id}, (err, data) =>{
-      console.log('product---')
-      console.log(data)
       if (data != undefined) {
         self.setData({
           "product": data
@@ -129,9 +123,8 @@ Page({
     })
     // 当前分类下的二级分类
     APP.requestData(API.categoryChild, {pid: options.id}, (err, data) =>{
-      console.log('category---')
-      console.log(data)
       if (data != undefined) {
+        console.log(data)
         self.setData({
           "category": data
         })
@@ -140,8 +133,6 @@ Page({
     })
     // 榜单推荐（默认6个）
     APP.requestData(API.categoryRecommend, {category_id: options.id, num: 6}, (err, data) =>{
-      console.log('recommend_products_arr---')
-      console.log(data)
       if (data != undefined) {
         self.setData({
           "recommend_products_arr": data.data
@@ -150,8 +141,6 @@ Page({
     })
     // 其他人还看了
     APP.requestData(API.other, {category_id: options.id}, (err, data) =>{
-      console.log('other---')
-      console.log(data)
       if (data != undefined) {
         self.setData({
           "other": data.data
