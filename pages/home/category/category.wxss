@@ -1,6 +1,7 @@
 @import "../../common/wxss/comWxss.wxss"
 @import "../../common/wxss/looked.wxss"
 @import "../../../iconfont/stylesheet.wxss"
+@import "../search/search.wxss"
 .csIcon:after{
   content: '\e606';
   font-family: 'iconfont';
@@ -28,7 +29,8 @@
 	width: 100%;
 	height: 100%;
 }
-.header_top .search{
+/*搜索框*/
+.search{
 	width: 670rpx;
 	height: 80rpx;
 	position: absolute;
@@ -53,7 +55,7 @@
 .search input{
 	height: 80rpx;
 	width: 510rpx;
-	text-align: center;
+	/*text-align: center;*/
 }
 .search_icon .submitBtn{
 	width: 100%;

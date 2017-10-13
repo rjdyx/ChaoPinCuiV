@@ -47,7 +47,8 @@ Page({
     comNum: 1,        //页数
     isLoading: false,
     proLoadList: [],
-    totalCom: 0
+    totalCom: 0,
+    totalPage: 0
   },
   // tab切换
   changeTabIndexFn(e) {
@@ -173,7 +174,8 @@ Page({
             "proInfo": data.info,
             "proComment": data.comment.data,
             "proRecommend": data.recommend,
-            "totalCom": data.comment.total
+            "totalCom": data.comment.total,
+            "totalPage": data.comment.last_page
           })
           self.footprintStorage()
           self.setData({
@@ -207,11 +209,18 @@ Page({
     wx.getStorage({
       key: 'footprint',
       success: function(res) {
-        _this.setData({
-          "storageFoots": res.data
-        })
-        _this.setStorageFoots()
+        if (res.data !== undefined)  {
+          _this.setData({
+            "storageFoots": res.data
+          })
+          _this.setStorageFoots()
+        } else {
+          _this.setStorageFoots()
+        }
       },
+      fail: function () {
+        _this.setStorageFoots()
+      }
     })
   },
   setStorageFoots: function () {
@@ -225,9 +234,20 @@ Page({
     info['desc'] = this.data.proInfo.desc
     info['comment'] = this.data.proInfo.comment
     datas = this.data.storageFoots
-    datas.unshift(info)
-    if (datas.length > 50) {
-      datas.pop()
+    if (datas.length !== 0) {
+      var flag = false
+      for (var i in datas) {
+        if (datas[i].id === info.id) {
+          datas.splice(i,1)
+          datas.unshift(info)
+          flag = true
+        }
+      }
+      if (!flag) {
+        datas.unshift(info)
+      }
+    } else {
+      datas.unshift(info)
     }
     wx.setStorage({
       key:"footprint",
@@ -242,9 +262,7 @@ Page({
       'comNum': 1
     })
     this.getPro()
-    console.log('pages---------')
-      let pages = getCurrentPages()
-    console.log(pages)
+    let pages = getCurrentPages()
   },
 
   /**
@@ -272,7 +290,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if (this.data.comNum < Math.ceil(this.data.totalCom/10) ) {
+    if (this.data.comNum < this.data.totalPage) {
       this.setData({
         'isLoading': true,
         'comNum': ++this.data.comNum

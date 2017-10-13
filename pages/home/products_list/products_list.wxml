@@ -10,7 +10,7 @@
 				<view>
 					<view class="pro_name">
 						<text class="tv_el dis_ib fl">{{item.name}}</text>
-						<text class="tv_el dis_ib fr">距离：{{item.dis}}</text>
+						<text class="tv_el dis_ib fr">距离：{{item.dis}}kg</text>
 					</view>
 					<view class="pro_place">
 						{{item.address}}
@@ -18,7 +18,8 @@
 				</view>
 			</view>
 		</block>
+		<view class="no_data" wx:if="{{isLoading}}">正在加载</view>
+		<view class="no_data" wx:else>全部加载完成</view>
 	</view>
 	<view class="no_data" wx:else>暂无数据，尽情期待以后内容</view>
-	<view class="no_data" wx:if="{{isLoading}}">正在加载</view>
 </view>
