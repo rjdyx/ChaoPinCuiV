@@ -13,12 +13,16 @@ Page({
     categoryUrl: './category',
     isShowMC: false,
     scenicCategory: [],
-    category: [], // 推荐分类
-    moreCategory: [], //更多分类
-    product: {}, // 推荐产品对象
-    recommend_products_arr: [], //推荐产品列表
-    other: [], // 其他人还看了,
-    options:{}
+    category: [],               // 推荐分类
+    moreCategory: [],           // 更多分类
+    product: {},                // 推荐产品对象
+    recommend_products_arr: [], // 推荐产品列表
+    other: [],                  // 其他人还看了,
+    options:{},                 // 接收的参数
+    isShowSearch: false,
+    searchOp: {},               // 搜索参数对象
+    timer: null,
+    searchList: []               
   },
   // 跳页面
   jumpFn: function(e){
@@ -26,6 +30,9 @@ Page({
     var url = ''
     switch (e.currentTarget.dataset.url) {
       case 'details':  
+        this.setData({
+          'isShowSearch': false
+        })
         url = this.data.detailsUrl + '?id=' + e.currentTarget.dataset.id
         break
       case 'products_list':
@@ -36,6 +43,33 @@ Page({
       url: url
     })
   },
+  showSearchPageFn: function(){
+    this.setData({
+      'isShowSearch': true
+    })
+  },
+  // input值改变时触发
+  inputChangeFn: function(e) {
+    clearTimeout(this.data.timer)
+    var timer = setTimeout(() => {
+      this.setData({
+        "searchOp.category_id": this.data.options.id,
+        "searchOp.type": "search",
+        "searchOp.name": e.detail.value
+      })
+      APP.requestData(API.proList, this.data.searchOp, (err, data) =>{
+        if (data != undefined) {
+          this.setData({
+            "searchList": data.data
+          })
+        }
+      })
+    }, 1000)
+    this.setData({
+      'timer': timer
+    }) 
+  },
+  // 搜索
   formSearch: function (e){
     console.log(e.detail.value)
     if(e.detail.value.searchName){
@@ -52,6 +86,13 @@ Page({
       }
     }
   },
+  // 取消搜索
+  cancelSearchFn: function () {
+    console.log(44)
+    this.setData({
+      'isShowSearch': false
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -64,12 +105,10 @@ Page({
     wx.getLocation({
       type: 'wgs84',
       success: function(res) {
-        var latitude = res.latitude //纬度
-        var longitude = res.longitude //经度
-        var speed = res.speed
-        var accuracy = res.accuracy
-        console.log('getLocation--')
-        console.log(res)
+        self.setData({
+          "searchOp.lon": res.longitude,  //经度
+          "searchOp.lat": res.latitude    //纬度
+        })
       }
     })
     if (options) {

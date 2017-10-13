@@ -120,7 +120,6 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-   
   },
 
   /**
@@ -128,10 +127,10 @@ Page({
    */
   onReachBottom: function () {
     if (this.data.pageNum < this.data.totalPage) {
-      var pageNum = this.data.pageNum += 1
+      var pageNum = this.data.pageNum + 1
       this.setData({
         'isLoading': true,
-        'page': pageNum,
+        'pageNum': pageNum,
         'op.page': pageNum,
       })
       this.dataLoadFn()

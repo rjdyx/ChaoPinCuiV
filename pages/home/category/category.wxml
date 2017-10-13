@@ -6,9 +6,10 @@
 			class="header_bg_img" 
 			src="{{product.img ? https + product.img : '../../../image/bg_logo.jpg'}}">
 			</image>
+
 			<!-- 搜索框 -->
 			<view class="search clear">
-				<form bindsubmit="formSearch">
+				<form>
 				<view class="search_icon fl">
 					<image src="../../../image/search.png"></image>
 					<button 
@@ -16,9 +17,10 @@
 					formType="submit"
 					></button>
 				</view>
-	            <input placeholder="请输入你想了解的{{options.name}}" type="text" class="fl" name="searchName"/>
+	            <input placeholder="请输入你想了解的{{options.name}}" type="text" class="fl" name="searchName" catch:tap="showSearchPageFn"/>
 	            </form>
 	        </view>
+
 	        <!-- 推荐产品 -->
 	        <view class="bgName">
 	        	<text class="tv_el dis_ib">{{product.name}}</text>
@@ -30,6 +32,7 @@
 	        	</image>
 	        </view>
 		</view>
+
 		<!-- 推荐分类 -->
 		<view class="header_bottom">
 			<view class="hb_class">
@@ -78,4 +81,6 @@
     	</view>
     </view>
 	<template is="looked" data="{{other,categoryUrl}}"/>
+	<!-- 搜索层 -->
+	<include wx:if="{{isShowSearch}}" src="../search/search.wxml"/>
 </view>
