@@ -113,7 +113,7 @@
 								<template is="star" data="{{...proInfo}}"/>
 							</view>
 							<view class="user_comment" wx:if="{{proComment.length}}">
-								<block wx:for="{{proComment}}" wx:key="">
+								<block wx:for="{{proComment}}" wx:key="" wx:for-index="i1">
 									<view class="user_comment_item" >
 										<view class="user_comment_item_t clear">
 											<image class="user_header fl" src="{{item.user_img ? https + item.user_img : '../../../image/d_header.png'}}"></image>
@@ -127,8 +127,14 @@
 											<text>{{item.content}}</text>
 											<view class="user_comment_item_img" wx:if="{{item.img[0] != ''}}">
 											    <scroll-view scroll-x="true" class="imgScroll">
-											        <block wx:for="{{item.img}}" wx:key="">
-											           <image src="{{item ?  https + item : ''}}"></image>
+											        <block wx:for="{{item.img}}" wx:key="" wx:for-index="i2">
+											           <image 
+											           src="{{item ?  https + item : ''}}"
+											           data-bol="{{true}}" 
+											           data-bigi="{{i1}}"
+											           data-smalli="{{i2}}"
+											           catch:tap="imgBlowUpFn"
+											           ></image>
 											        </block>
 											    </scroll-view>
 											</view>
@@ -215,6 +221,20 @@
 				{{proInfo.desc}}
 			 </scroll-view>
 			<map wx:if="{{isShowPop.type === 'map'}}" class="map" longitude="{{proInfo.meridian}}" latitude="{{proInfo.weft}}" scale="14" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location></map>
+		</view>
+    </view>
+
+    <!-- 图片放大层 -->
+    <view class="imgBlowUp" wx:if="{{isImgBlowUp}}" data-bol="{{false}}" catch:tap="imgBlowUpFn" >
+		<view class="imgBlowUpBox">
+			<swiper indicator-dots="{{indicatorDots}}"
+			  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{true}}" current="0" bindchange="bindchangeFn" indicator-dots="{{true}}" indicator-active-color="yellow" indicator-color="#fff">
+			  <block wx:for="{{proComment[ImgBlowUpIndex.bigi].img}}" wx:key="">
+			    <swiper-item>
+			      <image src="{{item ? https + item : ''}}" class="slide-image" mode="widthFix"/>
+			    </swiper-item>
+			  </block>
+			</swiper>
 		</view>
     </view>
 </view>
