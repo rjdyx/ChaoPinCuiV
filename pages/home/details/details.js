@@ -207,11 +207,18 @@ Page({
     wx.getStorage({
       key: 'footprint',
       success: function(res) {
-        _this.setData({
-          "storageFoots": res.data
-        })
-        _this.setStorageFoots()
+        if (res.data !== undefined)  {
+          _this.setData({
+            "storageFoots": res.data
+          })
+          _this.setStorageFoots()
+        } else {
+          _this.setStorageFoots()
+        }
       },
+      fail: function () {
+        _this.setStorageFoots()
+      }
     })
   },
   setStorageFoots: function () {
@@ -225,9 +232,20 @@ Page({
     info['desc'] = this.data.proInfo.desc
     info['comment'] = this.data.proInfo.comment
     datas = this.data.storageFoots
-    datas.unshift(info)
-    if (datas.length > 50) {
-      datas.pop()
+    if (datas.length !== 0) {
+      var flag = false
+      for (var i in datas) {
+        if (datas[i].id === info.id) {
+          datas.splice(i,1)
+          datas.unshift(info)
+          flag = true
+        }
+      }
+      if (!flag) {
+        datas.unshift(info)
+      }
+    } else {
+      datas.unshift(info)
     }
     wx.setStorage({
       key:"footprint",
@@ -242,9 +260,7 @@ Page({
       'comNum': 1
     })
     this.getPro()
-    console.log('pages---------')
-      let pages = getCurrentPages()
-    console.log(pages)
+    let pages = getCurrentPages()
   },
 
   /**
