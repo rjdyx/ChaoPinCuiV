@@ -16,8 +16,8 @@ Page({
     prints: [],
     stars: [0, 1, 2, 3, 4],
     normalSrc: '../../../image/star2.png',
-    selectedSrc: '../../../image/全星.png',
-    halfSrc: '../../../image/半星.png',
+    selectedSrc: '../../../image/allstar.png',
+    halfSrc: '../../../image/halfstar.png',
     key: 0,//评分,
     startX: 0,
     startY: 0,
@@ -97,6 +97,7 @@ Page({
       },
       method: 'get',
       success: function (res) {
+        console.log(res)
         if (res.data) {
           _this.data.prints.splice(e.currentTarget.dataset.index, 1)
           _this.setData({

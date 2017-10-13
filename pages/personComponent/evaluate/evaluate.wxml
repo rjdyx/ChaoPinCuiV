@@ -17,8 +17,8 @@
 <view class='prints'>
  <block wx:for="{{prints}}"  wx:key="title">
 <!-- 头部 -->
-  <view class='print-item' bindtap='itemTo'>
-    <view class='print-title'  bindtap="productSkip" data-pid="{{item.product_id}}">
+  <view class='print-item' bindtap="productSkip" data-pid="{{item.product_id}}">
+    <view class='print-title'>
         <text class='product_name'>{{item.product_name}}</text>     
         <text class='arrow'></text>
     </view>

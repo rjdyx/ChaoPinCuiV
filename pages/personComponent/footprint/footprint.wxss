@@ -94,7 +94,7 @@
   position: absolute;
   width: 37rpx;
   height:43rpx;
-  src: "../../../image/全星.png";
+  src: "../../../image/allstar.png";
 }
 
 .item {
