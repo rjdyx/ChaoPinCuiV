@@ -1,6 +1,7 @@
 <!--pages/home/search/search.wxml-->
 <text>pages/home/search/search.wxml</text>
 <view class="searchPage">
+
 	<!-- 搜索框 -->
 	<view class="search clear">
 		<form bindsubmit="formSearch">
@@ -11,7 +12,13 @@
 			formType="submit"
 			></button>
 		</view>
-	    <input focus="{{true}}" placeholder="请输入你想了解的{{options.name}}" type="text" class="fl" name="searchName" bindinput="inputChangeFn"/>
+	    <input 
+	    focus="{{true}}" 
+	    placeholder="请输入你想了解的{{options.name}}" 
+	    type="text" 
+	    class="fl" 
+	    name="searchName" 
+	    bindinput="inputChangeFn"/>
 	   	<view class="cancelSearch fr" catch:tap="cancelSearchFn">取消</view>
 	    </form>
 	</view>

@@ -51,23 +51,29 @@ Page({
   // input值改变时触发
   inputChangeFn: function(e) {
     clearTimeout(this.data.timer)
-    var timer = setTimeout(() => {
+    if (e.detail.value) {
+      var timer = setTimeout(() => {
+        this.setData({
+          "searchOp.category_id": this.data.options.id,
+          "searchOp.type": "search",
+          "searchOp.name": e.detail.value
+        })
+        APP.requestData(API.proList, this.data.searchOp, (err, data) =>{
+          if (data != undefined) {
+            this.setData({
+              "searchList": data.data
+            })
+          }
+        })
+      }, 1000)
       this.setData({
-        "searchOp.category_id": this.data.options.id,
-        "searchOp.type": "search",
-        "searchOp.name": e.detail.value
+        'timer': timer
+      }) 
+    } else {
+      this.setData({
+        "searchList": []
       })
-      APP.requestData(API.proList, this.data.searchOp, (err, data) =>{
-        if (data != undefined) {
-          this.setData({
-            "searchList": data.data
-          })
-        }
-      })
-    }, 1000)
-    this.setData({
-      'timer': timer
-    }) 
+    }
   },
   // 搜索
   formSearch: function (e){
@@ -84,6 +90,12 @@ Page({
           url: url
         })
       }
+    } else {
+      wx.showToast({
+        title: '请输入' + this.data.options.name,
+        image: '../../../image/gth.png',
+        duration: 2000
+      })
     }
   },
   // 取消搜索
