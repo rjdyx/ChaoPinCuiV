@@ -33,6 +33,7 @@
 	    				</view>
 	    			</block>
     			</view>
+
     			<!-- tab_con1 产品详细 -->
     			<view class="tab_con1" wx:if="{{tabIndex === 0}}">
     				<!-- 历史来源 -->
@@ -141,12 +142,14 @@
 										</view>
 									</view>
 								</block>
-								<view class="no_data" wx:if="{{isLoading}}">正在加载</view>
-								<view class="no_data" wx:else>全部加载完成</view>
+								<view class="no_data">{{isLoading ? '正在加载' : '全部加载完成'}}</view>
+								<!-- <view class="no_data" wx:if="{{isLoading}}">正在加载</view> -->
+								<!-- <view class="no_data" wx:else>全部加载完成</view> -->
 							</view>
     					</view>
     				</view>
     			</view>
+
     			<!-- tab_con2 产品图片 -->
     			<view class="tab_con2" wx:elif="{{tabIndex === 1}}">
     				<view class="width700">
@@ -171,6 +174,7 @@
     					</view>
     				</view>
     			</view>
+
     			<!-- tab_con3 附近产品-->
     			<view class="tab_con3" wx:elif="{{tabIndex === 2}}">
     				<view class="width700">
@@ -212,6 +216,7 @@
     		</view>
     	</view>
     </view>
+
     <!-- 弹出框 -->
     <view class="pop_up_wrap" wx:if="{{isShowPop.bol}}">
 		<view class="pop_up_inner">
@@ -228,7 +233,7 @@
     <view class="imgBlowUp" wx:if="{{isImgBlowUp}}" data-bol="{{false}}" catch:tap="imgBlowUpFn" >
 		<view class="imgBlowUpBox">
 			<swiper indicator-dots="{{indicatorDots}}"
-			  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{true}}" current="0" bindchange="bindchangeFn" indicator-dots="{{true}}" indicator-active-color="yellow" indicator-color="#fff">
+			  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{true}}" current="{{current}}" bindchange="bindchangeFn" indicator-dots="{{true}}" indicator-active-color="yellow" indicator-color="#fff">
 			  <block wx:for="{{proComment[ImgBlowUpIndex.bigi].img}}" wx:key="">
 			    <swiper-item>
 			      <image src="{{item ? https + item : ''}}" class="slide-image" mode="widthFix"/>
@@ -237,4 +242,5 @@
 			</swiper>
 		</view>
     </view>
+
 </view>

@@ -18,13 +18,12 @@
 	        </view>
 
 	        <!-- 推荐产品 -->
-	        <view class="bgName">
-	        	<text class="tv_el dis_ib">{{product.name}}</text>
-	        	<image 
-	        	src="../../../image/downward.png" 
+	        <view class="bgName"
 	        	data-url="details" 
 	        	catch:tap="jumpFn" 
 	        	data-id="{{product.id}}">
+	        	<text class="tv_el dis_ib">{{product.name}}</text>
+	        	<image src="../../../image/downward.png">
 	        	</image>
 	        </view>
 		</view>

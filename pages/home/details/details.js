@@ -56,7 +56,9 @@ Page({
     indicatorDots: false,
     autoplay: false,
     interval: 5000,
-    duration: 1000
+    duration: 500,
+    isShowComment: false, //是否显示评论页
+    current: 0            //放大图片下标
   },
   // tab切换
   changeTabIndexFn(e) {
@@ -202,7 +204,8 @@ Page({
     this.setData({
       'ImgBlowUpIndex.bigi': i1,
       'ImgBlowUpIndex.smalli': i2,
-      'isImgBlowUp': e.currentTarget.dataset.bol
+      'isImgBlowUp': e.currentTarget.dataset.bol,
+      'current': i2 
       // ,
       // 'imgNum': e.currentTarget.dataset.bol ? (i2 + 1) + '/' + this.data.proComment[i1].img.length : 0
     })
