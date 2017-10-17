@@ -143,34 +143,41 @@ Page({
   },
   // 收藏
   loveFn: function(e){
-    if (this.data.loveUrl == '../../../image/no_love.png' ){
-      this.setData({
-        'loveUrl' : '../../../image/love.png',
-        'ifLove': true
-       })
-    } else{
-      this.setData({
-       'loveUrl' : '../../../image/no_love.png' ,
-       'ifLove': false
+    if (APP.globalData.userInfo.id == null || APP.globalData.userInfo.id == undefined || APP.globalData.userInfo.id == '') {
+      wx.redirectTo({
+        url: '../../loginOrregister/loginOrigister/loginOrigister',
       })
-    }
-    APP.requestData(API.collect, {openid: APP.globalData.userInfo.openid, user_id: APP.globalData.userInfo.id, product_id: this.data.options.id, type: this.data.ifLove}, (err, data) =>{
+    } else {
+      if (this.data.loveUrl == '../../../image/no_love.png') {
+        this.setData({
+          'loveUrl': '../../../image/love.png',
+          'ifLove': true
+        })
+      } else {
+        this.setData({
+          'loveUrl': '../../../image/no_love.png',
+          'ifLove': false
+        })
+      }
+      APP.requestData(API.collect, { openid: APP.globalData.userInfo.openid, user_id: APP.globalData.userInfo.id, product_id: this.data.options.id, type: this.data.ifLove }, (err, data) => {
         if (data != undefined) {
-          if (this.data.loveUrl == '../../../image/love.png' ){
+          if (this.data.loveUrl == '../../../image/love.png') {
             wx.showToast({
               title: '收藏成功',
               icon: 'success',
-              duration:1000
-            }) 
-          } else{
+              duration: 1000
+            })
+          } else {
             wx.showToast({
               title: '取消收藏',
               image: '../../../image/gth.png',
-              duration:1000
-            }) 
+              duration: 1000
+            })
           }
         }
-    })
+      })
+    }
+    
   },  
   getPro: function() {
     var self = this
