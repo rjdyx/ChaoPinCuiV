@@ -124,11 +124,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getPro()
+   
   },
   getPro: function () {
     //判断是否登录
-    if (app.globalData.userInfo.id == null || app.globalData.userInfo.id == undefined) {
+    if (app.globalData.userInfo.id == null || app.globalData.userInfo.id == undefined || app.globalData.userInfo.id == '') {
       wx.redirectTo({
         url: '../../loginOrregister/loginOrigister/loginOrigister',
       })
