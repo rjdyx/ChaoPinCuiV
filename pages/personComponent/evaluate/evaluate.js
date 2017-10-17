@@ -49,44 +49,51 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
-    wx.showToast({
-      title: '加载中',
-      icon:'loading',
-      duration:1000
-    })
-    setTimeout(function () {
-      wx.request({
-        url:that.data.https+'/api/home/user/' + app.globalData.userInfo.id + '/edit',
-        success: function (res) {
-          that.setData({
-            img: that.data.https + res.data.img,
-            userName: res.data.name
-          })
-        }
+    if (app.globalData.userInfo.id == null || app.globalData.userInfo.id == undefined || app.globalData.userInfo.id == '') {
+      wx.redirectTo({
+        url: '../../loginOrregister/loginOrigister/loginOrigister',
       })
-      wx.request({
-        url: that.data.https + '/api/home/comment',
-        method: 'GET',
-        data: {
-          user_id: app.globalData.userInfo.id,
-          openid: app.globalData.userInfo.openid
-        },
-        success: function (res) {
-          for (var i = 0; i < res.data.length; i++) {
-            if (res.data[i].img != null) {
-              res.data[i].img = res.data[i].img.split(',')
-            }
+    } else {
+      var that = this
+      wx.showToast({
+        title: '加载中',
+        icon: 'loading',
+        duration: 1000
+      })
+      setTimeout(function () {
+        wx.request({
+          url: that.data.https + '/api/home/user/' + app.globalData.userInfo.id + '/edit',
+          success: function (res) {
+            that.setData({
+              img: that.data.https + res.data.img,
+              userName: res.data.name
+            })
           }
-          that.setData({
-            prints: res.data
-          })
-          that.setData({
-            num: res.data.length
-          })
-        }
-      })
-    }, 1000)
+        })
+        wx.request({
+          url: that.data.https + '/api/home/comment',
+          method: 'GET',
+          data: {
+            user_id: app.globalData.userInfo.id,
+            openid: app.globalData.userInfo.openid
+          },
+          success: function (res) {
+            for (var i = 0; i < res.data.length; i++) {
+              if (res.data[i].img != null) {
+                res.data[i].img = res.data[i].img.split(',')
+              }
+            }
+            that.setData({
+              prints: res.data
+            })
+            that.setData({
+              num: res.data.length
+            })
+          }
+        })
+      }, 1000)
+    }
+    
   },
 
   /**

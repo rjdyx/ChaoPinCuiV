@@ -34,7 +34,7 @@
 				<block wx:for="{{category}}" wx:key="">
 					<navigator 
 					class="class_box" 
-					url="{{proListUrl + '?id=' + item.id + '&name=' + item.name}}">
+					url="{{proListUrl + '?category_id=' + item.id + '&name=' + item.name + '&type=category'}}">
 						{{item.name}}
 						<image class='hotIcon' src="../../../image/hot.png"></image>
 					</navigator>

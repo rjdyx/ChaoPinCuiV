@@ -108,7 +108,7 @@
 							<button class="comment_btn fr" data-url="comment" catch:tap="jumpFn">发表评论</button>
     					</view>
     					<view class="score">
-							<view>{{proInfo.comment}}分</view>
+							<view>{{proInfo.level}}分</view>
 							<view>{{totalCom}}条评论</view>
 							<view class="padding_top30">
 								<template is="star" data="{{...proInfo}}"/>
@@ -119,7 +119,7 @@
 										<view class="user_comment_item_t clear">
 											<image class="user_header fl" src="{{item.user_img ? https + item.user_img : '../../../image/d_header.png'}}"></image>
 											<view class="user_comment_item_t_r fl clear">
-												<text class="t">{{item.user_name}}</text>
+												<text class="t">{{item.anony ? item.anony : item.user_name}}</text>
 												<text class="t fr createdTime">{{item.created_at}}</text>
 												<template is="star" data="{{...item}}"/>
 											</view>
@@ -200,7 +200,7 @@
 											<text class="pro_name tv_el">{{item.name}}</text>
 											<view class="pro_distance">
 												<text class="tv_el">距离</text>
-												<text class="tv_el">{{item.dis}}</text>
+												<text class="tv_el">{{item.dis}}km</text>
 											</view>
 										</view>
 									</view>

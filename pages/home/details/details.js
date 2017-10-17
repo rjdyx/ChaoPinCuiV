@@ -16,7 +16,7 @@ Page({
     proImgs: [],        //产品图片列表
     nearbysProList: [], //附近产品列表
     tabArr: ['景点详情', '景点图片', '附近景点'],
-    star: 'AAAA',
+    star: '',
     isShowPop: {bol: false, type: 'source', title: ''},
     ifLove: false,
     loveUrl: '../../../image/no_love.png',
@@ -58,8 +58,14 @@ Page({
     interval: 5000,
     duration: 500,
     isShowComment: false, //是否显示评论页
+<<<<<<< HEAD
     current: 0,           //放大图片下标
     animationData: {}
+=======
+    current: 0,            //放大图片下标
+    curLat: '',
+    curLog: ''
+>>>>>>> 27fbaf197249505afd47f326b07046b6276269f2
   },
   // tab切换
   changeTabIndexFn(e) {
@@ -76,15 +82,15 @@ Page({
         })
       }
     } else if (e.target.dataset.id === 2) {
-      if (this.data.options.id !== 'undefined' && self.data.proInfo.meridian && self.data.proInfo.weft && !this.data.nearbysProList.length){
+      if (this.data.options.id !== 'undefined' && !this.data.nearbysProList.length){
         // 获取附近产品
-        APP.requestData(API.nearbysPro, {id: this.data.options.id, lon: self.data.proInfo.meridian, lat: self.data.proInfo.weft}, (err, data) =>{
+        APP.requestData(API.nearbysPro, {id: this.data.options.id}, (err, data) =>{
           if (data != undefined) {
             self.setData({
               "nearbysProList": data.data
             })
             self.data.nearbysProList.forEach((objItem, i) => {
-              self.data.nearbysProList[i].dis = Number(self.data.nearbysProList[i].dis).toFixed(2)
+              self.data.nearbysProList[i].dis = APP.getDistince(self.data.nearbysProList[i].weft,self.data.nearbysProList[i].meridian,self.data.curLat,self.data.curLog).toFixed(2)
             })
             self.setData({
               "nearbysProList": self.data.nearbysProList
@@ -121,7 +127,8 @@ Page({
         })
         break
       case 'products_list':
-        url = '../products_list/products_list?id=' + this.data.options.id + '&type=nearby' + '&name=更多附近' + this.data.proInfo.parent_name
+        url = '../products_list/products_list?id=' + this.data.proInfo.id + '&category_id=' + this.data.proInfo.category_id 
+            + '&parent_id=' + this.data.proInfo.parent_id + '&type=nearby' + '&name=更多附近' + this.data.proInfo.parent_name
         let pages = getCurrentPages()
         if (pages.length >= 4) {
             wx.redirectTo({
@@ -143,34 +150,41 @@ Page({
   },
   // 收藏
   loveFn: function(e){
-    if (this.data.loveUrl == '../../../image/no_love.png' ){
-      this.setData({
-        'loveUrl' : '../../../image/love.png',
-        'ifLove': true
-       })
-    } else{
-      this.setData({
-       'loveUrl' : '../../../image/no_love.png' ,
-       'ifLove': false
+    if (APP.globalData.userInfo.id == null || APP.globalData.userInfo.id == undefined || APP.globalData.userInfo.id == '') {
+      wx.redirectTo({
+        url: '../../loginOrregister/loginOrigister/loginOrigister',
       })
-    }
-    APP.requestData(API.collect, {openid: APP.globalData.userInfo.openid, user_id: APP.globalData.userInfo.id, product_id: this.data.options.id, type: this.data.ifLove}, (err, data) =>{
+    } else {
+      if (this.data.loveUrl == '../../../image/no_love.png') {
+        this.setData({
+          'loveUrl': '../../../image/love.png',
+          'ifLove': true
+        })
+      } else {
+        this.setData({
+          'loveUrl': '../../../image/no_love.png',
+          'ifLove': false
+        })
+      }
+      APP.requestData(API.collect, { openid: APP.globalData.userInfo.openid, user_id: APP.globalData.userInfo.id, product_id: this.data.options.id, type: this.data.ifLove }, (err, data) => {
         if (data != undefined) {
-          if (this.data.loveUrl == '../../../image/love.png' ){
+          if (this.data.loveUrl == '../../../image/love.png') {
             wx.showToast({
               title: '收藏成功',
               icon: 'success',
-              duration:1000
-            }) 
-          } else{
+              duration: 1000
+            })
+          } else {
             wx.showToast({
               title: '取消收藏',
               image: '../../../image/gth.png',
-              duration:1000
-            }) 
+              duration: 1000
+            })
           }
         }
-    })
+      })
+    }
+    
   },  
   getPro: function() {
     var self = this
@@ -186,17 +200,28 @@ Page({
             "proComment": data.comment.data,
             "proRecommend": data.recommend,
             "totalCom": data.comment.total,
-            "totalPage": data.comment.last_page
+            "totalPage": data.comment.last_page,
+            "allLevel": data.totalComment,
+            "star": self.getStar(data.info.star_rate)
           })
           self.footprintStorage()
+          var l = self.shiDataFun(Math.ceil(parseInt(self.data.allLevel)/self.data.totalCom))
           self.setData({
-            "proInfo.level": self.data.proInfo.comment,
+            "proInfo.level":  isNaN(l) ? 0 : l,
             "loveUrl": data.info.is_collect ? '../../../image/love.png' : '../../../image/no_love.png'
           })
           wx.setNavigationBarTitle({title: self.data.proInfo.category_name})
         }
       })
     }   
+  },
+  // 获取评分星级
+  getStar: function(star_rate) {
+    var star = ''
+    for(var i=0; i<star_rate; i++) {
+      star += 'A'
+    }
+    return star
   },
   // 图片放大
   imgBlowUpFn: function(e) {
@@ -215,11 +240,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var _this = this
     this.setData({
       "options": options
     })
     // 获取产品详情数据
     this.getPro()
+    // 获取当前的地理位置
+    wx.getLocation({
+      type: 'wgs84',
+      success: function(res) {
+        _this.data.curLat = res.latitude //纬度
+        _this.data.curLog = res.longitude //经度
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -395,6 +429,7 @@ Page({
   // 发布评论
   putOutCommentFn:function(){
   },
+<<<<<<< HEAD
   animationFn: function(op){
     var animation = wx.createAnimation({
       duration: 500,
@@ -405,5 +440,18 @@ Page({
     this.setData({
       animationData:animation.export()
     })        
+=======
+  // 取整十位数
+  shiDataFun: function (data) {
+    var newData
+    var s = parseInt(data/10)
+    var y = data%10
+    if (y>=5) {
+      newData = s*10+10
+    } else {
+      newData = s*10
+    }
+    return newData
+>>>>>>> 27fbaf197249505afd47f326b07046b6276269f2
   }
 })

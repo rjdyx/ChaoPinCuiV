@@ -98,16 +98,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
-    wx.showToast({
-      title: '加载中',
-      icon: 'loading',
-      duration: 1000,
-      mask: true
-    })
-    setTimeout(function(){
-      that.getStorageFoot()
-    },1000)
+    if (app.globalData.userInfo.id == null || app.globalData.userInfo.id == undefined || app.globalData.userInfo.id == '') {
+      wx.redirectTo({
+        url: '../../loginOrregister/loginOrigister/loginOrigister',
+      })
+    } else {
+      var that = this
+      wx.showToast({
+        title: '加载中',
+        icon: 'loading',
+        duration: 1000,
+        mask: true
+      })
+      setTimeout(function () {
+        that.getStorageFoot()
+      }, 1000)
+    }
+    
   },
   getStorageFoot: function () {
     var _this = this

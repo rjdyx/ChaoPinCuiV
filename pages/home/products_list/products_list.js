@@ -47,16 +47,14 @@ Page({
     wx.getLocation({
       type: 'wgs84',
       success: function(res) {
-        var latitude = res.latitude //纬度
-        var longitude = res.longitude //经度
-        self.data.curLat = latitude
-        self.data.curLog = longitude
+        self.data.curLat = res.latitude //纬度
+        self.data.curLog = res.longitude //经度
         var speed = res.speed
         var accuracy = res.accuracy
         var op = {
-          category_id:  options.id,
-          lon: longitude,
-          lat: latitude,
+          id: options.id,
+          category_id: options.category_id,
+          parent_id: options.parent_id,
           page: self.data.pageNum
         }
         if (options.type) {
@@ -95,7 +93,7 @@ Page({
           'totalPage': data.last_page
         })
         self.data.proLoadList.forEach((objItem, i) => {
-          self.data.proLoadList[i].dis = self.getDistince(self.data.proLoadList[i].weft,self.data.proLoadList[i].meridian,self.data.curLat,self.data.curLog).toFixed(2)
+          self.data.proLoadList[i].dis = APP.getDistince(self.data.proLoadList[i].weft,self.data.proLoadList[i].meridian,self.data.curLat,self.data.curLog).toFixed(2)
         })
         self.data.proLoadList = self.getSort(self.data.proLoadList)
         self.setData({
@@ -175,16 +173,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  },
-  // 经纬度距离(纬度，经度)
-  getDistince: function(lat1, lng1, lat2, lng2){
-    var radLat1 = lat1 * Math.PI / 180.0
-    var radLat2 = lat2 * Math.PI / 180.0
-    var a = radLat1 - radLat2
-    var b = lng1 * Math.PI / 180.0 - lng2 * Math.PI / 180.0
-    var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)))
-    s = s * 6378.137
-    s = Math.round(s * 10000) / 10000
-    return s
   }
 })

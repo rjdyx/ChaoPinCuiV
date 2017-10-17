@@ -15,8 +15,8 @@ Page({
     selectedSrc: '../../../image/allstar.png',
     halfSrc: '../../../image/halfstar.png',
     key: 0 ,//评分,
-    isUserName: true,
-    userNameCol: '#ff713f', //默认匿名
+    isUserName: false,
+    userNameCol: '#dcdcdc', //默认匿名
     options: {},
     imgArr: []
   },
@@ -48,7 +48,7 @@ Page({
       content: e.detail.value.content,
       level: this.data.key,
       img: '',
-      isUserName: this.data.userNameCol === '#ff713f' ? 0 : 1, // 匿名：不匿名,
+      isUserName: this.data.userNameCol === '#dcdcdc' ? 0 : 1, // 匿名：不匿名,
       user_id: APP.globalData.userInfo.id,
       openid:APP.globalData.userInfo.openid
     }
@@ -169,9 +169,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (APP.globalData.userInfo.id == null || APP.globalData.userInfo.id == undefined || APP.globalData.userInfo.id == '') {
+      wx.redirectTo({
+        url: '../../loginOrregister/loginOrigister/loginOrigister',
+      })
+    } 
     this.setData({
       "options": options
     })
+
   },
 
   /**
