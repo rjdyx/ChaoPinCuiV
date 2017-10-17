@@ -37,7 +37,7 @@ Page({
    */
   onLoad: function (options) {
     // 获取当前页面的路径
-    var url = getCurrentPages()[getCurrentPages().length - 1].__route__;
+    // var url = getCurrentPages()[getCurrentPages().length - 1].__route__;
     this.setData({
       userId: app.globalData.userInfo.id
     })
@@ -46,17 +46,23 @@ Page({
   // 预加载函数
   initData: function() {
     var userId = this.data.userId
-    if (userId!= '' && userId!=undefined) {
+    if (userId!= '' && userId!=undefined && userId!=null) {
       this.login(userId)
-    }
-    // 其他人还看了
-    app.requestData(API.categoryRand, {}, (err, data) =>{
-      if (data != undefined) {
-        this.setData({
-          "interset": data.data
+      // 其他人还看了
+      app.requestData(API.categoryRand, {}, (err, data) =>{
+        if (data != undefined) {
+          this.setData({
+            "interset": data.data
+          })
+        }
+      })
+    } else {
+      setTimeout(function() {
+        wx.navigateTo({
+          url: '../../loginOrregister/loginOrigister/loginOrigister',
         })
-      }
-    })
+      }, 1000*60)
+    }
   },
   catchTo: function(e){
     var data = e.currentTarget.dataset.url
@@ -123,7 +129,6 @@ Page({
     })
   },
   interestFn: function(){
-    console.log(55555)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

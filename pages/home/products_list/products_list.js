@@ -81,7 +81,7 @@ Page({
           'totalPage': data.last_page
         })
         self.data.proLoadList.forEach((objItem, i) => {
-          self.data.proLoadList[i].dis = self.getDistince(self.data.proLoadList[i].weft,self.data.proLoadList[i].meridian,self.data.curLat,self.data.curLog).toFixed(2)
+          self.data.proLoadList[i].dis = APP.getDistince(self.data.proLoadList[i].weft,self.data.proLoadList[i].meridian,self.data.curLat,self.data.curLog).toFixed(2)
         })
         self.data.proLoadList = self.getSort(self.data.proLoadList)
         self.setData({

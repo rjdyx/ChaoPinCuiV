@@ -50,6 +50,22 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    
+  },
+  swiperchange: function(e){
+    this.setData({
+      swiperCurrent: e.detail.current
+    })
+  },
+  toDetail: function(e) {
+    wx.navigateTo({
+      url: '../details/details?id=' + e.currentTarget.dataset.id
+    })
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
     var that = this
     wx.request({
       url: that.data.https+'/api/home/index/recommend', 
@@ -71,21 +87,6 @@ Page({
         })
       }
     })
-  },
-  swiperchange: function(e){
-    this.setData({
-      swiperCurrent: e.detail.current
-    })
-  },
-  toDetail: function(e) {
-    wx.navigateTo({
-      url: '../details/details?id=' + e.currentTarget.dataset.id
-    })
-  },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
   },
 
   /**

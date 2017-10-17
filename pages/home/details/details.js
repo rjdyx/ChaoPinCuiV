@@ -82,8 +82,9 @@ Page({
             self.setData({
               "nearbysProList": data.data
             })
+            console.log(self.data.proInfo.weft)
             self.data.nearbysProList.forEach((objItem, i) => {
-              self.data.nearbysProList[i].dis = Number(self.data.nearbysProList[i].dis).toFixed(2)
+              self.data.nearbysProList[i].dis = APP.getDistince(self.data.nearbysProList[i].weft,self.data.nearbysProList[i].meridian,self.data.proInfo.weft,self.data.proInfo.meridian).toFixed(2)
             })
             self.setData({
               "nearbysProList": self.data.nearbysProList
