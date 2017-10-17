@@ -57,15 +57,11 @@ Page({
     autoplay: false,
     interval: 5000,
     duration: 500,
-    isShowComment: false, //是否显示评论页
-<<<<<<< HEAD
-    current: 0,           //放大图片下标
-    animationData: {}
-=======
+    isShowComment: false, //是否显示评论页        //放大图片下标
+    animationData: {},
     current: 0,            //放大图片下标
     curLat: '',
     curLog: ''
->>>>>>> 27fbaf197249505afd47f326b07046b6276269f2
   },
   // tab切换
   changeTabIndexFn(e) {
@@ -429,7 +425,6 @@ Page({
   // 发布评论
   putOutCommentFn:function(){
   },
-<<<<<<< HEAD
   animationFn: function(op){
     var animation = wx.createAnimation({
       duration: 500,
@@ -439,8 +434,8 @@ Page({
     animation.opacity(op).step()
     this.setData({
       animationData:animation.export()
-    })        
-=======
+    })    
+  },
   // 取整十位数
   shiDataFun: function (data) {
     var newData
@@ -452,6 +447,5 @@ Page({
       newData = s*10
     }
     return newData
->>>>>>> 27fbaf197249505afd47f326b07046b6276269f2
   }
 })
