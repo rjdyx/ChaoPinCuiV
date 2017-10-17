@@ -48,7 +48,17 @@ Page({
     isLoading: false,
     proLoadList: [],
     totalCom: 0,
-    totalPage: 0
+    totalPage: 0,
+    isImgBlowUp: false, // 是否图片放大
+    ImgBlowUpUrl: '',   // 图片放大的那张地址
+    imgNum: '',
+    ImgBlowUpIndex: {bigi: 0, smalli: 0},
+    indicatorDots: false,
+    autoplay: false,
+    interval: 5000,
+    duration: 500,
+    isShowComment: false, //是否显示评论页
+    current: 0            //放大图片下标
   },
   // tab切换
   changeTabIndexFn(e) {
@@ -187,6 +197,19 @@ Page({
       })
     }   
   },
+  // 图片放大
+  imgBlowUpFn: function(e) {
+    var i1 = e.currentTarget.dataset.bigi
+    var i2 = e.currentTarget.dataset.smalli
+    this.setData({
+      'ImgBlowUpIndex.bigi': i1,
+      'ImgBlowUpIndex.smalli': i2,
+      'isImgBlowUp': e.currentTarget.dataset.bol,
+      'current': i2 
+      // ,
+      // 'imgNum': e.currentTarget.dataset.bol ? (i2 + 1) + '/' + this.data.proComment[i1].img.length : 0
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -197,7 +220,6 @@ Page({
     // 获取产品详情数据
     this.getPro()
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

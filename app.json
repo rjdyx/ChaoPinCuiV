@@ -22,7 +22,7 @@
     "navigationBarBackgroundColor": "#ffd102",
     "navigationBarTitleText": "潮品萃",
     "navigationBarTextStyle": "black",
-    "onReachBottomDistance": "0"
+    "onReachBottomDistance": "50"
   },
   "tabBar": {
     "color": "#000000",

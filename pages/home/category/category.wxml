@@ -12,23 +12,18 @@
 				<form>
 				<view class="search_icon fl">
 					<image src="../../../image/search.png"></image>
-					<button 
-					class="submitBtn" 
-					formType="submit"
-					></button>
 				</view>
-	            <input placeholder="请输入你想了解的{{options.name}}" type="text" class="fl" name="searchName" catch:tap="showSearchPageFn"/>
+	            <input placeholder="请输入你想了解的{{options.name}}" type="text" class="fl" name="searchName" catch:tap="showSearchPageFn" disabled="true"/>
 	            </form>
 	        </view>
 
 	        <!-- 推荐产品 -->
-	        <view class="bgName">
-	        	<text class="tv_el dis_ib">{{product.name}}</text>
-	        	<image 
-	        	src="../../../image/downward.png" 
+	        <view class="bgName"
 	        	data-url="details" 
 	        	catch:tap="jumpFn" 
 	        	data-id="{{product.id}}">
+	        	<text class="tv_el dis_ib">{{product.name}}</text>
+	        	<image src="../../../image/downward.png">
 	        	</image>
 	        </view>
 		</view>
@@ -39,7 +34,7 @@
 				<block wx:for="{{category}}" wx:key="">
 					<navigator 
 					class="class_box" 
-					url="{{proListUrl + '?id=' + item.pid + '&name=' + item.name}}">
+					url="{{proListUrl + '?id=' + item.id + '&name=' + item.name}}">
 						{{item.name}}
 						<image class='hotIcon' src="../../../image/hot.png"></image>
 					</navigator>
