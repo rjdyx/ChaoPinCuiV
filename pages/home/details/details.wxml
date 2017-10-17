@@ -108,7 +108,7 @@
 							<button class="comment_btn fr" data-url="comment" catch:tap="jumpFn">发表评论</button>
     					</view>
     					<view class="score">
-							<view>{{proInfo.comment}}分</view>
+							<view>{{proInfo.level}}分</view>
 							<view>{{totalCom}}条评论</view>
 							<view class="padding_top30">
 								<template is="star" data="{{...proInfo}}"/>
@@ -200,7 +200,7 @@
 											<text class="pro_name tv_el">{{item.name}}</text>
 											<view class="pro_distance">
 												<text class="tv_el">距离</text>
-												<text class="tv_el">{{item.dis}}</text>
+												<text class="tv_el">{{item.dis}}km</text>
 											</view>
 										</view>
 									</view>

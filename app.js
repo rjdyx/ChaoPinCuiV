@@ -96,6 +96,7 @@ App({
     })
   },
   check: function () {
+    var that = this
     var openUserId = wx.getStorageSync('user')
     wx.request({
       url: 'https://cpc.find360.cn/api/home/wx/check',
