@@ -4,34 +4,41 @@ Page({
     https: 'https://cpc.find360.cn/'
   },
   onLoad: function(e) {
-    this.WxValidate = app.WxValidate({
+    if (app.globalData.userInfo.id == null || app.globalData.userInfo.id == undefined || app.globalData.userInfo.id == '') {
+      wx.redirectTo({
+        url: '../../loginOrregister/loginOrigister/loginOrigister',
+      })
+    } else {
+      this.WxValidate = app.WxValidate({
         orin_pass: {
-            required: true
+          required: true
         },
         now_pass: {
-            required: true,
-            minlength: 9,
-            alnum: true
+          required: true,
+          minlength: 9,
+          alnum: true
         },
         now_pass_rep: {
-            required: true,
-            equalTo: 'now_pass'
+          required: true,
+          equalTo: 'now_pass'
         }
-    },
-    {
-        orin_pass: {
+      },
+        {
+          orin_pass: {
             required: '请输入当前密码'
-        },
-        now_pass: {
+          },
+          now_pass: {
             required: '请输入修改密码',
             minlength: '密码最小为9位',
             alnum: '输入字母和数字'
-        },
-        now_pass_rep: {
+          },
+          now_pass_rep: {
             required: '请再次输入密码',
             equalTo: '两次密码不一致'
-        }
-    })
+          }
+        })
+    }
+    
   },
   bindPickerChange: function (e) {
     this.setData({

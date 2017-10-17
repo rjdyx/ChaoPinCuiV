@@ -107,5 +107,12 @@ Page({
             })  
         }
     },'POST')
+    },
+  onLoad: function() {
+    if (APP.globalData.userInfo.id == null || APP.globalData.userInfo.id == undefined || APP.globalData.userInfo.id == '') {
+        wx.redirectTo({
+          url: '../../loginOrregister/loginOrigister/loginOrigister',
+        })
+      }
     }
 })
