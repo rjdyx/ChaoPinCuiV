@@ -36,12 +36,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 获取当前页面的路径
-    var url = getCurrentPages()[getCurrentPages().length - 1].__route__;
-    this.setData({
-      userId: app.globalData.userInfo.id
-    })
-    this.initData()
+    //判断是否登录
+    if (app.globalData.userInfo.id == null || app.globalData.userInfo.id == undefined) {
+      wx.redirectTo({
+        url: '../../loginOrregister/loginOrigister/loginOrigister',
+      })
+    } else {
+      this.setData({
+        userId: app.globalData.userInfo.id
+      })
+      this.initData()
+    }
   },
   // 预加载函数
   initData: function() {
@@ -74,7 +79,7 @@ Page({
   login: function(userId) {
     var that = this
     wx.request({
-      url: 'https://cpc.find360.cn/api/home/user/' + userId + '/edit',
+      url: that.apiUrl+'/api/home/user/' + userId + '/edit',
       success: function (res) {
         that.setData({
           img: 'https://cpc.find360.cn/' + res.data.img,

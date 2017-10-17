@@ -16,21 +16,23 @@
   flex-direction: row;
 }
 .user-avatar{
-  width: 34%; 
-  height: 100%;
+  width: 160rpx; 
+  height: 160rpx;
+  border-radius: 50px;
+  
+  margin-top: 20rpx;
+  margin-left: 52rpx;
+  border: 5px solid #fff;
 }
 .user-avatar image{
   width: 160rpx;
   height: 160rpx;
   border-radius: 50px;
-  border: 5px solid #fff;
   display: block;
-  margin-top: 20rpx;
-  margin-left: 52rpx;
 }
 .user-msg{
     width: 60%;  
-    padding: 50rpx 0;
+    padding: 50rpx 20rpx;
     font-size: 30rpx;
 }
 .user-msg text{

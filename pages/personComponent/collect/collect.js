@@ -133,9 +133,6 @@ Page({
         url: '../../loginOrregister/loginOrigister/loginOrigister',
       })
     } else {
-      // 获取当前页面的路径
-      var url = getCurrentPages()[getCurrentPages().length - 1].__route__;
-      wx.setStorageSync('currentUrl', url)
       //请求数据
       var _this = this
       _this.getMsg()
