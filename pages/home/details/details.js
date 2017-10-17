@@ -200,8 +200,9 @@ Page({
             "allLevel": data.totalComment
           })
           self.footprintStorage()
+          var l = self.shiDataFun(Math.ceil(parseInt(self.data.allLevel)/self.data.totalCom))
           self.setData({
-            "proInfo.level": self.shiDataFun(Math.ceil(parseInt(self.data.allLevel)/self.data.totalCom)),
+            "proInfo.level":  isNaN(l) ? 0 : l,
             "loveUrl": data.info.is_collect ? '../../../image/love.png' : '../../../image/no_love.png'
           })
           wx.setNavigationBarTitle({title: self.data.proInfo.category_name})
