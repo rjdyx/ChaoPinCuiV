@@ -19,6 +19,9 @@ Page({
     paraObj[objId] = event.detail.value
     this.setData(paraObj)
   },
+  toIndex: function() {
+    app.homeUrl()
+  },
   formSubmit: function(e) {
     var that = this
     var openid = wx.getStorageSync('user')

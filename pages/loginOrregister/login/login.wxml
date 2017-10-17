@@ -10,7 +10,7 @@
     <button class='loginBtn' formType="submit">登录</button>
     
     <view class='forget'>
-      <text>随意游览</text>
+      <text bindtap="toIndex">随意游览</text>
       <text>忘记密码？</text>
     </view>
 
