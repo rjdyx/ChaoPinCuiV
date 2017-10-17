@@ -58,7 +58,8 @@ Page({
     interval: 5000,
     duration: 500,
     isShowComment: false, //是否显示评论页
-    current: 0            //放大图片下标
+    current: 0,           //放大图片下标
+    animationData: {}
   },
   // tab切换
   changeTabIndexFn(e) {
@@ -348,6 +349,7 @@ Page({
       "isShowPop.title": this.data.proInfo.name + '历史来源',
       "isShowPop.type": 'source'
     })
+    this.animationFn(1)
   },
   // 查看地图
   lookMapFn () {
@@ -374,12 +376,14 @@ Page({
       'markers[0].longitude': self.data.proInfo.meridian,
       'markers[0].latitude': self.data.proInfo.weft
     })
+    this.animationFn(1)
   },
   // 关闭弹窗
   closeFn () {
     this.setData({
       "isShowPop.bol": false
     })
+    this.animationFn(0)
   },
   // 地图方法
   gionchange(e) {
@@ -390,5 +394,16 @@ Page({
   },
   // 发布评论
   putOutCommentFn:function(){
+  },
+  animationFn: function(op){
+    var animation = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease',
+    })
+    this.animation = animation
+    animation.opacity(op).step()
+    this.setData({
+      animationData:animation.export()
+    })        
   }
 })
