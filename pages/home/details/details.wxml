@@ -119,7 +119,7 @@
 										<view class="user_comment_item_t clear">
 											<image class="user_header fl" src="{{item.user_img ? https + item.user_img : '../../../image/d_header.png'}}"></image>
 											<view class="user_comment_item_t_r fl clear">
-												<text class="t">{{item.user_name}}</text>
+												<text class="t">{{item.anony ? item.anony : item.user_name}}</text>
 												<text class="t fr createdTime">{{item.created_at}}</text>
 												<template is="star" data="{{...item}}"/>
 											</view>

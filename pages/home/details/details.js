@@ -16,7 +16,7 @@ Page({
     proImgs: [],        //产品图片列表
     nearbysProList: [], //附近产品列表
     tabArr: ['景点详情', '景点图片', '附近景点'],
-    star: 'AAAA',
+    star: '',
     isShowPop: {bol: false, type: 'source', title: ''},
     ifLove: false,
     loveUrl: '../../../image/no_love.png',
@@ -114,7 +114,6 @@ Page({
   },
   jumpFn: function(e){
     var url = ''
-    // return false
     switch (e.currentTarget.dataset.url) {
       case 'details':
         url = '../details/details?id=' + e.currentTarget.dataset.id
@@ -197,7 +196,8 @@ Page({
             "proRecommend": data.recommend,
             "totalCom": data.comment.total,
             "totalPage": data.comment.last_page,
-            "allLevel": data.totalComment
+            "allLevel": data.totalComment,
+            "star": self.getStar(data.info.star_rate)
           })
           self.footprintStorage()
           var l = self.shiDataFun(Math.ceil(parseInt(self.data.allLevel)/self.data.totalCom))
@@ -209,6 +209,14 @@ Page({
         }
       })
     }   
+  },
+  // 获取评分星级
+  getStar: function(star_rate) {
+    var star = ''
+    for(var i=0; i<star_rate; i++) {
+      star += 'A'
+    }
+    return star
   },
   // 图片放大
   imgBlowUpFn: function(e) {
