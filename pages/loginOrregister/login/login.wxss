@@ -54,7 +54,7 @@
   float: right;
 }
 .forget text:last-child{
-  padding-right: 95rpx;
+  /* padding-right: 95rpx; */
 }
 .recommand{
   width:91%;
