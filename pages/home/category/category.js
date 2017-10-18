@@ -53,7 +53,8 @@ Page({
     if (e.detail.value) {
       var timer = setTimeout(() => {
         this.setData({
-          "searchOp.category_id": this.data.options.id,
+          "searchOp.id": this.data.options.id,
+          // "searchOp.category_id": this.data.options.id,
           "searchOp.type": "search",
           "searchOp.name": e.detail.value
         })
