@@ -25,7 +25,6 @@ Page({
   },
   // 跳转
   productSkip: function (e) {
-    console.log(e)
     wx.navigateTo({
       url: '../../home/details/details?id='+ e.currentTarget.dataset.pid
     })
@@ -97,7 +96,6 @@ Page({
       },
       method: 'get',
       success: function (res) {
-        console.log(res)
         if (res.data) {
           _this.data.prints.splice(e.currentTarget.dataset.index, 1)
           _this.setData({
@@ -155,6 +153,13 @@ Page({
         },
         method: 'GET',
         success: function (res) {
+          for (var i in res.data) {
+            if (res.data[i].total == null) {
+              res.data[i].total = 0
+            }
+            var c = app.shiDataFun(Math.ceil(parseInt(res.data[i].total)/parseInt(res.data[i].num)))
+            res.data[i]['comment'] = isNaN(c) ? 0 : c
+          }
           that.setData({
             prints: res.data
           })
