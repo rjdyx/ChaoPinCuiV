@@ -69,6 +69,20 @@ Page({
         self.dataLoadFn()
       }
     })
+
+    // ----------------------
+    wx.getSetting({
+      success: (res) => {
+        /*
+         * res.authSetting = {
+         *   "scope.userInfo": true,
+         *   "scope.userLocation": true
+         * }
+         */
+        console.log(res)
+      }
+    })
+    // ---------------------- 
   },
   dataLoadFn: function(){
     var self = this

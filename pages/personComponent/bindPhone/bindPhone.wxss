@@ -1,0 +1,6 @@
+.contact{
+  text-align: center;
+  font-size: 28rpx;
+  color: #ccc;
+  padding-top: 50rpx;
+}

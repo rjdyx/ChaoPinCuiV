@@ -218,7 +218,7 @@
     </view>
 
     <!-- 弹出框 -->
-    <view class="pop_up_wrap" wx:if="{{isShowPop.bol}}">
+    <view animation="{{animationData}}" class="pop_up_wrap" wx:if="{{isShowPop.bol}}">
 		<view class="pop_up_inner">
 			<image class="close_icon" catchtap="closeFn" src="../../../image/x.png"></image>
 			<view class="pop_up_title">{{isShowPop.title}}</view>
