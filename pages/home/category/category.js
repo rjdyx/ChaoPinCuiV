@@ -76,7 +76,6 @@ Page({
   },
   // 搜索
   formSearch: function (e){
-    console.log(e.detail.value)
     if(e.detail.value.searchName){
       var url = this.data.proListUrl + '?id=' + this.data.options.id + '&type=search'+ '&name=搜索' + this.data.options.name + '&searchName=' + e.detail.value.searchName
       let pages = getCurrentPages()
@@ -99,7 +98,6 @@ Page({
   },
   // 取消搜索
   cancelSearchFn: function () {
-    console.log(44)
     this.setData({
       'isShowSearch': false
     })
@@ -136,7 +134,6 @@ Page({
     // 当前分类下的二级分类
     APP.requestData(API.categoryChild, {pid: options.id}, (err, data) =>{
       if (data != undefined) {
-        console.log(data)
         self.setData({
           "category": data
         })

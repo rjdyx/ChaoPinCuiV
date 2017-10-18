@@ -51,7 +51,7 @@ Page({
   // 预加载函数
   initData: function() {
     var userId = this.data.userId
-    if (userId!= '' && userId!=undefined) {
+    if (userId!= '' && userId!=undefined && userId!=null) {
       this.login(userId)
     }
     // 其他人还看了
@@ -131,7 +131,6 @@ Page({
     })
   },
   interestFn: function(){
-    console.log(55555)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
