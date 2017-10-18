@@ -124,6 +124,9 @@ Page({
           name : '',
           openid: ''              
         }
+        setTimeout(function(){
+          app.homeUrl()
+        },1000)
       }
     })
   },

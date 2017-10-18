@@ -11,7 +11,7 @@
     
     <view class='forget'>
       <text bindtap="toIndex">随意游览</text>
-      <text>忘记密码？</text>
+      <!-- <text>忘记密码？</text> -->
     </view>
 
     <!-- <view class='recommand'>

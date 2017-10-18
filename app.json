@@ -15,7 +15,8 @@
     "pages/personComponent/footprint/footprint",
     "pages/personComponent/aboutUs/aboutUs",
     "pages/personComponent/resetPass/resetPass",
-    "pages/personComponent/editMsg/editMsg"
+    "pages/personComponent/editMsg/editMsg",
+    "pages/personComponent/bindPhone/bindPhone"
   ],
   "window": {
     "backgroundTextStyle": "light",
