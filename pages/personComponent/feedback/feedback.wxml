@@ -6,7 +6,7 @@
       <block wx:for-items="{{pics}}" wx:for-item="image" wx:key="name">
         <image src="{{image}}" class="images-image" data-src="{{image}}" bindtap="previewImage"></image>
       </block>
-      <text class="images-image images-image-plus" bindtap="chooseImage"></text>
+      <text class="images-image images-image-plus" bindtap="chooseImage" wx:if="{{showAdd}}"></text>
     </view>
   </view>
 

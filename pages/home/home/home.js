@@ -87,8 +87,6 @@ Page({
     wx.request({
       url: that.data.https+'/api/home/index/turns',
       success: function(res){
-        console.log('//////////////')
-        console.log(res)
         that.setData({
           'banners': res.data.data
         })

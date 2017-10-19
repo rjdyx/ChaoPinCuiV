@@ -47,6 +47,7 @@ Page({
     wx.request({
       url: url,
       success: function(res){
+        console.log(res)
             that.setData({
                 img: res.data.img,
                 name: res.data.name,
