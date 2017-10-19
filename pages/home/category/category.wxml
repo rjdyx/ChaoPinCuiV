@@ -76,7 +76,10 @@
     		</view>
     	</view>
     </view>
+
+    <!-- 其他人还看了 -->
 	<template is="looked" data="{{other,categoryUrl}}"/>
+
 	<!-- 搜索层 -->
 	<include wx:if="{{isShowSearch}}" src="../search/search.wxml"/>
 </view>
