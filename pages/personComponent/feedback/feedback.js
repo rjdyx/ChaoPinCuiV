@@ -39,6 +39,11 @@ Page({
   onShareAppMessage: function () {
   },
   formSubmit: function(e){
+    if (!this.WxValidate.checkForm(e)) {
+        const error = this.WxValidate.errorList[0]
+        APP.showToast(error.msg,'../../../image/gth.png',2000)
+        return false
+    }
     var that = this
     var form = {
       content: e.detail.value.content,
@@ -109,6 +114,16 @@ Page({
     },'POST')
     },
   onLoad: function() {
+    this.WxValidate = APP.WxValidate({
+        content: {
+            required: true
+        }
+    },
+    {
+        content: {
+            required: '请输入意见内容'
+        }
+    })
     if (APP.globalData.userInfo.id == null || APP.globalData.userInfo.id == undefined || APP.globalData.userInfo.id == '') {
         wx.redirectTo({
           url: '../../loginOrregister/loginOrigister/loginOrigister',
