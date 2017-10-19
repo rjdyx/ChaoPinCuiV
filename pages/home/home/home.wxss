@@ -75,7 +75,7 @@
 .recommandTitle{
   width: 65%;
   border-top: 1px solid #95e1eb;
-  margin: 1.3rem auto;
+  margin: 55rpx auto;
   line-height: 1.6em;
   text-align: center;
 }

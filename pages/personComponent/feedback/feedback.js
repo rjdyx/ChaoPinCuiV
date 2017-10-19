@@ -6,7 +6,8 @@ Page({
     srcUrl: '',
     pics:[],
     content: '',
-    showAdd: true
+    showAdd: true,
+    addText:'添加图片'
   },
   imgStr: '',
   key: 0,
@@ -29,6 +30,9 @@ Page({
             showAdd: false
           })
         }
+        that.setData({
+          addText: that.data.pics.length + '/3'
+        })
       },
       fail: function () {
       },

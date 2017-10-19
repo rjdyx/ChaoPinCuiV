@@ -23,8 +23,9 @@
   height: 150rpx;
   margin: 10rpx;
   border-radius: 15rpx;
-  text-align: center;
-  line-height: 137rpx;
+   text-align: center; 
+   line-height:109rpx; 
+  position: relative;
 }
 .images-image-plus{
   border: 1px solid #999;
@@ -46,4 +47,12 @@
 .send{
   width: 92%;
   background: #fed555;
+}
+.add{
+  width: 100%;
+  left:0; 
+  position: absolute;
+  bottom:-11rpx;
+  color: #b5b5b7;
+  font-size: 26rpx;
 }
