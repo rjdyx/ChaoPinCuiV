@@ -40,7 +40,7 @@
   </view> 
   <view class='relist'>
      <block wx:for="{{list}}" wx:key="name"> 
-      <view class="list-item" catchtap='catchTapCategory' data-type="{{item.name}}" data-typeid="{{item.id}}">  
+      <view class="list-item" data-type="{{item.name}}" data-typeid="{{item.id}}">  
           <image src='https://cpc.find360.cn/{{item.img}}' class='list-image'></image>  
          <text bindtap="toDetail" data-id="{{item.id}}">{{item.name}}</text> 
       </view>
