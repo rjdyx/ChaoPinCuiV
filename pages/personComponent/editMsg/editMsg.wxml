@@ -61,7 +61,7 @@
     <picker mode="date" value="{{age}}" start="1905-09-01" end="2017-09-01" bindchange="bindDateChange" class="input common" name="age">
       <view class="section__title">出生日期</view>
         <view class="picker">
-            {{age}}
+            {{age!=null?age:'2017-02-01'}}
         </view>
         <image src="../../../image/arrow_down.png" class="arrow"></image>
     </picker>

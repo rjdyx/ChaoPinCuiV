@@ -10,11 +10,11 @@
             </block>
         </swiper>
 
-         <view class="dots">  
+         <!-- <view class="dots">  
             <block wx:for="{{banners}}" wx:key="unique">  
                 <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>  
             </block>  
-        </view> 
+        </view>  -->
    </view>
 
 <!-- 分类导航 -->
