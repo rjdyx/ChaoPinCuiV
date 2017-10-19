@@ -8,13 +8,14 @@
 			</image>
 
 			<!-- 搜索框 -->
-			<view class="search clear">
-				<form>
+			<view class="search">
+				<form class="clear" >
 				<view class="search_icon fl">
 					<image src="../../../image/search.png"></image>
 				</view>
-	            <input placeholder="请输入你想了解的{{options.name}}" type="text" class="fl" name="searchName" catch:tap="showSearchPageFn" disabled="true"/>
+	            <input placeholder="请输入你想了解的{{options.name}}" type="text" class="fl" name="searchName"  disabled="true"/>
 	            </form>
+	            <view class="mark" catch:tap="showSearchPageFn"></view>
 	        </view>
 
 	        <!-- 推荐产品 -->

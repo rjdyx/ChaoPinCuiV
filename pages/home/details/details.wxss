@@ -146,11 +146,10 @@
 	padding-top: 20rpx;
 }
 .comment .comment_btn{
-	width: 200rpx;
+	width: 210rpx;
 	height: 70rpx;
 	background: #fccf52;
 	color: #fff;
-	text-align: center;
 	line-height: 70rpx;
 }
 .score>view:nth-of-type(1){
