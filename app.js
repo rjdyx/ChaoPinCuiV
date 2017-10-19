@@ -132,5 +132,17 @@ App({
     s = s * 6378.137
     s = Math.round(s * 10000) / 10000
     return s
+  },
+  // 取整十位数
+  shiDataFun: function (data) {
+    var newData
+    var s = parseInt(data/10)
+    var y = data%10
+    if (y>=5) {
+      newData = s*10+10
+    } else {
+      newData = s*10
+    }
+    return newData
   }
 })

@@ -138,20 +138,28 @@ Page({
   },
   getMsg: function () {
     var that = this
-    wx.request({
-      url: 'https://cpc.find360.cn/api/home/collect',
-      data: {
-        openid: app.globalData.userInfo.openid,
-        user_id: app.globalData.userInfo.id
-      },
-      method: 'GET',
-      success: function (res) {
-        console.log(res)
-        that.setData({
-          prints: res.data
-        })
-      }
-    })
+    setTimeout(function(){
+      wx.request({
+        url: app.globalData.apiUrl+'/api/home/collect',
+        data: {
+          openid: app.globalData.userInfo.openid,
+          user_id: app.globalData.userInfo.id
+        },
+        method: 'GET',
+        success: function (res) {
+          for (var i in res.data) {
+            if (res.data[i].total == null) {
+              res.data[i].total = 0
+            }
+            var c = app.shiDataFun(Math.ceil(parseInt(res.data[i].total)/parseInt(res.data[i].num)))
+            res.data[i]['comment'] = isNaN(c) ? 0 : c
+          }
+          that.setData({
+            prints: res.data
+          })
+        }
+      })
+    },1000)
   },
   //向下滚动
   lower: function () {

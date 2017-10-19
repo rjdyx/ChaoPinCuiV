@@ -201,7 +201,7 @@ Page({
             "star": self.getStar(data.info.star_rate)
           })
           self.footprintStorage()
-          var l = self.shiDataFun(Math.ceil(parseInt(self.data.allLevel)/self.data.totalCom))
+          var l = APP.shiDataFun(Math.ceil(parseInt(self.data.allLevel)/self.data.totalCom))
           self.setData({
             "proInfo.level":  isNaN(l) ? 0 : l,
             "loveUrl": data.info.is_collect ? '../../../image/love.png' : '../../../image/no_love.png'
@@ -435,17 +435,5 @@ Page({
     this.setData({
       animationData:animation.export()
     })    
-  },
-  // 取整十位数
-  shiDataFun: function (data) {
-    var newData
-    var s = parseInt(data/10)
-    var y = data%10
-    if (y>=5) {
-      newData = s*10+10
-    } else {
-      newData = s*10
-    }
-    return newData
   }
 })
