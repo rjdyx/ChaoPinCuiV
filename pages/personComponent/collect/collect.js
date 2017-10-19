@@ -1,5 +1,4 @@
 var app = getApp()
-import API from '../../../utils/api.js';
 Page({
 
   /**
@@ -25,9 +24,8 @@ Page({
   },
   // 跳转
   productSkip: function (e) {
-    console.log(e)
     wx.navigateTo({
-      url: '../../home/details/details?id='+ e.currentTarget.dataset.pid
+      url: '../../home/details/details?id=' + e.currentTarget.dataset.pid
     })
   },
   selectLeft: function (e) {
@@ -50,6 +48,7 @@ Page({
   },
   //滑动事件处理
   touchmove: function (e) {
+    console.log(e)
     var that = this,
       index = e.currentTarget.dataset.index,//当前索引
       startX = that.data.startX,//开始X坐标
@@ -58,15 +57,15 @@ Page({
       touchMoveY = e.changedTouches[0].clientY,//滑动变化坐标
       //获取滑动角度
       angle = that.angle({ X: startX, Y: startY }, { X: touchMoveX, Y: touchMoveY });
-      that.data.prints.forEach(function (v, i) {
-        v.isTouchMove = false
-        //滑动超过30度角 return
-        if (Math.abs(angle) > 30) return;
-        if (i == index) {
-          if (touchMoveX > startX) //右滑
-            v.isTouchMove = false
-          else //左滑
-            v.isTouchMove = true
+    that.data.prints.forEach(function (v, i) {
+      v.isTouchMove = false
+      //滑动超过30度角 return
+      if (Math.abs(angle) > 30) return;
+      if (i == index) {
+        if (touchMoveX > startX) //右滑
+          v.isTouchMove = false
+        else //左滑
+          v.isTouchMove = true
       }
     })
     //更新数据
@@ -87,17 +86,13 @@ Page({
   },
   //删除事件
   del: function (e) {
+    console.log(e)
     var _this = this
     wx.request({
-      url: API.collect,
-      data: {
-        user_id: app.globalData.userInfo.id, 
-        product_id: e.currentTarget.dataset.pid,
-        type: 'false'
-      },
-      method: 'get',
+      url: 'https://cpc.find360.cn/api/home/collect/' + e.currentTarget.dataset.pid,
+      data: {},
+      method: 'DELETE',
       success: function (res) {
-        console.log(res)
         if (res.data) {
           _this.data.prints.splice(e.currentTarget.dataset.index, 1)
           _this.setData({
@@ -107,14 +102,14 @@ Page({
             title: '取消成功',
             icon: 'succes',
             duration: 1000,
-            mask:true
+            mask: true
           })
         } else {
           wx.showToast({
             title: '取消失败',
             icon: 'succes',
             duration: 1000,
-            mask:true
+            mask: true
           })
         }
       }
@@ -124,55 +119,51 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+    this.getPro()
   },
   getPro: function () {
     //判断是否登录
-    if (app.globalData.userInfo.id == null || app.globalData.userInfo.id == undefined || app.globalData.userInfo.id == '') {
+    if (app.globalData.userInfo.id == null || app.globalData.userInfo.id == undefined) {
       wx.redirectTo({
         url: '../../loginOrregister/loginOrigister/loginOrigister',
       })
     } else {
+      // 获取当前页面的路径
+      var url = getCurrentPages()[getCurrentPages().length - 1].__route__;
+      wx.setStorageSync('currentUrl', url)
       //请求数据
       var _this = this
       _this.getMsg()
     }
   },
-  getMsg: function(){
+  getMsg: function () {
     var that = this
-    wx.showToast({
-      title: '加载中',
-      icon: 'loading',
-      duration: 1000,
-      mask: true
+    wx.request({
+      url: 'https://cpc.find360.cn/api/home/collect',
+      data: {
+        openid: app.globalData.userInfo.openid,
+        user_id: app.globalData.userInfo.id
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          prints: res.data
+        })
+      }
     })
-    setTimeout(function(){
-      wx.request({
-        url: app.globalData.apiUrl+'/api/home/collect',
-        data: {
-          openid: app.globalData.userInfo.openid,
-          user_id: app.globalData.userInfo.id
-        },
-        method: 'GET',
-        success: function (res) {
-          that.setData({
-            prints: res.data
-          })
-        }
-      })
-    },1000)
   },
   //向下滚动
   lower: function () {
     wx.showNavigationBarLoading();
     var that = this;
-    setTimeout(function () { 
-      wx.hideNavigationBarLoading(); 
-      that.nextLoad(); 
+    setTimeout(function () {
+      wx.hideNavigationBarLoading();
+      that.nextLoad();
     }, 1000);
   },
   //向下刷新
-  nextLoad: function(){
+  nextLoad: function () {
     var that = this
     wx.showToast({
       title: '刷新中',

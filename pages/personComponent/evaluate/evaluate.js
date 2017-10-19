@@ -64,6 +64,7 @@ Page({
         wx.request({
           url: that.data.https + '/api/home/user/' + app.globalData.userInfo.id + '/edit',
           success: function (res) {
+            console.log(res)
             that.setData({
               img: that.data.https + res.data.img,
               userName: res.data.name
