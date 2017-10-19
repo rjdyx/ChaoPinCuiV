@@ -21,7 +21,11 @@ Page({
   navs: [],
   list: [],
   },
-  catchTapCategory: function () {
+  catchTapCategory: function (e) {
+    console.log(e)
+    wx.navigateTo({
+      url: '../details/details?id=' + e.currentTarget.dataset.product_id
+    })
   },
  
 
@@ -58,6 +62,7 @@ Page({
     })
   },
   toDetail: function(e) {
+    console.log(e)
     wx.navigateTo({
       url: '../details/details?id=' + e.currentTarget.dataset.id
     })
@@ -82,6 +87,8 @@ Page({
     wx.request({
       url: that.data.https+'/api/home/index/turns',
       success: function(res){
+        console.log('//////////////')
+        console.log(res)
         that.setData({
           'banners': res.data.data
         })

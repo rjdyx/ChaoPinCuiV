@@ -47,8 +47,9 @@
   background: #fff;
 }
 .nav-item{
-  width: 25%;
+  width: 20%;
   padding: 20rpx;
+  display: inline-block;
 }
 .nav-item navigator{
   display: flex;
@@ -119,4 +120,7 @@
   line-height:196rpx;
   text-align: center;
   white-space: wrap;
+}
+.imgScroll{
+	white-space: nowrap;
 }

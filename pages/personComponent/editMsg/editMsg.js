@@ -30,7 +30,7 @@ Page({
     {
         name: {
             required: '请输入用户名',
-            minlength: '不能小于6个字符',
+            minlength: '用户名有误',
             maxlength: '不能大于50个字符'
         },
         phone: {

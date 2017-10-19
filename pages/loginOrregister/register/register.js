@@ -11,7 +11,7 @@ Page({
   onload: function(){
   },
   checkboxChange: function(e){
-    console.log(e.detail.value)
+    // console.log(e.detail.value)
     if (e.detail.value != '') {
       this.setData({
         isChecked: true
@@ -48,8 +48,15 @@ Page({
   },
   // 验证用户名
   validateName: function(e){
-    if (e.detail.value.length>10){
-      app.showToast('用户名过长', '../../../image/gth.png', 1500)
+    if (e.detail.value.length < 6 || e.detail.value.length>50){
+      app.showToast('用户名有误', '../../../image/gth.png', 1500)
+    }
+  },
+  // 验证密码
+  validatePassword: function(e) {
+    var pass = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,21}$/;
+    if (!pass.test(e.detail.value)) {
+      app.showToast('密码格式错误', '../../../image/gth.png', 1500)
     }
   },
   formSubmit: function(e) {

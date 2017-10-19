@@ -5,28 +5,31 @@
         <swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
             <block wx:for="{{banners}}" wx:key="">
                 <swiper-item>
-                    <image bindtap="catchTapCategory" src="https://cpc.find360.cn/{{item.img}}" class="slide-image" height="370" data-id="{{item.id}}"/>
+                    <image bindtap="catchTapCategory" src="https://cpc.find360.cn/{{item.img}}" class="slide-image" height="370" data-product_id="{{item.product_id}}"/>
                 </swiper-item>
             </block>
         </swiper>
 
-        <view class="dots">  
+         <view class="dots">  
             <block wx:for="{{banners}}" wx:key="unique">  
                 <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>  
             </block>  
-        </view>
+        </view> 
    </view>
 
 <!-- 分类导航 -->
+
    <view class="navs">
-    <block wx:for="{{navs}}" wx:key="name">
-      <view class="nav-item" data-type="{{item.name}}">  
-        <navigator url="{{navUrl + '?id=' + item.id + '&name=' + item.name}}">
-          <image src='{{https+item.img}}' class='nav-image'></image>
-          <text>{{item.name}}</text>
-        </navigator>
-      </view>
+    <scroll-view  scroll-x="true" class="imgScroll">
+      <block wx:for="{{navs}}" wx:key="name">
+        <view class="nav-item" data-type="{{item.name}}">  
+          <navigator url="{{navUrl + '?id=' + item.id + '&name=' + item.name}}">
+            <image src='{{https+item.img}}' class='nav-image'></image>
+            <text>{{item.name}}</text>
+          </navigator>
+        </view>
     </block>
+    </scroll-view>
   </view>
 
 <!-- 经典推荐 -->
