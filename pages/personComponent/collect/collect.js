@@ -86,12 +86,14 @@ Page({
   },
   //删除事件
   del: function (e) {
-    console.log(e)
     var _this = this
     wx.request({
-      url: 'https://cpc.find360.cn/api/home/collect/' + e.currentTarget.dataset.pid,
-      data: {},
-      method: 'DELETE',
+      url: 'https://cpc.find360.cn/api/home/collect/cancel',
+      data: {
+        product_id: e.currentTarget.dataset.pid,
+        user_id: app.globalData.userInfo.id
+      },
+      method: 'GET',
       success: function (res) {
         if (res.data) {
           _this.data.prints.splice(e.currentTarget.dataset.index, 1)
