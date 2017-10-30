@@ -181,7 +181,7 @@
     					<view class="header_h3 clear">
     						<view class="header_h3_l fl">
 								<image src="../../../image/dian.png"></image>
-								<text class="t">{{proName}}附近景点</text>
+								<text class="t">{{proName}}附近{{proInfo.parent_name}}</text>
 							</view>
 							<view class="header_h3_r fr" data-url="products_list" catch:tap="jumpFn">
 								更多<image src="../../../image/r_icon.png"></image>
