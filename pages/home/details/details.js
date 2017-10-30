@@ -15,7 +15,7 @@ Page({
     proRecommend: [],   //自定义数据
     proImgs: [],        //产品图片列表
     nearbysProList: [], //附近产品列表
-    tabArr: ['景点详情', '景点图片', '附近景点'],
+    tabArr: ['详情', '图片', '附近'],
     star: '',
     isShowPop: {bol: false, type: 'source', title: ''},
     ifLove: false,
@@ -137,7 +137,7 @@ Page({
         }
         break
       case 'comment':
-        url = '../comment/comment?id=' + this.data.options.id
+        url = '../comment/comment?id=' + this.data.options.id + '&parent_name=' + this.data.proInfo.parent_name 
         wx.navigateTo({
           url: url
         })
@@ -193,6 +193,7 @@ Page({
           }
           self.setData({
             "proInfo": data.info,
+            "tabArr": [data.info.parent_name + '详情', data.info.parent_name + '图片', '附近' + data.info.parent_name],
             "proComment": data.comment.data,
             "proRecommend": data.recommend,
             "totalCom": data.comment.total,
