@@ -61,5 +61,30 @@ Page({
         }
       }
     })
+  },
+  // 微信号登陆
+  wxLogin: function(e) {
+    var that = this
+    var openid = wx.getStorageSync('user')
+    wx.request({
+      url: 'https://cpc.find360.cn/api/home/wx/wxlogin',
+      data:{
+        openid: openid
+      },
+      method: "GET",
+      success: function(res) {
+        if (res.data !== 500) {
+          app.showToast('登录成功', '../../../image/pass.png', 1500)
+          app.globalData.userInfo = {
+              id : res.data.id,
+              name : res.data.name,
+              openid: res.data.openid              
+          }
+          setTimeout(function(){
+            app.homeUrl()
+          },1000)
+        }
+      }
+    })
   }
 })
