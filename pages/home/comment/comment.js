@@ -177,7 +177,7 @@ Page({
     this.setData({
       "options": options
     })
-
+    wx.setNavigationBarTitle({title: options.parent_name + '评论'})
   },
 
   /**

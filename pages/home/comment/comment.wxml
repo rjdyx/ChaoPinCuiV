@@ -17,7 +17,7 @@
   </view>
   <view class="bg_gray_line"></view>
   <view class="grade width700">
-	   <text class="t">景点评分</text>
+	   <text class="t">{{options.parent_name}}评分</text>
 	    <block wx:for="{{stars}}" wx:key="">
 	        <image class="star-image" src="{{key > item ?(key-item == 10?halfSrc:selectedSrc) : normalSrc}}">
 	          <view class="item" data-key="{{item+10}}" bindtap="selectLeft"></view>
