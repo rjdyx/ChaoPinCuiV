@@ -135,6 +135,7 @@ Page({
     // 当前分类下的二级分类
     APP.requestData(API.categoryChild, {pid: options.id}, (err, data) =>{
       if (data != undefined) {
+        data = this.onSort(data)
         self.setData({
           "category": data
         })
@@ -232,5 +233,22 @@ Page({
    */
   onShareAppMessage: function () {
   
-  }
+  },
+  /**
+   * 选择排序
+   */
+   onSort: function (arr) {
+      var newArr = []
+      var b = {}
+      for(var i=0; i<arr.length; i++) {
+         for(var j=i+1; j<arr.length; j++) {
+            if(arr[i].tap_head<arr[j].tap_head) {
+              b = arr[j]
+              arr[j] = arr[i]
+              arr[i] = b
+            }
+         }
+      }
+      return arr
+   }
 })

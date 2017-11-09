@@ -37,7 +37,7 @@
 					class="class_box" 
 					url="{{proListUrl + '?category_id=' + item.id + '&name=' + item.name + '&type=category'}}">
 						{{item.name}}
-						<image class='hotIcon' src="../../../image/hot.png"></image>
+						<image wx:if="{{index<4}}" class='hotIcon' src="../../../image/hot.png"></image>
 					</navigator>
 				</block>
 			</view>

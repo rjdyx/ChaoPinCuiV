@@ -80,7 +80,7 @@ Page({
               name : res.data.name,
               openid: res.data.openid              
           }
-          setTimeout(function(){
+          setTimeout(function() {
             app.homeUrl()
           },1000)
         }
