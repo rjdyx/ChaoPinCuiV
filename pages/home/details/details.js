@@ -16,6 +16,7 @@ Page({
     proImgs: [],        //产品图片列表
     nearbysProList: [], //附近产品列表
     tabArr: ['详情', '图片', '附近'],
+    arrBox: {'美食': '相似', '景点': '附近', '工艺': '相似', '茶叶': '同种'},
     star: '',
     isShowPop: {bol: false, type: 'source', title: ''},
     ifLove: false,
@@ -193,7 +194,7 @@ Page({
           }
           self.setData({
             "proInfo": data.info,
-            "tabArr": [data.info.parent_name + '详情', data.info.parent_name + '图片', '附近' + data.info.parent_name],
+            "tabArr": [data.info.parent_name + '详情', data.info.parent_name + '图片', self.data.arrBox[data.info.parent_name] + data.info.parent_name],
             "proComment": data.comment.data,
             "proRecommend": data.recommend,
             "totalCom": data.comment.total,

@@ -24,7 +24,6 @@ Page({
         that.setData({
           pics: pics
         });
-        console.log(that.data.pics.length)
         if (that.data.pics.length == 3 ) {
           that.setData({
             showAdd: false

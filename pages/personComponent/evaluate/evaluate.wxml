@@ -27,7 +27,7 @@
     <view class="print-content" data-index="{{index}}">
       <!-- 图片 -->
         <view class='print-spot flex-item'>
-          <image wx:if="{{apiUrl}}/{{item.product_thumb}}" src='{{apiUrl}}/{{item.product_thumb}}'></image>
+          <image wx:if="{{apiUrl}}/{{item.product_img}}" src='{{apiUrl}}/{{item.product_img}}'></image>
         </view>
       <!-- 右侧评分和描述 -->
       <view class='print-desc flex-item'>

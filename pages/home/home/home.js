@@ -22,32 +22,15 @@ Page({
   list: [],
   },
   catchTapCategory: function (e) {
-    console.log(e)
     wx.navigateTo({
       url: '../details/details?id=' + e.currentTarget.dataset.product_id
     })
   },
- 
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var self = this
-    APP.requestData(API.homeCategorys, {}, (err, data) =>{
-      if (data != undefined) {
-        self.setData({
-          "navs": data
-        })
-      }
-    })
-    // APP.requestData(API.homeCategorys, {}, (err, data) =>{
-    //   if (data) {
-    //     self.setData({
-    //       "navs": data
-    //     })
-    //   }
-    // })
   },
 
   /**
@@ -62,7 +45,6 @@ Page({
     })
   },
   toDetail: function(e) {
-    console.log(e)
     wx.navigateTo({
       url: '../details/details?id=' + e.currentTarget.dataset.id
     })
@@ -78,7 +60,6 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res)
         that.setData({
           'list': res.data.data
         })
@@ -89,6 +70,13 @@ Page({
       success: function(res){
         that.setData({
           'banners': res.data.data
+        })
+      }
+    })
+    APP.requestData(API.homeCategorys, {}, (err, data) =>{
+      if (data) {
+        that.setData({
+          "navs": data
         })
       }
     })
