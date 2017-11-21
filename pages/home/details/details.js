@@ -242,8 +242,6 @@ Page({
     this.setData({
       "options": options
     })
-    // 获取产品详情数据
-    this.getPro()
     // 获取当前的地理位置
     wx.getLocation({
       type: 'wgs84',
