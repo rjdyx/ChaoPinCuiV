@@ -24,10 +24,9 @@ Page({
   },
   formSubmit: function(e) {
     var that = this
-    var openid = wx.getStorageSync('user')
+    var openid = app.globalData.openid
     var url = wx.getStorageSync('currentUrl')
     var cururl = '../../../' + url
-    // var loginState = wx.getStorageSync('loginState')
     wx.request({
       url: 'https://cpc.find360.cn/api/home/wx/login',
       header: {
@@ -64,25 +63,54 @@ Page({
   },
   // 微信号登陆
   wxLogin: function(e) {
+    wx.showLoading({
+      title: '登录中',
+      mask: true
+    })
     var that = this
-    var openid = wx.getStorageSync('user')
+    wx.login({
+      success: function(res) {
+        if(res.code) {
+            var r = 'https://cpc.find360.cn/get/openid?js_code=' + res.code
+            var objz = {}
+            app.requestData(r, {}, (err, data) =>{
+              if (data) {
+                wx.getUserInfo({
+                  success: function(res) {
+                      objz.avatarUrl = res.userInfo.avatarUrl
+                      objz.nickName = res.userInfo.nickName
+                      objz.sex = res.userInfo.gender
+                      that.loginUrl(data.openid, objz)
+                  }
+                })
+              }
+            })
+        }
+      }
+    })
+  },
+  loginUrl: function(openid, userInfo) {
     wx.request({
       url: 'https://cpc.find360.cn/api/home/wx/wxlogin',
       data:{
-        openid: openid
+        openid: openid,
+        real_name: userInfo.nickName,
+        sex: userInfo.sex,
+        img: userInfo.avatarUrl
       },
       method: "GET",
       success: function(res) {
         if (res.data !== 500) {
-          app.showToast('登录成功', '../../../image/pass.png', 1500)
           app.globalData.userInfo = {
               id : res.data.id,
               name : res.data.name,
               openid: res.data.openid              
           }
           setTimeout(function() {
+            wx.hideLoading()
             app.homeUrl()
           },1000)
+          app.showToast('登录成功', '../../../image/pass.png', 1500)
         }
       }
     })

@@ -117,7 +117,7 @@
 								<block wx:for="{{proComment}}" wx:key="" wx:for-index="i1">
 									<view class="user_comment_item" >
 										<view class="user_comment_item_t clear">
-											<image class="user_header fl" src="{{item.user_img ? https + item.user_img : '../../../image/d_header.png'}}"></image>
+											<image class="user_header fl" src="{{item.anony ? '../../../image/d_header.png' : item.user_img}}"></image>
 											<view class="user_comment_item_t_r fl clear">
 												<text class="t">{{item.anony ? item.anony : item.user_name}}</text>
 												<text class="t fr createdTime">{{item.created_at}}</text>

@@ -7,7 +7,7 @@
     </view>
     <view class='user-msg'>
       <text>已贡献{{num}}条评价</text>
-      <text>名字：{{userName}}</text>
+      <text>昵称：{{userName}}</text>
     </view>
   </view>
 

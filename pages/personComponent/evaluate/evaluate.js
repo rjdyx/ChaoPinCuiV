@@ -21,7 +21,6 @@ Page({
   },
   // 跳转
   productSkip: function (e) {
-    console.log(e)
     wx.navigateTo({
       url: '../../home/details/details?id=' + e.currentTarget.dataset.pid
     })
@@ -64,10 +63,9 @@ Page({
         wx.request({
           url: that.data.https + '/api/home/user/' + app.globalData.userInfo.id + '/edit',
           success: function (res) {
-            console.log(res)
             that.setData({
-              img: that.data.https + res.data.img,
-              userName: res.data.name
+              img: res.data.img,
+              userName: res.data.real_name
             })
           }
         })

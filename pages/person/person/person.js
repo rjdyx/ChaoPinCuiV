@@ -36,17 +36,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //判断是否登录
-    if (app.globalData.userInfo.id == null || app.globalData.userInfo.id == undefined || app.globalData.userInfo.id == '') {
-      wx.redirectTo({
-        url: '../../loginOrregister/loginOrigister/loginOrigister',
-      })
-    } else {
-      this.setData({
-        userId: app.globalData.userInfo.id
-      })
-      this.initData()
-    }
   },
   // 预加载函数
   initData: function() {
@@ -82,11 +71,11 @@ Page({
       url: that.apiUrl+'/api/home/user/' + userId + '/edit',
       success: function (res) {
         that.setData({
-          img: 'https://cpc.find360.cn/' + res.data.img,
-          name: res.data.name
+          img: res.data.img,
+          name: res.data.real_name
         })
         that.setData({
-          bindLogin: '解除绑定'
+          bindLogin: '退出系统'
         })
       }
     })
@@ -95,7 +84,28 @@ Page({
     var that = this
     var userId = this.data.userId
     if (userId!= '' && userId != undefined) {
-      this.logouts(userId)
+      wx.showModal({
+        title: '提示',
+        content: '是否要退出系统',
+        confirmColor: '#FED555',
+        success: function(res) {
+          if (res.confirm) {
+            wx.showLoading({
+              title: '退出中',
+              mask: true
+            })
+            setTimeout(function(){
+              that.logouts(userId)
+            },1000)
+          } else if (res.cancel) {
+            wx.showToast({
+              title: '取消退出',
+              image: '../../../image/gth.png',
+              duration: 1500
+            })
+          }
+        }
+      })
     } else {
       this.logins()
     }
@@ -111,9 +121,8 @@ Page({
       url: 'https://cpc.find360.cn/api/home/wx/relieve',
       data: {user_id: userId},
       success: function(res){
-        app.showToast('解除绑定成功','../../../image/pass.png',1500)
         that.setData({
-          bindLogin: '绑定账户',
+          bindLogin: '登录系统',
           img: '' ,
           name: '',
           userId: '',
@@ -125,8 +134,11 @@ Page({
           openid: ''              
         }
         setTimeout(function(){
+          wx.clearStorageSync()
+          wx.hideLoading()
           app.homeUrl()
         },1000)
+        app.showToast('退出系统成功','../../../image/pass.png',1500)
       }
     })
   },
@@ -142,7 +154,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.initData()
+    if (app.globalData.userInfo.id == null || app.globalData.userInfo.id == undefined || app.globalData.userInfo.id == '') {
+      wx.redirectTo({
+        url: '../../loginOrregister/loginOrigister/loginOrigister',
+      })
+    } else {
+      this.setData({
+        userId: app.globalData.userInfo.id
+      })
+      this.initData()
+    }
   },
 
   /**

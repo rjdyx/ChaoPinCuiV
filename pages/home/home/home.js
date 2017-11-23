@@ -7,19 +7,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-  autoplay: true,
-  interval: 3000,
-  duration: 1000,
-  swiperCurrent: 0,
-  navs: [],
-  https: 'https://cpc.find360.cn/',
-  banners: [],
-  autoplay: true,
-  interval: 3000,
-  duration: 1000,
-  navUrl: '../category/category',
-  navs: [],
-  list: [],
+    autoplay: true,
+    interval: 3000,
+    duration: 1000,
+    swiperCurrent: 0,
+    navs: [],
+    https: 'https://cpc.find360.cn/',
+    banners: [],
+    autoplay: true,
+    interval: 3000,
+    duration: 1000,
+    navUrl: '../category/category',
+    navs: [],
+    list: [],
   },
   catchTapCategory: function (e) {
     wx.navigateTo({
@@ -80,6 +80,7 @@ Page({
         })
       }
     })
+    // APP.setUserInfo()
   },
 
   /**

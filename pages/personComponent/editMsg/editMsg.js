@@ -5,14 +5,11 @@ Page({
     index: '',
     age: '2016-09-01',
     address: ['广东省', '广州市', '海珠区'],
-    img: '',
     name: '',
     phone: '',
     real_name: '',
     https: 'https://cpc.find360.cn/'
   },
-  defaultImg: '',
-  uploadImg: '',
   onLoad: function(e) {
     this.WxValidate = app.WxValidate({
         name: {
@@ -41,15 +38,12 @@ Page({
         }
     })
     var that = this
-    this.uploadImg = ''
     var userId = app.globalData.userInfo.id
     var url = 'https://cpc.find360.cn/api/home/user/' + userId + '/edit'
     wx.request({
       url: url,
       success: function(res){
-        console.log(res)
             that.setData({
-                img: res.data.img,
                 name: res.data.name,
                 phone: res.data.phone,
                 email: res.data.email,
@@ -58,7 +52,6 @@ Page({
                 index: res.data.sex,
                 address: (res.data.address !== null && res.data.address !== '') ? res.data.address.split(',') : that.data.address
             })
-            that.defaultImg = res.data.img
         }
     })
   },
@@ -77,25 +70,6 @@ Page({
       address: e.detail.value
     })
   },
-  chooseImage: function(){
-    var that = this
-    that.setData({
-      https: ''
-    })
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original','compressed'],
-      sourceType: ['album','camera'],
-      success: function(res){
-        that.setData({
-          img: res.tempFilePaths
-        })
-        wx.setStorageSync('img',res.tempFilePaths)
-        that.uploadImg = res.tempFilePaths
-        console.log(that.uploadImg)
-      }
-    })
-  },
   formSubmit: function(e){
     //提交错误描述
     if (!this.WxValidate.checkForm(e)) {
@@ -108,47 +82,23 @@ Page({
     var addressTo = address.join(',')
     var userId = app.globalData.userInfo.id
     var url = 'https://cpc.find360.cn/api/home/user/setUpdate'
-    var imgUrl = wx.getStorageSync('img')[0]
-    if (this.uploadImg !== '') {
-        wx.uploadFile({
-            url: url,
-            filePath: imgUrl,
-            name: 'imgs',
-            formData:{
-                name: e.detail.value.name,
-                phone: e.detail.value.phone,
-                address: addressTo,
-                real_name: e.detail.value.real_name,
-                age: e.detail.value.age,
-                email: e.detail.value.email,
-                sex: e.detail.value.sex,
-                id: userId,
-                img: that.defaultImg
-            },
-            success: function(res){
-                that.getRes(res)
-            }
-        })
-    } else {
-        wx.request({
-            url: url,
-            method: 'POST',
-            data:{
-                name: e.detail.value.name,
-                phone: e.detail.value.phone,
-                address: addressTo,
-                real_name: e.detail.value.real_name,
-                age: e.detail.value.age,
-                email: e.detail.value.email,
-                sex: e.detail.value.sex,
-                id: userId,
-                img: that.defaultImg
-            },
-            success: function(res){
-                that.getRes(res)
-            }
-        })
-    }
+    wx.request({
+        url: url,
+        method: 'POST',
+        data:{
+            name: e.detail.value.name,
+            phone: e.detail.value.phone,
+            address: addressTo,
+            real_name: e.detail.value.real_name,
+            age: e.detail.value.age,
+            email: e.detail.value.email,
+            sex: e.detail.value.sex,
+            id: userId,
+        },
+        success: function(res){
+            that.getRes(res)
+        }
+    })
   },
   // 提交返回值
   getRes: function(res) {

@@ -2,15 +2,6 @@
 <view class="msg">
   <form  bindsubmit="formSubmit">
     <view class="msgWrap">
-  
-  <!-- 头像 -->
-    <view class="avataUrl common" bindtap="chooseImage">
-      <text>头像</text>
-        <view class="img">
-             <image wx:if="{{img}}" src="{{https+img}}" data-src="{{img}}" class="chooseImg" name="img"></image>
-        </view>
-      <image src="../../../image/arrow_down.png" class="arrow"></image>
-    </view>
 
     <!-- 用户名 -->
     <!-- <block wx:for="{{inputs}}"> -->
@@ -24,7 +15,7 @@
     <!-- </block> -->
 
     <view class="input common" >
-      <text>姓名</text>
+      <text>昵称</text>
         <view class="editInput" data-id="1">
           <!-- <text wx:if="{{hide}}">{{name}}</text>  -->
           <input value="{{real_name}}" class="inputEdit" name="real_name"></input> 
