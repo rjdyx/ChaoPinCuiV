@@ -80,7 +80,6 @@ Page({
         })
       }
     })
-    // APP.setUserInfo()
   },
 
   /**

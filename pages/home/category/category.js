@@ -18,6 +18,7 @@ Page({
     product: {},                // 推荐产品对象
     recommend_products_arr: [], // 推荐产品列表
     other: [],                  // 其他人还看了,
+    categoryRecArr: [],
     options:{},                 // 接收的参数
     isShowSearch: false,
     searchOp: {},               // 搜索参数对象
@@ -37,6 +38,9 @@ Page({
       case 'products_list':
         url = this.data.proListUrl + '?id=' + this.data.options.id + '&type=recommend'+ '&name=更多' + this.data.options.name
         break
+      case 'products_cat':
+        url = this.data.proListUrl + '?id=' + this.data.options.id + '&category_id=' + e.currentTarget.dataset.cid
+            + '&type=recommend'+ '&name=更多' + e.currentTarget.dataset.cname
     }
     wx.navigateTo({
       url: url
@@ -54,7 +58,6 @@ Page({
       var timer = setTimeout(() => {
         this.setData({
           "searchOp.id": this.data.options.id,
-          // "searchOp.category_id": this.data.options.id,
           "searchOp.type": "search",
           "searchOp.name": e.detail.value
         })
@@ -142,8 +145,8 @@ Page({
         this.slice6()
       }
     })
-    // 榜单推荐（默认6个）
-    APP.requestData(API.categoryRecommend, {category_id: options.id, num: 6}, (err, data) =>{
+    // 榜单推荐（默认4个）
+    APP.requestData(API.categoryRecommend, {category_id: options.id, num: 4}, (err, data) =>{
       if (data != undefined) {
         self.setData({
           "recommend_products_arr": data.data
@@ -158,6 +161,14 @@ Page({
         })
       }
     })
+    // 获取各类推荐
+    APP.requestData(API.getCat, {category_id: options.id}, (err, data) =>{
+      if (data != undefined) {
+        self.setData({
+          "categoryRecArr": data
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -167,9 +178,9 @@ Page({
   slice6: function() {
     var arr = []
     var arr2 = []
-    if (this.data.category.length > 6) {
-      arr = this.data.category.slice(0, 6)
-      arr2 = this.data.category.slice(6)
+    if (this.data.category.length > 3) {
+      arr = this.data.category.slice(0, 3)
+      arr2 = this.data.category.slice(3)
       this.setData({
         "category": arr,
         "moreCategory": arr2,
@@ -187,7 +198,7 @@ Page({
         })
       } else{
         this.setData({
-          "category": this.data.category.slice(0, 6),
+          "category": this.data.category.slice(0, 3),
           "isShowMC": !this.data.isShowMC
         })
       }

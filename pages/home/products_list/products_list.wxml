@@ -10,9 +10,9 @@
 				<view>
 					<view class="pro_name">
 						<text class="tv_el dis_ib fl">{{item.name}}</text>
-						<text class="tv_el dis_ib fr">距离：{{item.dis}}km</text>
+						<text class="tv_el dis_ib fr"><text wx:if="{{item.meridian}}">距离：{{item.dis}}km</text></text>
 					</view>
-					<view class="pro_place">
+					<view class="pro_place" wx:if="{{item.meridian}}">
 						{{item.address}}
 					</view>
 				</view>

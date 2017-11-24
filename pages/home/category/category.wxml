@@ -37,7 +37,7 @@
 					class="class_box" 
 					url="{{proListUrl + '?category_id=' + item.id + '&name=' + item.name + '&type=category'}}">
 						{{item.name}}
-						<image wx:if="{{index<4}}" class='hotIcon' src="../../../image/hot.png"></image>
+						<image wx:if="{{index<3}}" class='hotIcon' src="../../../image/hot.png"></image>
 					</navigator>
 				</block>
 			</view>
@@ -76,6 +76,40 @@
     		</view>
     	</view>
     </view>
+
+
+    <view class="main" wx:for="{{categoryRecArr}}" wx:key="index">
+    	<view class="main_inner">
+    		<view class="main_con">
+    			<view class="main_title clear">
+					<view class='fl'>{{index}}推荐</view>
+					<view class="fr" 
+						data-url="products_cat"
+						data-cid="{{item[0].category_id}}"
+						data-cname="{{index}}"
+						catch:tap="jumpFn">
+						更多>
+					</view>
+		    	</view>
+		    	<view class="recommend_products" wx:if="{{recommend_products_arr.length}}">
+		    		<block wx:for="{{item}}" wx:key="" wx:for-item="items">
+		    			<view 
+		    			class="a_product" 
+		    			data-id="{{items.id}}" 
+		    			data-url="details" 
+		    			catch:tap="jumpFn">
+							<image src="{{items.img ? https + items.img : '../../../image/bg_logo.jpg'}}"></image>
+							<view>
+								<text class="pro_name tv_el dis_ib">{{items.name}}</text>
+								<view class="pro_place">{{items.address}}</view>
+							</view>
+						</view>
+		    		</block>
+		    	</view>
+    		</view>
+    	</view>
+    </view>
+
 
     <!-- 其他人还看了 -->
 	<template is="looked" data="{{other,categoryUrl}}"/>

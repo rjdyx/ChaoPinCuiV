@@ -79,7 +79,6 @@ Page({
          *   "scope.userLocation": true
          * }
          */
-        console.log(res)
       }
     })
     // ---------------------- 
@@ -88,6 +87,7 @@ Page({
     var self = this
     APP.requestData(API.proList, this.data.op, (err, data) =>{
       if (data != undefined) {
+        console.log(data.data)
         self.setData({
           "proLoadList": data.data,
           'totalPage': data.last_page

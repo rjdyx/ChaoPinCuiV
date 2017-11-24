@@ -8,6 +8,7 @@ const api = {
     categoryChild: https + 'api/home/category/child', //2.2 当前分类下的二级分类
     categoryRecommend: https + 'api/home/category/recommend', //榜单推荐（默认6个）
     other: https + 'api/home/category/other', // 其他人还看了
+    getCat: https + 'api/home/category/getCat', // 其他各类推荐
     // 3.产品详情页
     proDetails: https + 'api/home/product/details', //3.1产品详情数据
     proImgs: https + 'api/home/product/imgs', // 3.2产品图片数据

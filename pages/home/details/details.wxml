@@ -13,7 +13,7 @@
 		</view>
 		<view class="header_bottom">
 			<text class="pro_name t dis_ib">{{proInfo.name}}</text>
-			<view class="pro_place">目的地：{{proInfo.address}}</view>
+			<view class="pro_place">地址：{{proInfo.address}}</view>
 		</view>
     </view>
     <view class="bg_gray_line"></view>
@@ -41,10 +41,10 @@
     					<view class="header_h3 clear">
     						<view class="header_h3_l fl">
 								<image src="../../../image/dian.png"></image>
-								<text class="t">{{proInfo.name}}历史来源</text>
+								<text class="t">{{proInfo.name}}介绍</text>
 							</view>
 							<view class="header_h3_r fr">
-								星级：{{star}}
+								<text wx:if="{{proInfo.meridian}}">星级：{{star}}</text>
 							</view>
     					</view>
 						<view class="source_text line-height40 font_size30">
@@ -58,7 +58,7 @@
 						</view>	
     				</view>
     				<!-- 详细地址 -->
-    				<view class="address width700">
+    				<view class="address width700" wx:if="{{proInfo.meridian}}">
     					<view class="header_h3 clear">
     						<view class="header_h3_l fl">
 								<image src="../../../image/dian.png"></image>
@@ -181,7 +181,7 @@
     					<view class="header_h3 clear">
     						<view class="header_h3_l fl">
 								<image src="../../../image/dian.png"></image>
-								<text class="t">{{proName}}附近{{proInfo.parent_name}}</text>
+								<text class="t">{{proName}}{{arrBox[proInfo.parent_name]}}{{proInfo.parent_name}}</text>
 							</view>
 							<view class="header_h3_r fr" data-url="products_list" catch:tap="jumpFn">
 								更多<image src="../../../image/r_icon.png"></image>
@@ -198,7 +198,7 @@
 										<image src="{{item.img ? https + item.img : ''}}"></image>
 										<view>
 											<text class="pro_name tv_el">{{item.name}}</text>
-											<view class="pro_distance">
+											<view class="pro_distance" wx:if="{{proInfo.meridian}}">
 												<text class="tv_el">距离</text>
 												<text class="tv_el">{{item.dis}}km</text>
 											</view>
