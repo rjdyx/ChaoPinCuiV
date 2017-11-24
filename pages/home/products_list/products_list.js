@@ -14,9 +14,7 @@ Page({
     pageNum: 1, //页数
     isLoading: false,
     proLoadList: [],
-    totalPage: 0, //总数量
-    curLat: '',
-    curLog: ''
+    totalPage: 0 //总数量
   },
   jumpFn: function(e){
     var url = '../details/details' + '?id=' + e.currentTarget.dataset.id
@@ -43,32 +41,23 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    // 获取当前的地理位置
-    wx.getLocation({
-      type: 'wgs84',
-      success: function(res) {
-        self.data.curLat = res.latitude //纬度
-        self.data.curLog = res.longitude //经度
-        var speed = res.speed
-        var accuracy = res.accuracy
-        var op = {
-          id: options.id,
-          category_id: options.category_id,
-          parent_id: options.parent_id,
-          page: self.data.pageNum
-        }
-        if (options.type) {
-          op.type= options.type
-        }
-        if (options.searchName) {
-          op.name= options.searchName
-        }
-        self.setData({
-          'op': op
-        })
-        self.dataLoadFn()
-      }
+    var op = {
+      id: options.id,
+      category_id: options.category_id,
+      parent_id: options.parent_id,
+      page: self.data.pageNum
+    }
+    if (options.type) {
+      op.type= options.type
+    }
+    if (options.searchName) {
+      op.name= options.searchName
+    }
+    self.setData({
+      'op': op
     })
+    self.dataLoadFn()
+    // 获取当前的地理位置
 
     // ----------------------
     wx.getSetting({
@@ -87,13 +76,33 @@ Page({
     var self = this
     APP.requestData(API.proList, this.data.op, (err, data) =>{
       if (data != undefined) {
-        console.log(data.data)
         self.setData({
           "proLoadList": data.data,
           'totalPage': data.last_page
         })
+        if (data.data[0].meridian) {
+          self.getLocation()
+        } else {
+          self.setData({
+            "proLoadList": self.data.proLoadList,
+            'isLoading': false,
+            'proList': self.data.proList.concat(self.data.proLoadList)
+          })
+          wx.hideLoading()
+        }
+      }
+    })
+  },
+  // 获取自身地理位置
+  getLocation: function () {
+    var self = this
+    wx.getLocation({
+      type: 'wgs84',
+      success: function(res) {
+        var speed = res.speed
+        var accuracy = res.accuracy
         self.data.proLoadList.forEach((objItem, i) => {
-          self.data.proLoadList[i].dis = APP.getDistince(self.data.proLoadList[i].weft,self.data.proLoadList[i].meridian,self.data.curLat,self.data.curLog).toFixed(2)
+          self.data.proLoadList[i].dis = APP.getDistince(self.data.proLoadList[i].weft,self.data.proLoadList[i].meridian,res.latitude,res.longitude).toFixed(2)
         })
         self.data.proLoadList = self.getSort(self.data.proLoadList)
         self.setData({
@@ -101,8 +110,8 @@ Page({
           'isLoading': false,
           'proList': self.data.proList.concat(self.data.proLoadList)
         })
+        wx.hideLoading()
       }
-      wx.hideLoading()
     })
   },
   // 景点距离从小到大排序

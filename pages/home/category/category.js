@@ -111,16 +111,6 @@ Page({
    */
   onLoad: function (options) {
     var self = this
-        // 获取当前的地理位置
-    wx.getLocation({
-      type: 'wgs84',
-      success: function(res) {
-        self.setData({
-          "searchOp.lon": res.longitude,  //经度
-          "searchOp.lat": res.latitude    //纬度
-        })
-      }
-    })
     if (options) {
       self.setData({
         "options": options

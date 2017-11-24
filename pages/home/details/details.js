@@ -192,6 +192,9 @@ Page({
           for (var i in data.comment.data){
              data.comment.data[i].img = (data.comment.data[i].img !== null && data.comment.data[i].img !== '') ? data.comment.data[i].img.split(',') : []
           }
+          if (data.info.meridian) {
+            self.getLocation()
+          }
           self.setData({
             "proInfo": data.info,
             "tabArr": [data.info.parent_name + '详情', data.info.parent_name + '图片', self.data.arrBox[data.info.parent_name] + data.info.parent_name],
@@ -242,7 +245,12 @@ Page({
     this.setData({
       "options": options
     })
-    // 获取当前的地理位置
+  },
+  /*
+   * 获取当前地理位置
+   */
+  getLocation: function () {
+    var _this = this
     wx.getLocation({
       type: 'wgs84',
       success: function(res) {
