@@ -143,6 +143,12 @@ Page({
           url: url
         })
         break
+      case 'nearby_hotel':
+        url = '../near_hotel/near_hotel?meridian=' + e.currentTarget.dataset.meridian + '&weft=' + e.currentTarget.dataset.weft + '&name=附近住宿' 
+        wx.navigateTo({
+          url: url
+        })
+        break
     }
   },
   // 收藏
@@ -192,9 +198,6 @@ Page({
           for (var i in data.comment.data){
              data.comment.data[i].img = (data.comment.data[i].img !== null && data.comment.data[i].img !== '') ? data.comment.data[i].img.split(',') : []
           }
-          if (data.info.meridian) {
-            self.getLocation()
-          }
           self.setData({
             "proInfo": data.info,
             "tabArr": [data.info.parent_name + '详情', data.info.parent_name + '图片', self.data.arrBox[data.info.parent_name] + data.info.parent_name],
@@ -232,9 +235,7 @@ Page({
       'ImgBlowUpIndex.bigi': i1,
       'ImgBlowUpIndex.smalli': i2,
       'isImgBlowUp': e.currentTarget.dataset.bol,
-      'current': i2 
-      // ,
-      // 'imgNum': e.currentTarget.dataset.bol ? (i2 + 1) + '/' + this.data.proComment[i1].img.length : 0
+      'current': i2
     })
   },
   /**
@@ -246,19 +247,7 @@ Page({
       "options": options
     })
   },
-  /*
-   * 获取当前地理位置
-   */
-  getLocation: function () {
-    var _this = this
-    wx.getLocation({
-      type: 'wgs84',
-      success: function(res) {
-        _this.data.curLat = res.latitude //纬度
-        _this.data.curLog = res.longitude //经度
-      }
-    })
-  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -314,9 +303,6 @@ Page({
       key:"footprint",
       data: datas
     })
-  },
-  aaaa: function() {
-    window.location.href = 'http://www.baidu.com'
   },
   /**
    * 生命周期函数--监听页面显示

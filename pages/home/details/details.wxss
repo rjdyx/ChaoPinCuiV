@@ -389,3 +389,9 @@
 	left: 0;
 	transform: translateY(-50%);
 }
+.nearby_hotel {
+	margin-bottom: 30rpx;
+}
+.nearby_hotel .hotel_text{
+	color: #2272AE
+}

@@ -1,0 +1,51 @@
+@import "../../common/wxss/comWxss.wxss";
+.hotel_body {
+	width: 700rpx;
+	margin: 0 auto;
+	padding: 30rpx 0rpx 70rpx ;
+}
+.hotel_div {
+	width: 100%;
+	height: 230rpx;
+	border-bottom:2px solid #f4f4f6;
+	margin-bottom: 30rpx;
+}
+.hotel_img {
+	width: 230rpx;
+	height: 200rpx;
+}
+.hotel_img>image {
+	width: 230rpx;
+	height: 200rpx;
+	border-radius: 15rpx
+}
+.hotel_text {
+	width: 450rpx;
+	height: 200rpx;
+	line-height: 57rpx;
+}
+.hotel_text .title {
+	font-weight: bold;
+}
+.hotel_text .address {
+	font-size: 27rpx;
+}
+.hotel_text .phone {
+	color: #21D8C4;
+	font-size: 27rpx;
+}
+.hotel_text .distance {
+	font-size: 27rpx;
+}
+.hotel_text .distance .num {
+	color: #D3290D;
+}
+.tb {
+	display: block;
+}
+.no_data{
+	text-align: center;
+	font-size: 32rpx;
+	color: #acacac;
+	line-height: 100rpx;
+}

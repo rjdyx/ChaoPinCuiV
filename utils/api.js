@@ -16,6 +16,8 @@ const api = {
     commentReload: https + 'api/home/product/reload', // 3.3附近的产品数据
     // 4.产品列表页
     proList: https + 'api/home/product/lists', //4.1产品列表数据
+    // 5.附近住宿
+    hotelList: https + 'api/home/near_hotel',  // 附近住宿
     // 6. 我的收藏
     collect: https + 'api/home/collect/user',
     // 7.2 评价提交

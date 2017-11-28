@@ -198,15 +198,17 @@
 										<image src="{{item.img ? https + item.img : ''}}"></image>
 										<view>
 											<text class="pro_name tv_el">{{item.name}}</text>
-											<view class="pro_distance" wx:if="{{proInfo.meridian}}">
-												<text class="tv_el">距离</text>
-												<text class="tv_el">{{item.dis}}km</text>
-											</view>
 										</view>
 									</view>
 					    		</block>
 					    	</view>
-					    	<view class="no_data" wx:else>暂无数据，尽情期待以后内容</view>
+					    	<view class="nearby_hotel" wx:if="{{proInfo.meridian}}" 
+					    		data-url="nearby_hotel"
+					    		data-meridian="{{proInfo.meridian}}"
+					    		data-weft="{{proInfo.weft}}"
+					    		catch:tap="jumpFn">
+								<text class="hotel_text">附近住宿(查看)</text>
+					    	</view>
     					</view>
     				</view>
     			</view>

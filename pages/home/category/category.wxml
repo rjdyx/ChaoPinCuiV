@@ -4,6 +4,9 @@
 		<view class="header_top">
 			<image 
 			class="header_bg_img" 
+			data-url="details" 
+        	catch:tap="jumpFn" 
+        	data-id="{{product.id}}"
 			src="{{product.img ? https + product.img : '../../../image/bg_logo.jpg'}}">
 			</image>
 
@@ -24,8 +27,6 @@
 	        	catch:tap="jumpFn" 
 	        	data-id="{{product.id}}">
 	        	<text class="tv_el dis_ib">{{product.name}}</text>
-	        	<image src="../../../image/downward.png">
-	        	</image>
 	        </view>
 		</view>
 
@@ -37,7 +38,7 @@
 					class="class_box" 
 					url="{{proListUrl + '?category_id=' + item.id + '&name=' + item.name + '&type=category'}}">
 						{{item.name}}
-						<image wx:if="{{index<3}}" class='hotIcon' src="../../../image/hot.png"></image>
+						<image wx:if="{{index<2}}" class='hotIcon' src="../../../image/hot.png"></image>
 					</navigator>
 				</block>
 			</view>
