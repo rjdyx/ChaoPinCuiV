@@ -103,7 +103,7 @@
     					<view class="header_h3 clear">
     						<view class="header_h3_l fl">
 								<image src="../../../image/dian.png"></image>
-								<text class="t">游客评论</text>
+								<text class="t">潮客评论</text>
 							</view>
 							<button class="comment_btn fr" data-url="comment" catch:tap="jumpFn">发表评论</button>
     					</view>

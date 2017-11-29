@@ -75,7 +75,15 @@ Page({
       }
     }
     APP.requestData(API.commentCheck, form, (err, data) =>{
-      console.log(data)
+      if (data) {
+        that.submitComment(form)
+      } else {
+        wx.showModal({
+          title: '提示',
+          content: '对该类' + that.options.parent_name + '每天只能评论一次',
+          showCancel: false
+        })
+      }
     })
     // this.submitComment(form)
   },
@@ -115,8 +123,8 @@ Page({
   // 文本评分提交
   textContent: function (form) {
     APP.requestData(API.comment, form, (err, data) =>{
-        wx.hideLoading()
         if (data) {
+            wx.hideLoading()
             wx.showToast({
                 title: '提交成功',
                 icon: 'success',
