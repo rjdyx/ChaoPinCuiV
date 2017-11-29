@@ -74,32 +74,42 @@ Page({
         }
       }
     }
+    APP.requestData(API.commentCheck, form, (err, data) =>{
+      console.log(data)
+    })
+    // this.submitComment(form)
+  },
+  /**
+   * 提交评论（图片与文本）
+  **/
+  submitComment: function (form) {
+    var that = this
     wx.showLoading({
       title: '提交中',
     })
     if (this.data.imgArr.length !== 0) {
-        for (var i in that.data.imgArr) {
-            wx.uploadFile({
-                url: API.commentImg,
-                filePath: that.data.imgArr[i],
-                name: 'img',
-                formData: {},
-                success: function(res){
-                    that.key++
-                    if (that.imgStr !== '') {
-                        that.imgStr += ',' + res.data
-                    } else {
-                        that.imgStr += res.data
-                    }
-                    if (that.key == that.data.imgArr.length) {
-                        form['img'] = that.imgStr
-                        that.textContent(form)
-                    }
+      for (var i in that.data.imgArr) {
+        wx.uploadFile({
+            url: API.commentImg,
+            filePath: that.data.imgArr[i],
+            name: 'img',
+            formData: {},
+            success: function(res){
+                that.key++
+                if (that.imgStr !== '') {
+                    that.imgStr += ',' + res.data
+                } else {
+                    that.imgStr += res.data
                 }
-            })
-        }
+                if (that.key == that.data.imgArr.length) {
+                    form['img'] = that.imgStr
+                    that.textContent(form)
+                }
+            }
+        })
+      }
     } else {
-        this.textContent(form)
+      this.textContent(form)
     }
   },
   // 文本评分提交

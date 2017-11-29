@@ -23,6 +23,7 @@ const api = {
     // 7.2 评价提交
     comment: https + 'api/home/comment', 
     commentImg: https + 'api/home/comment/img', // 提交图片
+    commentCheck: https + 'api/home/comment/check', // 检测用户每天评论次数
     categoryRand: https + 'api/home/category/rand',
     // 用户反馈
     feedbackImg: https + 'api/home/feedback/img',
