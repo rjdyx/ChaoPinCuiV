@@ -52,7 +52,7 @@
 							<view 
 							class="look_more dis_ib" 
 							catchtap="lookSourceFn">
-								查看完整历史
+								查看完整介绍
 								<image src="../../../image/r_icon.png"></image>
 							</view>
 						</view>	

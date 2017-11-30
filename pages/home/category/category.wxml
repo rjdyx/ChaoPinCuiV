@@ -3,10 +3,7 @@
 	<view class="header">
 		<view class="header_top">
 			<image 
-			class="header_bg_img" 
-			data-url="details" 
-        	catch:tap="jumpFn" 
-        	data-id="{{product.id}}"
+			class="header_bg_img"
 			src="{{product.img ? https + product.img : '../../../image/bg_logo.jpg'}}">
 			</image>
 
@@ -22,12 +19,12 @@
 	        </view>
 
 	        <!-- 推荐产品 -->
-	        <view class="bgName"
+	        <!--<view class="bgName"
 	        	data-url="details" 
 	        	catch:tap="jumpFn" 
 	        	data-id="{{product.id}}">
 	        	<text class="tv_el dis_ib">{{product.name}}</text>
-	        </view>
+	        </view>-->
 		</view>
 
 		<!-- 推荐分类 -->

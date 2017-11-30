@@ -81,7 +81,8 @@ Page({
         wx.showModal({
           title: '提示',
           content: '对该类' + that.options.parent_name + '每天只能评论一次',
-          showCancel: false
+          showCancel: false,
+          confirmColor: '#FFD102'
         })
       }
     })

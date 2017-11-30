@@ -84,7 +84,8 @@ Page({
     wx.showModal({
       title: '地址',
       content: e.currentTarget.dataset.info,
-      showCancel: false
+      showCancel: false,
+      confirmColor: '#FFD102'
     })
   },
 

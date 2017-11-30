@@ -118,12 +118,15 @@ Page({
       wx.setNavigationBarTitle({  title: '潮州' + options.name})
     }
     // 当前分类代表性产品数据
-    APP.requestData(API.product, {category_id: options.id}, (err, data) =>{
-      if (data != undefined) {
-        self.setData({
-          "product": data
-        })
-      }
+    // APP.requestData(API.product, {category_id: options.id}, (err, data) =>{
+    //   if (data != undefined) {
+    //     self.setData({
+    //       "product": data
+    //     })
+    //   }
+    // })
+    self.setData({
+      "product.img": options.img
     })
     // 当前分类下的二级分类
     APP.requestData(API.categoryChild, {pid: options.id}, (err, data) =>{

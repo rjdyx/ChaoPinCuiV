@@ -59,7 +59,7 @@
 .nav-item .nav-image{
   width: 100rpx;
   height: 100rpx;
-  border-radius: 50%;
+  border-radius: 10%;
 }
 .nav-item text{
   padding-top: 10rpx;

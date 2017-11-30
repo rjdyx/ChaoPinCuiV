@@ -22,7 +22,7 @@
 .hotel_text {
 	width: 450rpx;
 	height: 200rpx;
-	line-height: 57rpx;
+	line-height: 54rpx;
 }
 .hotel_text .title {
 	font-weight: bold;
