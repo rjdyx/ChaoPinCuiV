@@ -3,13 +3,13 @@
 	<block wx:for="{{arrList}}" wx:key="">
 		<view class="hotel_div">
 			<view class="hotel_img fl">
-				<image src="../../../image/hotel.png"></image>
+				<image src="{{item.street_id ? 'http://api.map.baidu.com/panorama/v2?ak=Nj0gBuO7PDZsawzGGmt0ScBVEccDPDUd&width=440&height=256&fov=180&poiid=' + item.uid : '../../../image/nopic.png'}}"></image>
 			</view>
 			<view class="hotel_text fr">
-				<text class="title tb">{{item.title}}</text>
-				<text class="address tb tv_el" catchtap="lookSourceFn" data-info="{{item.address}}">地址：{{item.address}}</text>
-				<text class="phone tb">电话：{{item.tel}}</text>
-				<text class="distance tb">距离：<text class="num">{{item._distance}}</text>米</text>
+				<text class="title tb tv_el" catchtap="lookSourceFn" data-title="名称" data-info="{{item.name}}">{{item.name}}</text>
+				<text class="address tb tv_el" catchtap="lookSourceFn" data-title="地址" data-info="{{item.address}}">地址：{{item.address}}</text>
+				<text class="phone tb tv_el" catchtap="lookSourceFn" data-title="电话" data-info="{{item.telephone}}">电话：{{item.telephone}}</text>
+				<text class="distance tb">距离：<text class="num">{{item.dis}}</text>公里</text>
 			</view>
 		</view>
 	</block>

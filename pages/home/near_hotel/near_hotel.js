@@ -11,7 +11,9 @@ Page({
     arrList: [],
     totalPage: 0,
     isLoading: true,
-    pageNum: 1 //页数
+    ads: '地址',
+    phone: '电话',
+    pageNum: 0 //页数
   },
   /**
    * 生命周期函数--监听页面加载
@@ -36,11 +38,12 @@ Page({
     var self = this
     APP.requestData(API.hotelList, self.data.op, (err, data) =>{
       if (data != undefined) {
-        self.data.hotleList = data.data
+        self.data.hotleList = self.operDistince(data.results)
         self.setData({
           'arrList': self.data.arrList.concat(self.data.hotleList)
         })
-        self.data.totalPage = parseInt(data.count/10) + 1
+        // 根据经纬度技术距离
+        self.data.totalPage = parseInt(data.total/10) + 1
         if (self.data.totalPage == 1) {
           self.setData({
             'isLoading': false
@@ -49,6 +52,16 @@ Page({
         wx.hideLoading()
       }
     })
+  },
+  /*
+   * 根据经纬度技术距离
+   * ret地图数据对象
+   */
+  operDistince: function(ret) {
+    for (let i in ret) {
+      ret[i]['dis'] = APP.getDistince(this.data.op.weft, this.data.op.meridian, ret[i].location.lat, ret[i].location.lng)
+    }
+    return ret
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -82,7 +95,7 @@ Page({
    */
   lookSourceFn: function (e) {
     wx.showModal({
-      title: '地址',
+      title: e.currentTarget.dataset.title,
       content: e.currentTarget.dataset.info,
       showCancel: false,
       confirmColor: '#FFD102'
