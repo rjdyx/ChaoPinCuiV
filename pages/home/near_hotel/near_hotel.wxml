@@ -3,7 +3,7 @@
 	<block wx:for="{{arrList}}" wx:key="">
 		<view class="hotel_div">
 			<view class="hotel_img fl">
-				<image src="{{item.street_id ? 'http://api.map.baidu.com/panorama/v2?ak=Nj0gBuO7PDZsawzGGmt0ScBVEccDPDUd&width=440&height=256&fov=180&poiid=' + item.uid : '../../../image/nopic.png'}}"></image>
+				<image src="{{item.street_id ? 'http://api.map.baidu.com/panorama/v2?ak=Nj0gBuO7PDZsawzGGmt0ScBVEccDPDUd&width=440&height=256&fov=180&poiid=' + item.uid : '../../../image/nopic.png'}}" catch:tap="imgBlowUpFn" data-bol="{{true}}" data-img="{{item.street_id ? 'http://api.map.baidu.com/panorama/v2?ak=Nj0gBuO7PDZsawzGGmt0ScBVEccDPDUd&width=440&height=256&fov=180&poiid=' + item.uid : '../../../image/nopic.png'}}"></image>
 			</view>
 			<view class="hotel_text fr">
 				<text class="title tb tv_el" catchtap="lookSourceFn" data-title="名称" data-info="{{item.name}}">{{item.name}}</text>
@@ -14,4 +14,11 @@
 		</view>
 	</block>
 	<view class="no_data">{{isLoading ? '正在加载' : '全部加载完成'}}</view>
+
+	<!-- 图片放大层 -->
+    <view class="imgBlowUp" wx:if="{{isImgBlowUp}}" data-bol="{{false}}" catch:tap="imgBlowUpFn" >
+		<view class="imgBlowUpBox">
+			<image src="{{bigTapImg}}" class="slide-image" catch:tap="eventStop"/>
+		</view>
+    </view>
 </view>

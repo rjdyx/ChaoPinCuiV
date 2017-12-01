@@ -124,8 +124,8 @@ Page({
         })
         break
       case 'products_list':
-        url = '../products_list/products_list?id=' + this.data.proInfo.id + '&category_id=' + this.data.proInfo.category_id 
-            + '&parent_id=' + this.data.proInfo.parent_id + '&type=nearby' + '&name=更多附近' + this.data.proInfo.parent_name
+        url = '../products_list/products_list?id=' + this.data.proInfo.id + '&category_id=' + this.data.proInfo.category_id + '&parent_id=' 
+          + this.data.proInfo.parent_id + '&type=nearby' + '&name=更多' + this.data.arrBox[this.data.proInfo.parent_name] + this.data.proInfo.parent_name
         let pages = getCurrentPages()
         if (pages.length >= 4) {
             wx.redirectTo({

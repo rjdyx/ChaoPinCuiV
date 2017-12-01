@@ -13,6 +13,7 @@ Page({
     isLoading: true,
     ads: '地址',
     phone: '电话',
+    bigTapImg: '',
     pageNum: 0 //页数
   },
   /**
@@ -100,6 +101,21 @@ Page({
       showCancel: false,
       confirmColor: '#FFD102'
     })
+  },
+
+  // 图片放大
+  imgBlowUpFn: function(e) {
+    this.setData({
+      'bigTapImg': e.currentTarget.dataset.img,
+      'isImgBlowUp': e.currentTarget.dataset.bol
+    })
+  },
+
+  /*
+   * 防止子元素冒泡
+  **/
+  eventStop: function(e) {
+    e.stopPropagation()
   },
 
   /**
