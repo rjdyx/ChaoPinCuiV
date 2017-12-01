@@ -13,57 +13,52 @@
 
   <!-- 评价 -->
    <scroll-view class="container" bindscrolltoupper="upper" upper-threshold="10" lower-threshold="5" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}"> 
-
-<view class='prints'>
- <block wx:for="{{prints}}"  wx:key="title">
-<!-- 头部 -->
-  <view class='print-item'>
-    <view class='print-title' bindtap="productSkip" data-pid="{{item.product_id}}">
-        <text class='product_name'>{{item.product_name}}</text>     
-        <text class='arrow'></text>
-    </view>
-    
-<!-- 中间内容 -->
-    <view class="print-content" data-index="{{index}}">
-      <!-- 图片 -->
-        <view class='print-spot flex-item'>
-          <image wx:if="{{apiUrl}}/{{item.product_img}}" src='{{apiUrl}}/{{item.product_img}}'></image>
+        <view class='prints'>
+            <block wx:for="{{prints}}"  wx:key="title">
+                <!-- 头部 -->
+                <view class='print-item'>
+                    <view class='print-title' bindtap="productSkip" data-pid="{{item.product_id}}">
+                        <text class='product_name'>{{item.product_name}}</text>     
+                        <text class='arrow'></text>
+                    </view>
+                    <!-- 中间内容 -->
+                    <view class="print-content" data-index="{{index}}">
+                        <!-- 图片 -->
+                        <view class='print-spot flex-item print-desc'>
+                            <image wx:if="{{apiUrl}}/{{item.product_img}}" src='{{apiUrl}}/{{item.product_img}}'></image>
+                        </view>
+                        <!-- 右侧评分和描述 -->
+                        <view class='print-desc flex-item'>
+                            <view>
+                                <view class='grade'>
+                                    <text class=''>{{item.user_name}}</text>
+                                    <text class='time'>{{item.updated_at}}</text>
+                                </view>
+                                <!-- 评分 -->
+                                <view>
+                                    <text class='sortLabel'>{{sortName}}评论 : </text>
+                                    <view class='fiveStars'>
+                                      <block wx:for="{{stars}}" wx:for-item="k"  wx:key="name">
+                                        <image class="star-image" style="left: {{k*40}}rpx" src="{{(item.level/20) > k ?((item.level/20)-k == 0.5?halfSrc:selectedSrc) : normalSrc}}">
+                                          <view class="item" data-key="{{k+0.5}}" bindtap="selectLeft"></view>
+                                          <view class="item" data-key="{{k+1}}" bindtap="selectRight"></view>
+                                        </image>
+                                      </block>
+                                    </view>
+                                </view>
+                            </view>
+                            <text class='spotDesc'>{{item.content}}</text>
+                            <view class="user_comment_item_img" wx:if="{{item.img[0] != ''}}">
+                                <scroll-view scroll-x="true" class="imgScroll">
+                                    <block wx:for="{{item.img}}" wx:key="">
+                                        <image src="{{item ?  https + item : ''}}"></image>  
+                                    </block>
+                                </scroll-view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </block>
         </view>
-      <!-- 右侧评分和描述 -->
-      <view class='print-desc flex-item'>
-        <view class='grade'>
-          <text class=''>{{item.user_name}}</text>
-          <text class='time'>{{item.updated_at}}</text>
-        </view>
-        <!-- 评分 -->
-          <view>
-            <text class='sortLabel'>{{sortName}}评论 : </text>
-            <view class='fiveStars'>
-            <block wx:for="{{stars}}" wx:for-item="k"  wx:key="name">
-            <image class="star-image" style="left: {{k*40}}rpx" src="{{(item.level/20) > k ?((item.level/20)-k == 0.5?halfSrc:selectedSrc) : normalSrc}}">
-              <view class="item" data-key="{{k+0.5}}" bindtap="selectLeft"></view>
-              <view class="item" data-key="{{k+1}}" bindtap="selectRight"></view>
-            </image>
-          </block>
-          </view>
-          </view>
-
-        <text class='spotDesc'>{{item.content}}</text>
-         <view class="user_comment_item_img" wx:if="{{item.img[0] != ''}}">
-            <scroll-view scroll-x="true" class="imgScroll">
-                <block wx:for="{{item.img}}" wx:key="">
-                      <image src="{{item ?  https + item : ''}}"></image>  
-                </block>
-            </scroll-view>
-        </view>
-      </view>
-
-
-    </view>
-
-  </view>
-</block>
-</view>
-
-   </scroll-view> 
+    </scroll-view>
 </view>
