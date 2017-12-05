@@ -38,8 +38,7 @@ Page({
   onLoad: function (options) {
   },
   // 预加载函数
-  initData: function() {
-    var userId = this.data.userId
+  initData: function(userId) {
     if (userId!= '' && userId!=undefined && userId!=null) {
       this.login(userId)
     }
@@ -80,68 +79,68 @@ Page({
       }
     })
   },
-  loginState: function(e) {
-    var that = this
-    var userId = this.data.userId
-    if (userId!= '' && userId != undefined) {
-      wx.showModal({
-        title: '提示',
-        content: '是否要退出系统',
-        confirmColor: '#FED555',
-        success: function(res) {
-          if (res.confirm) {
-            wx.showLoading({
-              title: '退出中',
-              mask: true
-            })
-            setTimeout(function(){
-              that.logouts(userId)
-            },1000)
-          } else if (res.cancel) {
-            wx.showToast({
-              title: '取消退出',
-              image: '../../../image/gth.png',
-              duration: 1500
-            })
-          }
-        }
-      })
-    } else {
-      this.logins()
-    }
-  },
-  logins: function() {
-    wx.navigateTo({
-      url: '../../loginOrregister/login/login'
-    })
-  },
-  logouts: function(userId) {
-    var that = this
-    wx.request({
-      url: 'https://cpc.find360.cn/api/home/wx/relieve',
-      data: {user_id: userId},
-      success: function(res){
-        that.setData({
-          bindLogin: '登录系统',
-          img: '' ,
-          name: '',
-          userId: '',
-          openid: ''
-        })
-        app.globalData.userInfo = {
-          id : '',
-          name : '',
-          openid: ''              
-        }
-        setTimeout(function(){
-          wx.clearStorageSync()
-          wx.hideLoading()
-          app.homeUrl()
-        },1000)
-        app.showToast('退出系统成功','../../../image/pass.png',1500)
-      }
-    })
-  },
+  // loginState: function(e) {
+  //   var that = this
+  //   var userId = this.data.userId
+  //   if (userId!= '' && userId != undefined) {
+  //     wx.showModal({
+  //       title: '提示',
+  //       content: '是否要退出系统',
+  //       confirmColor: '#FED555',
+  //       success: function(res) {
+  //         if (res.confirm) {
+  //           wx.showLoading({
+  //             title: '退出中',
+  //             mask: true
+  //           })
+  //           setTimeout(function(){
+  //             that.logouts(userId)
+  //           },1000)
+  //         } else if (res.cancel) {
+  //           wx.showToast({
+  //             title: '取消退出',
+  //             image: '../../../image/gth.png',
+  //             duration: 1500
+  //           })
+  //         }
+  //       }
+  //     })
+  //   } else {
+  //     this.logins()
+  //   }
+  // },
+  // logins: function() {
+  //   wx.navigateTo({
+  //     url: '../../loginOrregister/login/login'
+  //   })
+  // },
+  // logouts: function(userId) {
+  //   var that = this
+  //   wx.request({
+  //     url: 'https://cpc.find360.cn/api/home/wx/relieve',
+  //     data: {user_id: userId},
+  //     success: function(res){
+  //       that.setData({
+  //         bindLogin: '登录系统',
+  //         img: '' ,
+  //         name: '',
+  //         userId: '',
+  //         openid: ''
+  //       })
+  //       app.globalData.userInfo = {
+  //         id : '',
+  //         name : '',
+  //         openid: ''              
+  //       }
+  //       setTimeout(function(){
+  //         wx.clearStorageSync()
+  //         wx.hideLoading()
+  //         app.homeUrl()
+  //       },1000)
+  //       app.showToast('退出系统成功','../../../image/pass.png',1500)
+  //     }
+  //   })
+  // },
   interestFn: function(){
   },
   /**
@@ -154,16 +153,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (app.globalData.userInfo.id == null || app.globalData.userInfo.id == undefined || app.globalData.userInfo.id == '') {
-      wx.redirectTo({
-        url: '../../loginOrregister/loginOrigister/loginOrigister',
-      })
-    } else {
-      this.setData({
-        userId: app.globalData.userInfo.id
-      })
-      this.initData()
-    }
+    var userInfo = wx.getStorageSync('userInfo')
+    this.data.userId = userInfo.id
+    this.initData(this.data.userId)
   },
 
   /**

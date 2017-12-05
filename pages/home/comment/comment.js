@@ -49,8 +49,8 @@ Page({
       level: this.data.key,
       img: '',
       isUserName: this.data.userNameCol === '#dcdcdc' ? 0 : 1, // 匿名：不匿名,
-      user_id: APP.globalData.userInfo.id,
-      openid:APP.globalData.userInfo.openid
+      user_id: wx.getStorageSync('userInfo').id,
+      openid: wx.getStorageSync('user')
     }
     var that = this
     for(var key in form){
@@ -188,11 +188,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (APP.globalData.userInfo.id == null || APP.globalData.userInfo.id == undefined || APP.globalData.userInfo.id == '') {
-      wx.redirectTo({
-        url: '../../loginOrregister/loginOrigister/loginOrigister',
-      })
-    } 
     this.setData({
       "options": options
     })

@@ -57,7 +57,7 @@ Page({
     var that = this
     var form = {
       content: e.detail.value.content,
-      user_id: APP.globalData.userInfo.id
+      user_id: wx.getStorageSync('userInfo').id
     }
     var pics = this.data.pics
     wx.showLoading({
@@ -134,10 +134,5 @@ Page({
             required: '请输入意见内容'
         }
     })
-    if (APP.globalData.userInfo.id == null || APP.globalData.userInfo.id == undefined || APP.globalData.userInfo.id == '') {
-        wx.redirectTo({
-          url: '../../loginOrregister/loginOrigister/loginOrigister',
-        })
-      }
-    }
+  }
 })

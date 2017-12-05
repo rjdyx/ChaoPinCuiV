@@ -15,10 +15,10 @@
     </view>
 
     <view class='recommand'>
-        <view class='type'>
+        <view class='type' bindtap="wxLogin">
           <view class='wechat block'>
             <text class="icon"></text>
-            <text class="wechatText" bindtap="wxLogin">微信</text>
+            <text class="wechatText">微信</text>
           </view>
           <!--<view class="recommandText">其他登录方式</view>-->
         </view>

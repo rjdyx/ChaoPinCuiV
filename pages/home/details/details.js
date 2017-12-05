@@ -153,7 +153,9 @@ Page({
   },
   // 收藏
   loveFn: function(e){
-    if (APP.globalData.userInfo.id == null || APP.globalData.userInfo.id == undefined || APP.globalData.userInfo.id == '') {
+    var userId = wx.getStorageSync('userInfo').id
+    var openId = wx.getStorageSync('user')
+    if (userId == null || userId == undefined || userId == '') {
       wx.redirectTo({
         url: '../../loginOrregister/loginOrigister/loginOrigister',
       })
@@ -169,7 +171,7 @@ Page({
           'ifLove': false
         })
       }
-      APP.requestData(API.collect, { openid: APP.globalData.userInfo.openid, user_id: APP.globalData.userInfo.id, product_id: this.data.options.id, type: this.data.ifLove }, (err, data) => {
+      APP.requestData(API.collect, { openid: openId, user_id: userId, product_id: this.data.options.id, type: this.data.ifLove }, (err, data) => {
         if (data != undefined) {
           if (this.data.loveUrl == '../../../image/love.png') {
             wx.showToast({
@@ -193,7 +195,7 @@ Page({
     var self = this
     // 获取产品详情数据
     if (this.data.options.id !== 'undefined'){
-      APP.requestData(API.proDetails, {id: this.data.options.id, user_id: APP.globalData.userInfo.id}, (err, data) =>{
+      APP.requestData(API.proDetails, {id: this.data.options.id, user_id: wx.getStorageSync('userInfo').id}, (err, data) =>{
         if (data != undefined) {
           for (var i in data.comment.data){
              data.comment.data[i].img = (data.comment.data[i].img !== null && data.comment.data[i].img !== '') ? data.comment.data[i].img.split(',') : []

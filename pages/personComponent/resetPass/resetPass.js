@@ -67,7 +67,7 @@ Page({
   },
   submitTo: function(arr){
     var that = this
-    var userId = app.globalData.userInfo.id
+    var userId = wx.getStorageSync('userInfo').id
     var url = 'https://cpc.find360.cn/api/home/user/password'
     var msg = '../../../image/gth.png'
     wx.request({

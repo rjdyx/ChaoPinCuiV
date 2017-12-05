@@ -3,17 +3,6 @@
   <form  bindsubmit="formSubmit">
     <view class="msgWrap">
 
-    <!-- 用户名 -->
-    <!-- <block wx:for="{{inputs}}"> -->
-    <view class="input common" >
-      <text>用户名</text>
-        <view class="editInput"  data-id="0">
-          <input value="{{name}}" class="inputEdit" name="name" placeholder='不可小于6位数'></input> 
-        <image src="../../../image/arrow_down.png" class="arrow"></image>
-      </view>
-    </view>
-    <!-- </block> -->
-
     <view class="input common" >
       <text>昵称</text>
         <view class="editInput" data-id="1">

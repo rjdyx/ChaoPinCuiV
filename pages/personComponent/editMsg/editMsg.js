@@ -12,10 +12,8 @@ Page({
   },
   onLoad: function(e) {
     this.WxValidate = app.WxValidate({
-        name: {
-            required: true,
-            minlength: 6,
-            maxlength: 50
+        real_name: {
+            required: true
         },
         phone: {
             tel: true
@@ -25,10 +23,8 @@ Page({
         }
     },
     {
-        name: {
-            required: '请输入用户名',
-            minlength: '用户名有误',
-            maxlength: '不能大于50个字符'
+        real_name: {
+            required: '请输入昵称'
         },
         phone: {
             tel: '手机号格式不对'
@@ -38,13 +34,12 @@ Page({
         }
     })
     var that = this
-    var userId = app.globalData.userInfo.id
+    var userId = wx.getStorageSync('userInfo').id
     var url = 'https://cpc.find360.cn/api/home/user/' + userId + '/edit'
     wx.request({
       url: url,
       success: function(res){
             that.setData({
-                name: res.data.name,
                 phone: res.data.phone,
                 email: res.data.email,
                 age: res.data.age,
@@ -80,13 +75,12 @@ Page({
     var that = this
     var address = e.detail.value.address
     var addressTo = address.join(',')
-    var userId = app.globalData.userInfo.id
+    var userId = wx.getStorageSync('userInfo').id
     var url = 'https://cpc.find360.cn/api/home/user/setUpdate'
     wx.request({
         url: url,
         method: 'POST',
         data:{
-            name: e.detail.value.name,
             phone: e.detail.value.phone,
             address: addressTo,
             real_name: e.detail.value.real_name,
@@ -103,13 +97,7 @@ Page({
   // 提交返回值
   getRes: function(res) {
     if (res.statusCode === 200) {
-        if (res.data == 101) {
-            app.showToast('用户名已存在','../../../image/gth.png',2000)
-        } else if (res.data == 102) {
-          app.showToast('邮箱已存在', '../../../image/gth.png', 2000)
-        } else if (res.data == 103) {
-          app.showToast('手机已存在', '../../../image/gth.png', 2000)
-        } else if (res.data != null || res.data != undefined) {
+        if (res.data != null || res.data != undefined) {
           app.showToast('修改成功', '../../../image/pass.png', 2000)
           var timer = setTimeout(() =>{
               wx.navigateBack({

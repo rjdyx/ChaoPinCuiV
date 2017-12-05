@@ -37,7 +37,7 @@ button.register{
   bottom:206rpx;
 }
 button.login{
-  bottom: 60rpx;
+  bottom: 200rpx;
 }
 .choice{
    width: 100%;

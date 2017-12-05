@@ -48,7 +48,6 @@ Page({
   },
   //滑动事件处理
   touchmove: function (e) {
-    console.log(e)
     var that = this,
       index = e.currentTarget.dataset.index,//当前索引
       startX = that.data.startX,//开始X坐标
@@ -91,7 +90,7 @@ Page({
       url: 'https://cpc.find360.cn/api/home/collect/cancel',
       data: {
         product_id: e.currentTarget.dataset.pid,
-        user_id: app.globalData.userInfo.id
+        user_id: wx.getStorageSync('userInfo').id
       },
       method: 'GET',
       success: function (res) {
@@ -124,19 +123,12 @@ Page({
     this.getPro()
   },
   getPro: function () {
-    //判断是否登录
-    if (app.globalData.userInfo.id == null || app.globalData.userInfo.id == undefined || app.globalData.userInfo.id == '') {
-      wx.redirectTo({
-        url: '../../loginOrregister/loginOrigister/loginOrigister',
-      })
-    } else {
       // 获取当前页面的路径
       var url = getCurrentPages()[getCurrentPages().length - 1].__route__;
       wx.setStorageSync('currentUrl', url)
       //请求数据
       var _this = this
       _this.getMsg()
-    }
   },
   getMsg: function () {
     var that = this
@@ -144,8 +136,8 @@ Page({
       wx.request({
         url: app.globalData.apiUrl+'/api/home/collect',
         data: {
-          openid: app.globalData.userInfo.openid,
-          user_id: app.globalData.userInfo.id
+          openid: wx.getStorageSync('user'),
+          user_id: wx.getStorageSync('userInfo').id
         },
         method: 'GET',
         success: function (res) {

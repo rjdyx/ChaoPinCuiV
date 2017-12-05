@@ -1,0 +1,46 @@
+.authorize_logo {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  height: 350rpx;
+  border-bottom: 4rpx solid #CFCFCF;
+}
+.authorize_logo>image{
+  margin-top: 130rpx;
+  width: 45%;
+  height: 100rpx;
+}
+.authorize_text {
+  width: 88%;
+  margin: 0 auto;
+  font-size: 30rpx;
+  margin-top: 100rpx;
+}
+.authorize_text_img {
+  margin-top: 40rpx;
+}
+.block {
+  display: block;
+} 
+.authorize_text_img>image{
+  width: 10rpx;
+  height: 10rpx;
+  margin-left: 15rpx;
+  vertical-align:middle
+}
+.authorize_text .user_info {
+  color: #B4B4B4;
+  margin-left: 30rpx;
+}
+.authorize_button {
+  margin-top: 120rpx;
+}
+.authorize_button>button {
+  width: 85%;
+  margin: 0 auto;
+  background: #FFD102;
+  color: white;
+  font-size: 40rpx;
+  font-weight: bold;
+  border-radius: 15rpx;
+}

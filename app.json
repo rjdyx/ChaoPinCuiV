@@ -2,6 +2,7 @@
   "pages": [
     "pages/home/home/home",
     "pages/loginOrregister/loginOrigister/loginOrigister",
+    "pages/loginOrregister/authorize/authorize",
     "pages/loginOrregister/register/register",
     "pages/loginOrregister/login/login",
     "pages/home/category/category",

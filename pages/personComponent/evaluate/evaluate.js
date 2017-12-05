@@ -48,11 +48,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (app.globalData.userInfo.id == null || app.globalData.userInfo.id == undefined || app.globalData.userInfo.id == '') {
-      wx.redirectTo({
-        url: '../../loginOrregister/loginOrigister/loginOrigister',
-      })
-    } else {
       var that = this
       wx.showToast({
         title: '加载中',
@@ -61,7 +56,7 @@ Page({
       })
       setTimeout(function () {
         wx.request({
-          url: that.data.https + '/api/home/user/' + app.globalData.userInfo.id + '/edit',
+          url: that.data.https + '/api/home/user/' + wx.getStorageSync('userInfo').id + '/edit',
           success: function (res) {
             that.setData({
               img: res.data.img,
@@ -73,8 +68,8 @@ Page({
           url: that.data.https + '/api/home/comment',
           method: 'GET',
           data: {
-            user_id: app.globalData.userInfo.id,
-            openid: app.globalData.userInfo.openid
+            user_id: wx.getStorageSync('userInfo').id,
+            openid: wx.getStorageSync('user')
           },
           success: function (res) {
             for (var i = 0; i < res.data.length; i++) {
@@ -91,8 +86,6 @@ Page({
           }
         })
       }, 1000)
-    }
-    
   },
 
   /**
