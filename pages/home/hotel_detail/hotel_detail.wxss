@@ -1,0 +1,148 @@
+@import "../../common/wxss/comWxss.wxss";
+.hotel_body {
+	width: 100%;
+	font-size: 35rpx;
+}
+.hotel_img {
+	width: 100%;
+	position:relative
+}
+.view_nopic>image {
+	width: 100%;
+	height: 420rpx;
+}
+.swiper_box {
+	width: 100%;
+	height: 420rpx;
+}
+.slide-image{
+	width: 100%;
+	height: 420rpx;
+	display: inline;
+}
+.tb {
+	display: block;
+}
+.hotel_img_text {
+	width: 100%;
+	position:absolute;
+	left: 22rpx;
+	top: 365rpx;
+	color: white;
+}
+.hotel_img_text .t1 {
+	width: 420rpx;
+}
+.hotel_img_text .t2 {
+	margin-left: 30rpx;
+}
+.hotel_img_text .t3 {
+	margin-right: 35rpx;
+}
+.hotel_type {
+	height: 120rpx;
+	line-height: 120rpx;
+	padding-left: 20rpx;
+	border-bottom: 2rpx solid #DCDCDC;
+	box-shadow: 0rpx 1rpx lightgrey;
+	color: #797979;
+}
+.hotel_cross {
+	height: 120rpx;
+	line-height: 120rpx;
+	padding-left: 20rpx;
+	color: #797979;
+	border-bottom: 20rpx solid #F4F3F6;
+}
+.hotel_cross .t1 {
+	color: #E83A2A;
+}
+.hotel_cross .t2 {
+	color: #F39600;
+	margin-left: 200rpx;
+	font-size: 55rpx;
+}
+.hotel_detail {
+	color: #797979;
+}
+.hotel_detail .h1{
+	margin-left: 20rpx;
+	margin-top: 45rpx;
+}
+.hotel_detail .d2{
+	margin-left: 20rpx;
+	margin-top: 40rpx;
+}
+.hotel_detail .d2 .dis{
+	color: #E83A2A;
+}
+.hotel_detail .d2 .localMap{
+	color: #0A7ED1;
+	margin-right: 10rpx;
+}
+.hotel_detail .h2{
+	margin-left: 20rpx;
+	margin-top: 120rpx;
+	clear:both;
+}
+.hotel_detail .h3{
+	margin-left: 20rpx;
+	margin-top: 40rpx;
+	color: #81C0EE;
+}
+.hotel_detail .h3 .ps {
+	width: 110rpx;
+}
+.hotel_detail .h3 .pw {
+	width: 400rpx;
+}
+.hotel_detail .h4{
+	margin-left: 20rpx;
+	margin-top: 40rpx;
+	color: #0A7ED1;
+	clear:both;
+}
+.pop_up_wrap{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.4);
+	color: #444444;
+	font-size:32rpx;
+	opacity: 0;
+}
+.pop_up_inner{
+	width: 90%;
+	height: 90%;
+	background: #fff;
+	position:absolute;
+	left:50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	border-radius: 7rpx;
+	overflow: hidden;
+}
+.pop_up_title{
+	text-align: center;
+	line-height: 100rpx;
+	border-bottom: 1px solid #eceaea;
+}
+.pop_up_text{
+	padding:30rpx;
+	line-height: 54rpx;
+	box-sizing: border-box;
+	max-height: 900rpx;
+}
+.close_icon{
+	position: absolute;
+	right: 30rpx;
+	top: 25rpx;
+	width: 50rpx;
+	height: 50rpx;
+}
+.map{
+	width: 100%;
+	height: 1000rpx;
+}

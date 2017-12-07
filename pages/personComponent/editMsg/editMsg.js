@@ -72,6 +72,9 @@ Page({
         app.showToast(error.msg,'../../../image/gth.png',2000)
         return false
     }
+    wx.showLoading({
+      title: '',
+    })
     var that = this
     var address = e.detail.value.address
     var addressTo = address.join(',')
@@ -98,11 +101,11 @@ Page({
   getRes: function(res) {
     if (res.statusCode === 200) {
         if (res.data != null || res.data != undefined) {
-          app.showToast('修改成功', '../../../image/pass.png', 2000)
           var timer = setTimeout(() =>{
               wx.navigateBack({
                   delta: 1
               })
+              app.showToast('修改成功', '../../../image/pass.png', 2000)
               clearTimeout(timer)
           }, 2000)
         }

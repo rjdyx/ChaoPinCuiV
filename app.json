@@ -9,6 +9,7 @@
     "pages/home/details/details",
     "pages/home/products_list/products_list",
     "pages/home/near_hotel/near_hotel",
+    "pages/home/hotel_detail/hotel_detail",
     "pages/home/comment/comment",
     "pages/personComponent/collect/collect",
     "pages/person/person/person",

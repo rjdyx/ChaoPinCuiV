@@ -94,10 +94,14 @@ Page({
 
   // 图片放大
   imgBlowUpFn: function(e) {
-    this.setData({
-      'bigTapImg': e.currentTarget.dataset.img,
-      'isImgBlowUp': e.currentTarget.dataset.bol
+    var hotel_info = JSON.stringify(e.currentTarget.dataset.hotel_info)
+    wx.navigateTo({
+      url: '../hotel_detail/hotel_detail?hotel_info=' + hotel_info
     })
+    // this.setData({
+    //   'bigTapImg': e.currentTarget.dataset.img,
+    //   'isImgBlowUp': e.currentTarget.dataset.bol
+    // })
   },
 
   /*

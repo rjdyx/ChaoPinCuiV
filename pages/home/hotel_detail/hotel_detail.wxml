@@ -1,0 +1,60 @@
+<!-- 附近酒店 -->
+<view class="hotel_body">
+	<view class="hotel_img">
+		<view wx:if="{{hotels.photos.length>0}}">
+			<swiper class="swiper_box" indicator-dots="{{indicatorDots}}" circular="{{circular}}" bindchange="swiperchange"
+			  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+			  <block wx:for="{{hotels.photos}}" wx:key="">
+			    <swiper-item>
+			      <image src="{{item.url}}" class="slide-image"/>
+			    </swiper-item>
+			  </block>
+			</swiper>
+			<view class="hotel_img_text">
+				<text class="t1 fl tb">{{hotels.name}}</text><text class="t3 fr tb">{{imgIndex}}/{{hotels.photos.length}}</text>
+			</view>
+		</view>
+		<view wx:else class="view_nopic">
+			<image src="../../../image/nopic.png"></image>
+		</view>
+	</view>
+	<view class="hotel_type">
+		类型：{{hotels.type != '' ? hotels.type : '暂无数据'}}
+	</view>
+	<view class="hotel_cross">
+		人均最低消费：<text class="t1">{{hotels.biz_ext.lowest_price != '' ? hotels.biz_ext.lowest_price + '￥' : '无消费数据'}}</text>
+		<text class="t2">{{hotels.biz_ext.rating != '' ? hotels.biz_ext.rating + '分' : ''}}</text>
+	</view>
+	<view class="hotel_detail">
+		<view class="h1">
+			<text class="t1">名称：{{hotels.name}}</text>
+		</view>
+		<view class="d2">
+			<text class="dis fl">距离：{{hotels.distance>1000 ? hotels.distance/1000 + '公里' : hotels.distance + '米'}}</text>
+			<text class="localMap fr" catchtap="lookMapFn" data-location="{{hotels.location}}">查看具体地理位置》</text>
+		</view>
+		<view class="h2">
+			<text>地址：{{hotels.address}}</text>
+		</view>
+		<view class="h3">
+			<text class="ps tb fl">电话：</text>
+			<view class="pw fl">
+				<block wx:for="{{phoneArr}}" wx:key="">
+					<text class="tb" catchtap="makeTipPhone" data-phone="{{item}}">{{item + '(拨打)'}}</text>
+				</block>
+			</view>
+		</view>
+		<!-- <view class="h4" catchtap="lookMapFn" data-location="{{hotels.location}}">
+			<text>查看具体地理位置》</text>
+		</view> -->
+	</view>
+
+	<!-- 弹出框 -->
+    <view animation="{{animationData}}" class="pop_up_wrap" wx:if="{{isShowPop.bol}}">
+		<view class="pop_up_inner">
+			<image class="close_icon" catchtap="closeFn" src="../../../image/x.png"></image>
+			<view class="pop_up_title">{{isShowPop.title}}</view>
+			<map wx:if="{{isShowPop.type === 'map'}}" class="map" longitude="{{meridian}}" latitude="{{weft}}" scale="14" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location></map>
+		</view>
+    </view>
+</view>

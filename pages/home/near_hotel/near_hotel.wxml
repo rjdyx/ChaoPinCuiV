@@ -3,7 +3,7 @@
 	<block wx:for="{{arrList}}" wx:key="">
 		<view class="hotel_div">
 			<view class="hotel_img fl">
-				<image src="{{item.photos[0].url ? item.photos[0].url : '../../../image/nopic.png'}}" catch:tap="imgBlowUpFn" data-bol="{{true}}" data-img="{{item.photos[0].url ? item.photos[0].url : '../../../image/nopic.png'}}"></image>
+				<image src="{{item.photos[0].url ? item.photos[0].url : '../../../image/nopic.png'}}" catch:tap="imgBlowUpFn" data-bol="{{true}}" data-img="{{item.photos[0].url ? item.photos[0].url : '../../../image/nopic.png'}}" data-hotel_info="{{item}}"></image>
 			</view>
 			<view class="hotel_text fr">
 				<text class="title tb tv_el" catchtap="lookSourceFn" data-title="名称" data-info="{{item.name}}">{{item.name}}</text>

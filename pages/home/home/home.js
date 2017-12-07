@@ -20,6 +20,7 @@ Page({
     navUrl: '../category/category',
     navs: [],
     list: [],
+    circular: true
   },
   catchTapCategory: function (e) {
     wx.navigateTo({
