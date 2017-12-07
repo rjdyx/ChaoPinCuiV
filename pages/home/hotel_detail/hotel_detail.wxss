@@ -43,8 +43,7 @@
 	height: 120rpx;
 	line-height: 120rpx;
 	padding-left: 20rpx;
-	border-bottom: 2rpx solid #DCDCDC;
-	box-shadow: 0rpx 1rpx lightgrey;
+	border-bottom: 2rpx solid #f4f4f6;
 	color: #797979;
 }
 .hotel_cross {
