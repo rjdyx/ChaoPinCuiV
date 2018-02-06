@@ -261,6 +261,7 @@ Page({
     wx.getStorage({
       key: 'footprint',
       success: function(res) {
+        console.log(res)
         if (res.data !== undefined)  {
           _this.setData({
             "storageFoots": res.data

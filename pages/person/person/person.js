@@ -62,7 +62,6 @@ Page({
         url: '../../personComponent/' + data + '/' + data,
       })
     }
-    
   },
   login: function(userId) {
     var that = this
