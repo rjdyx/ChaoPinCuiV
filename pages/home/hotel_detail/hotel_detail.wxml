@@ -22,7 +22,7 @@
 		类型：{{hotels.type != '' ? hotels.type : '暂无数据'}}
 	</view>
 	<view class="hotel_cross">
-		人均最低消费：<text class="t1">{{hotels.biz_ext.lowest_price != '' ? hotels.biz_ext.lowest_price + '￥' : '无消费数据'}}</text>
+		人均最低消费：<text class="t1">{{hotels.biz_ext.lowest_price != '' ? '￥' + hotels.biz_ext.lowest_price : '无消费数据'}}</text>
 		<text class="t2">{{hotels.biz_ext.rating != '' ? hotels.biz_ext.rating + '分' : ''}}</text>
 	</view>
 	<view class="hotel_detail">

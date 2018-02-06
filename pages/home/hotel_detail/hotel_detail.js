@@ -103,6 +103,7 @@ Page({
     wx.getLocation({
       type: 'wgs84',
       success: function(res) {
+        console.log(res)
         var latitude = res.latitude
         var longitude = res.longitude
         var speed = res.speed
