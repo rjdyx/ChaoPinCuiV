@@ -124,6 +124,7 @@ Page({
     },'POST')
     },
   onLoad: function() {
+    wx.setNavigationBarTitle({ title: '意见反馈' })
     this.WxValidate = APP.WxValidate({
         content: {
             required: true

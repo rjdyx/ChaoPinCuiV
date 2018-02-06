@@ -16,6 +16,9 @@ Page({
     })
   },
    onLoad: function(){
+     wx.setNavigationBarTitle({
+       title: '联系我们',
+     })
      var that = this
      wx.request({
        url: 'https://cpc.find360.cn/api/home/company',
